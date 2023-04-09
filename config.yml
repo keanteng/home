@@ -1,5 +1,5 @@
 baseURL: "https://keanteng.github.io/home/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
-title: PaperMod
+title: Kean Teng Blog
 paginate: 10
 theme: PaperMod
 
@@ -27,13 +27,13 @@ languages:
         menu:
             main:
                 - name: Archive
-                  url: /archives/
+                  url: archives/
                   weight: 5
                 - name: Search
-                  url: /search/
+                  url: search/
                   weight: 10
                 - name: Tags
-                  url: /tags/
+                  url: tags/
                   weight: 10
                 - name: WiKi
                   url: https://github.com/keanteng/home
@@ -144,18 +144,23 @@ params:
           url: "https://github.com/keanteng/home"
         - name: linkedIn
           url: "https://my.linkedin.com/in/khorkeanteng"
+        - name: twitter
+          url: https://twitter.com/realKeanTeng
+        - name: medium
+          url: https://khorkeanteng.medium.com/
         - name: Rss
           url: "index.xml"
+        
 
     editPost:
         URL: "https://github.com/keanteng/home"
         Text: "Suggest Changes" # edit text
         appendFilePath: true # to append file path to Edit link
 
-    # label:
-    #     text: "Home"
-    #     icon: icon.png
-    #     iconHeight: 35
+     #label:
+      #   text: "Home"
+       #  icon: icon.png
+        # iconHeight: 35
 
     # analytics:
     #     google:
