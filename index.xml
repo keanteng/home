@@ -12,6 +12,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 09 Apr 2023 11:04:02 +0800</lastBuildDate><atom:link href="https://keanteng.github.io/home/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Google Sheet Simple Web Scraping</title>
+      <link>https://keanteng.github.io/home/docs/2022_11_05/content/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2022_11_05/content/</guid>
+      <description>Fetching Companies Market Capitalization Data</description>
+    </item>
+    
+    <item>
       <title>Test</title>
       <link>https://keanteng.github.io/home/docs/test/</link>
       <pubDate>Sun, 09 Apr 2023 11:04:02 +0800</pubDate>

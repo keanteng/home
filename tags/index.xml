@@ -10,5 +10,50 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google Sheets</title>
+      <link>https://keanteng.github.io/home/tags/google-sheets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/google-sheets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Market Cap</title>
+      <link>https://keanteng.github.io/home/tags/market-cap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/market-cap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Scraping</title>
+      <link>https://keanteng.github.io/home/tags/web-scraping/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/web-scraping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Website</title>
+      <link>https://keanteng.github.io/home/tags/website/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/website/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xpath</title>
+      <link>https://keanteng.github.io/home/tags/xpath/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/xpath/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

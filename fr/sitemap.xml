@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://keanteng.github.io/home/fr/frcategories/</loc>
+    <loc>https://keanteng.github.io/home/fr/chcategories/</loc>
   </url><url>
-    <loc>https://keanteng.github.io/home/fr/frseries/</loc>
+    <loc>https://keanteng.github.io/home/fr/chseries/</loc>
   </url><url>
-    <loc>https://keanteng.github.io/home/fr/frtags/</loc>
+    <loc>https://keanteng.github.io/home/fr/chtags/</loc>
   </url><url>
     <loc>https://keanteng.github.io/home/fr/</loc>
     <xhtml:link
@@ -16,8 +16,8 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="fa"
-                href="https://keanteng.github.io/home/fa/"
+                hreflang="jp"
+                href="https://keanteng.github.io/home/jp/"
                 />
     <xhtml:link
                 rel="alternate"

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>PaperModL2</title>
+    <title>Kean Teng Blog</title>
     <link>https://keanteng.github.io/home/fr/</link>
-    <description>Recent content on PaperModL2</description>
+    <description>Recent content on Kean Teng Blog</description>
     <image>
-      <title>PaperModL2</title>
+      <title>Kean Teng Blog</title>
       <url>https://keanteng.github.io/home/papermod-cover.png</url>
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>

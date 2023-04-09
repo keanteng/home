@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://keanteng.github.io/home/docs/2022_11_05/content/</loc>
+  </url><url>
     <loc>https://keanteng.github.io/home/docs/</loc>
     <lastmod>2023-04-09T11:04:02+08:00</lastmod>
   </url><url>
@@ -14,8 +16,8 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="fa"
-                href="https://keanteng.github.io/home/fa/"
+                hreflang="jp"
+                href="https://keanteng.github.io/home/jp/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -28,8 +30,18 @@
   </url><url>
     <loc>https://keanteng.github.io/home/categories/</loc>
   </url><url>
+    <loc>https://keanteng.github.io/home/tags/google-sheets/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/market-cap/</loc>
+  </url><url>
     <loc>https://keanteng.github.io/home/series/</loc>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/web-scraping/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/website/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/xpath/</loc>
   </url>
 </urlset>
