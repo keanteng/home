@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on PaperMod</title>
+    <title>Tags on Kean Teng Blog</title>
     <link>https://keanteng.github.io/home/tags/</link>
-    <description>Recent content in Tags on PaperMod</description>
+    <description>Recent content in Tags on Kean Teng Blog</description>
     <image>
-      <title>PaperMod</title>
+      <title>Kean Teng Blog</title>
       <url>https://keanteng.github.io/home/papermod-cover.png</url>
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 05 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub</title>
+      <link>https://keanteng.github.io/home/tags/github/</link>
+      <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://keanteng.github.io/home/tags/hugo/</link>
+      <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PaperMode</title>
+      <link>https://keanteng.github.io/home/tags/papermode/</link>
+      <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/papermode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Website</title>
+      <link>https://keanteng.github.io/home/tags/website/</link>
+      <pubDate>Sun, 09 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/website/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Google Sheets</title>
       <link>https://keanteng.github.io/home/tags/google-sheets/</link>
@@ -35,15 +71,6 @@
       <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/web-scraping/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Website</title>
-      <link>https://keanteng.github.io/home/tags/website/</link>
-      <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/website/</guid>
       <description></description>
     </item>
     
