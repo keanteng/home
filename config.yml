@@ -36,56 +36,56 @@ languages:
                   url: tags/
                   weight: 10
                 - name: WiKi
-                  url: https://github.com/adityatelange/hugo-PaperMod/wiki/
-                - name: Discord
-                  url: https://discord.gg/ahpmTvhVmp
+                  url: https://github.com/keanteng/home
+                - name: LinkedIn
+                  url: https://my.linkedin.com/in/khorkeanteng
 
     fr:
-        languageName: ":fr:"
-        languageAltTitle: French
+        languageName: "CH"
+        languageAltTitle: Chinese
         weight: 2
-        title: PaperModL2
+        title: Kean Teng Blog
         taxonomies:
-          category: FRcategories
-          tag: FRtags
-          series: FRseries
+          category: CHcategories
+          tag: CHtags
+          series: CHseries
         profileMode:
             enabled: true
-            title: PaperMod
-            imageUrl: "https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/1f317.svg"
+            title: Kean Teng Blog
+            imageUrl: "https://images.unsplash.com/photo-1680869181678-9b38a80169d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=60"
             imageTitle: ProfileMode image
             # imageWidth: 120
             # imageHeight: 120
-            subtitle: "☄️ Fast | ☁️ Fluent | 🌙 Smooth | 📱 Responsive"
+            subtitle: " 👋 Welcome to my personal blog. 欢迎来到我的部落格。"
             buttons:
                 - name: Blog
                   url: posts
                 - name: Profile Mode
-                  url: https://github.com/adityatelange/hugo-PaperMod/wiki/Features#profile-mode
+                  url: https://keanteng.github.io/home/
         menu:
             main:
                 - name: Archive
                   url: archives/
                   weight: 5
-                - name: FRTags
-                  url: frtags
+                - name: CHTags
+                  url: chtags
                   weight: 10
-                - name: FRCategories
-                  url: frcategories
+                - name: CHCategories
+                  url: chcategories
                   weight: 10
-                - name: FRSeries
-                  url: frseries
+                - name: CHSeries
+                  url: chseries
                   weight: 10
                 - name: NullLink
                   url: "#"
 
-    fa:
+    Jp:
         languagedirection: rtl
         weight: 3
         title: PaperMod RTL
         homeInfoParams:
             Title: "Hi there \U0001F44B"
-            Content: Welcome to RTL layout
+            Content: Work in progresss
         taxonomies:
           category: FAcategories
           tag: FAtags
@@ -105,7 +105,7 @@ outputs:
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
     description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
-    author: Theme PaperMod
+    author: Kean Teng Blog
     # author: ["Me", "You"] # multiple authors
 
     defaultTheme: auto
@@ -136,22 +136,19 @@ params:
               url: tags
 
     homeInfoParams:
-        Title: "PaperMod"
+        Title: "Kean Teng Blog"
         Content: >
-            Welcome to demo of hugo's theme PaperMod.
-            - **PaperMod** is a simple but fast and responsive theme with useful feature-set that enhances UX.
-            - Do give a 🌟 on Github !
-            - PaperMod is based on theme [Paper](https://github.com/nanxiaobei/hugo-paper).
+            Welcome to my personal blog. I will publish me learning notes on a variety of topics and ideas here. ✨ 
     socialIcons:
         - name: github
-          url: "https://github.com/adityatelange/hugo-PaperMod"
-        - name: KoFi
-          url: "https://ko-fi.com/adityatelange"
+          url: "https://github.com/keanteng/home"
+        - name: LinkedIn
+          url: "https://my.linkedin.com/in/khorkeanteng"
         - name: Rss
           url: "index.xml"
 
     editPost:
-        URL: "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
+        URL: "https://github.com/keanteng/home"
         Text: "Suggest Changes" # edit text
         appendFilePath: true # to append file path to Edit link
 
