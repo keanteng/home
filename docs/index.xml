@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Docs on PaperMod</title>
+    <link>https://keanteng.github.io/home/docs/</link>
+    <description>Recent content in Docs on PaperMod</description>
+    <image>
+      <title>PaperMod</title>
+      <url>https://keanteng.github.io/home/papermod-cover.png</url>
+      <link>https://keanteng.github.io/home/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 09 Apr 2023 11:04:02 +0800</lastBuildDate><atom:link href="https://keanteng.github.io/home/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test</title>
+      <link>https://keanteng.github.io/home/docs/test/</link>
+      <pubDate>Sun, 09 Apr 2023 11:04:02 +0800</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/test/</guid>
+      <description>This is a test page Hello there.</description>
+    </item>
+    
+  </channel>
+</rss>

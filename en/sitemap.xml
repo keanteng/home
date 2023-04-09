@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://keanteng.github.io/home/docs/</loc>
+    <lastmod>2023-04-09T11:04:02+08:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/</loc>
+    <lastmod>2023-04-09T11:04:02+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://keanteng.github.io/home/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="fa"
+                href="https://keanteng.github.io/home/fa/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://keanteng.github.io/home/"
+                />
+  </url><url>
+    <loc>https://keanteng.github.io/home/docs/test/</loc>
+    <lastmod>2023-04-09T11:04:02+08:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/categories/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/series/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/</loc>
+  </url>
+</urlset>
