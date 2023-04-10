@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://keanteng.github.io/home/zh/chcategories/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/zh/chseries/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/zh/chtags/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/zh/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://keanteng.github.io/home/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="jp"
+                href="https://keanteng.github.io/home/jp/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://keanteng.github.io/home/zh/"
+                />
+  </url>
+</urlset>

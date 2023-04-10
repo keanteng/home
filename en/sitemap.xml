@@ -5,6 +5,9 @@
     <loc>https://keanteng.github.io/home/docs/2023_04_09-creating-a-website-with-hugo--papermode/</loc>
     <lastmod>2023-04-09T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://keanteng.github.io/home/docs/2023-02-25-stable-diffusion-webui-with-civitai-loras/</loc>
+    <lastmod>2023-02-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://keanteng.github.io/home/docs/2022-11-05-google-sheet-simple-web-scraping/</loc>
     <lastmod>2022-11-05T00:00:00+00:00</lastmod>
   </url><url>
@@ -21,8 +24,8 @@
     <lastmod>2023-04-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="https://keanteng.github.io/home/fr/"
+                hreflang="zh"
+                href="https://keanteng.github.io/home/zh/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -44,6 +47,15 @@
     <loc>https://keanteng.github.io/home/tags/website/</loc>
     <lastmod>2023-04-09T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://keanteng.github.io/home/tags/loras/</loc>
+    <lastmod>2023-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/stable-diffusion/</loc>
+    <lastmod>2023-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/webui/</loc>
+    <lastmod>2023-02-25T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://keanteng.github.io/home/tags/google-sheets/</loc>
     <lastmod>2022-11-05T00:00:00+00:00</lastmod>
   </url><url>
@@ -59,6 +71,8 @@
     <loc>https://keanteng.github.io/home/archives/</loc>
   </url><url>
     <loc>https://keanteng.github.io/home/categories/</loc>
+  </url><url>
+    <loc>https://keanteng.github.io/home/search/</loc>
   </url><url>
     <loc>https://keanteng.github.io/home/series/</loc>
   </url>
