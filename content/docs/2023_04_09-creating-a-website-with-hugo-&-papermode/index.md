@@ -8,20 +8,20 @@ tags: ["Website", "Hugo", "PaperMode", "GitHub"]
 weight: 5
 ---
 
-> *This article aims to provide a comprehensive overview of how this site is set-up and run. All references used are attached at page bottom.* 
+> *This article aims to provide a comprehensive overview of how this site is set up and run. All references used are attached at page bottom.* 
 
 ## Pre-requisite
-There are a few things to prepare before your own site can be created, as follow:
-- A [**GitHub**]("https://github.com/") account
-- Installed [**Microsoft Visual Studio Code**]("https://code.visualstudio.com/download")
-- Installed [**Git**]("https://git-scm.com/downloads") 
+There are a few things to prepare before your own site can be created, as follows:
+- A [**GitHub**](https://github.com/) account
+- Installed [**Microsoft Visual Studio Code**](https://code.visualstudio.com/download)
+- Installed [**Git**](https://git-scm.com/downloads) 
 
-After you creating a GitHub account and installing the necessary software, we are ready to begin!
+After you create a GitHub account and installing the necessary software, we are ready to begin!
 
 ## Website Foundations Setup
-The site that we are going to create will be based on [**Hugo**]("https://gohugo.io/"), a open-source site generators where it provides a framework for us to deploy a site with speed and ease. 
+The site that we are going to create will be based on [**Hugo**](https://gohugo.io/), an open-source site generators where it provides a framework for us to deploy a site with speed and ease. 
 
-To build our website, we will need to install Hugo into our local machine. The installation process will be done on Windows Terminal with the support of [**Go**]("https://go.dev/doc/install") language. Of course, you can also use other language such as chocolatey, scoop and winget. 
+To build our website, we will need to install Hugo into our local machine. The installation process will be done on Windows Terminal with the support of [**Go**](https://go.dev/doc/install) language. Of course, you can also use other language such as chocolatey, scoop and winget. 
 
 After installing go, here's how to install Hugo on terminal:
 ```yaml {linenos=true}
@@ -42,7 +42,7 @@ hugo new docs/page.md
 ```
 
 ## Website Theme Setup
-With the site foundation ready, we now add a theme or a specific design to our site for better functionality and appearance. You can check our different theme [**here**]("https://themes.gohugo.io/"), but in my case we will proceed with the [**PaperMode**]("https://themes.gohugo.io/themes/hugo-papermod/") theme. 
+With the site foundation ready, we now add a theme or a specific design to our site for better functionality and appearance. You can check out different theme [**here**](https://themes.gohugo.io/), but in my case we will proceed with the [**PaperMode**](https://themes.gohugo.io/themes/hugo-papermod/) theme. 
 
 Here we will use git to install the website theme:
 ```bash {linenos=true}
@@ -50,7 +50,7 @@ git init
 git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1
 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 ```
-After that, navigate to GitHub to create an empty repository and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually `README.md` to avoid causing any error:
+After that, navigate to GitHub to create an **empty repository** and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually `README.md` to avoid causing any error:
 ```bash {linenos=true}
 echo "# Test" >> README.md
 git add README.md
@@ -60,20 +60,20 @@ git remote add origin https://github.com/YOUR-GIT-NAME/REPOSITORY-NAME.git
 git push -u origin main
 ```
 
-If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before your deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:
+If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:
 ```bash {linenos=true}
 hugo server
 ```
 
 ## Website Deployment Workflow
-Just now your are shown to deploy the site locally, now to do it publicly - meaning on the web, you need the support from GitHub workflow. 
+Just now your were shown to deploy the site locally, now to do it publicly - meaning on the web, you need the support from GitHub workflow. 
 
 Here we will need to create an additional directory and put in some codes into it:
 ```bash
 mkdir -p .github/workflows
 ```
 
-After creating this diretory, create a file with name `deploy.yml` in the workflows folder. Then navigate these two files (your can use file explorer) and put in these codes:
+After creating this directory, create a file with name `deploy.yml` in the workflow folder. Then navigate these two files (your can use file explorer) and put in these codes:
 - `config.yml`
     - After copying, change the first line `baseurl:` to the following format `"https://YOUR-NAME-ON-GITHUB.github.io/REPOSITORY-NAME/"`
 ```yaml {linenos=true}
@@ -123,7 +123,7 @@ jobs:
           git push          
 ```
 
-Before we link up our local files with the repository, you need to create a new branch on your repository called `git-pages` and you need to change the setting for Github actions. 
+Before we link up our local files with the repository, you need to create a new branch on your repository called `git-pages` and you need to change the setting for GitHub actions. 
 
 <img src="images/git_action.png"  class = "center"/>
 <p style="text-align: center; color:grey;"><i>Change the setting here</i></p>
@@ -143,4 +143,4 @@ Now, just head to GitHub actions and click on pages build and deployment, and cl
 <p style="text-align: center; color:grey;"><i>Click on the link to view your site</i></p>
 
 ## Acknowledgement ✨
-First of all, I would like to thank [Hugo]("https://gohugo.io/") and [PaperMode]("https://github.com/adityatelange/hugo-PaperMod") for empowering me with the tool and foundations to build such a beautiful and impressive site. I want to thanks [dhij]("https://www.youtube.com/watch?v=_QSr2_pxIJs&t=306s") for the wonderful tutorial on YouTube for the site set-up, I failed on numerous attemp to set-up the site by looking at some blogs on Medium until I look up his video. I am inspired to make this blog as comprehensive as possible so anyone that reads it can follow successfully. Thanks to [Abdur Rahman]("https://arkalim.org/blog/") for his own site set-up as well where I can reference to his code on GitHub such as markdown pages set-up. Finally, thanks to [Lil'Log]("https://lilianweng.github.io/") where I am inspired to kickstart my own site to share my learnings and some of the codes on her GitHub blog repository like embedding images and equations on pages, otherwise I might still struggel to add caption to all the images attached. 
+I would like to thank [Hugo](https://gohugo.io/) and [PaperMode](https://github.com/adityatelange/hugo-PaperMod) for empowering me with the tool and foundations to build such a beautiful and impressive site. I want to thank [dhij](https://www.youtube.com/watch?v=_QSr2_pxIJs&t=306s) for the wonderful tutorial on YouTube for the site set-up, I failed on numerous attempt to set up the site by looking at some blogs on Medium until I look up his video. I am inspired to make this blog as comprehensive as possible so anyone that reads it can follow successfully. Thanks to [Abdur Rahman](https://arkalim.org/blog/) for his own site set-up as well where I can reference to his code on GitHub such as markdown pages set-up. Finally, thanks to [Lil'Log](https://lilianweng.github.io/) where I am inspired to kick-start my own site to share my learnings and some codes on her GitHub blog repository like embedding images and equations on pages, otherwise I might still struggle to add caption to all the images attached.
