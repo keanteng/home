@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Web Scraping on Kean Teng Blog</title>
-    <link>https://keanteng.github.io/home/tags/web-scraping/</link>
-    <description>Recent content in Web Scraping on Kean Teng Blog</description>
+    <title>Python on Kean Teng Blog</title>
+    <link>https://keanteng.github.io/home/tags/python/</link>
+    <description>Recent content in Python on Kean Teng Blog</description>
     <image>
       <title>Kean Teng Blog</title>
       <url>https://keanteng.github.io/home/papermod-cover.png</url>
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/web-scraping/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Images Scraping from Web Pages</title>
       <link>https://keanteng.github.io/home/docs/2023-02-19-images-scraping-from-web-pages/</link>
@@ -18,15 +18,6 @@
       
       <guid>https://keanteng.github.io/home/docs/2023-02-19-images-scraping-from-web-pages/</guid>
       <description>A Functional Approach Towards Repetitious Images Saving</description>
-    </item>
-    
-    <item>
-      <title>Google Sheet Simple Web Scraping</title>
-      <link>https://keanteng.github.io/home/docs/2022-11-05-google-sheet-simple-web-scraping/</link>
-      <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/docs/2022-11-05-google-sheet-simple-web-scraping/</guid>
-      <description>Fetching Companies Market Capitalization Data</description>
     </item>
     
   </channel>
