@@ -6,6 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["WebUI", "Stable Diffusion", "LORAs"]
 weight: 5
+summary: "There are two ways to use Stable Diffusion — either locally on your own PC or through a cloud computing services such as Google Collab and Kaggle. It has been a frustration for many without a decent GPU and sufficient VRAM. This"
 ---
 
 <img src="images/img1.jpg"  class = "center"/>

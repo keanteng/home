@@ -6,6 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Google Sheets", "Web Scraping", "Website", "Xpath", "Market Cap"]
 weight: 5
+summary: "In this article, I will be showing the process of scraping some listed companies market capitalization in Malaysia data using Google Sheet. We will perform web scraping on the i3 Investor site. First of all, open a new google sheet and "
 ---
 
 In this article, I will be showing the process of scraping some listed companies market capitalization in Malaysia data using Google Sheet. We will perform web scraping on the **[i3 Investor site](https://klse.i3investor.com/web/index)**.
