@@ -8,6 +8,9 @@ tags: ["Website", "Hugo", "PaperMode", "GitHub"]
 weight: 5
 ---
 
+<img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"  class = "center"/>
+<p style="text-align: center; color:grey;"><i>Images from Unsplash</i></p>
+
 > *This article aims to provide a comprehensive overview of how this site is set up and run. All references used are attached at page bottom.* 
 
 ## Pre-requisite
