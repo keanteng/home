@@ -52,7 +52,7 @@ languages:
         profileMode:
             enabled: true
             title: Kean Teng Blog
-            imageUrl: "favicon.png"
+            imageUrl: "https://i.postimg.cc/0Qq5g2fX/favicon.png"
             imageTitle: ProfileMode image
             # imageWidth: 120
             # imageHeight: 120
@@ -168,9 +168,9 @@ params:
 
     assets:
         disableHLJS: true
-        favicon: "favicon.ico"
-        favicon16x16: "favicon.png"
-        favicon32x32: "favicon.png"
+        favicon: "https://i.postimg.cc/0Qq5g2fX/favicon.png"
+      # favicon16x16: "favicon.png"
+      # favicon32x32: "favicon.png"
     #     apple_touch_icon: "<link / abs url>"
     #     safari_pinned_tab: "<link / abs url>"
 
