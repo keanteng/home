@@ -10,7 +10,25 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intermediate Machine Learning</title>
+      <link>https://keanteng.github.io/home/docs/2023-03-02-intermediate-machine-learning/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-03-02-intermediate-machine-learning/</guid>
+      <description>My Kaggle Learning Note 3</description>
+    </item>
+    
+    <item>
+      <title>Intro to Deep Learning</title>
+      <link>https://keanteng.github.io/home/docs/2023-02-24-intro-to-deep-learning/</link>
+      <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-02-24-intro-to-deep-learning/</guid>
+      <description>My Kaggle Learning Note 1</description>
+    </item>
+    
     <item>
       <title>Images Scraping from Web Pages</title>
       <link>https://keanteng.github.io/home/docs/2023-02-19-images-scraping-from-web-pages/</link>

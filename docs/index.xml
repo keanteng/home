@@ -21,12 +21,30 @@
     </item>
     
     <item>
+      <title>Intermediate Machine Learning</title>
+      <link>https://keanteng.github.io/home/docs/2023-03-02-intermediate-machine-learning/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-03-02-intermediate-machine-learning/</guid>
+      <description>My Kaggle Learning Note 3</description>
+    </item>
+    
+    <item>
       <title>Stable Diffusion WebUI with Civitai LORAs</title>
       <link>https://keanteng.github.io/home/docs/2023-02-25-stable-diffusion-webui-with-civitai-loras/</link>
       <pubDate>Sat, 25 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/docs/2023-02-25-stable-diffusion-webui-with-civitai-loras/</guid>
       <description>Quick Guide I compiled from the Web</description>
+    </item>
+    
+    <item>
+      <title>Intro to Deep Learning</title>
+      <link>https://keanteng.github.io/home/docs/2023-02-24-intro-to-deep-learning/</link>
+      <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-02-24-intro-to-deep-learning/</guid>
+      <description>My Kaggle Learning Note 1</description>
     </item>
     
     <item>

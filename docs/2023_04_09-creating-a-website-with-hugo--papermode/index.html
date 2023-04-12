@@ -10,7 +10,7 @@
 <meta name="description" content="Deploying Your Own Site With Ease">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023_04_09-creating-a-website-with-hugo--papermode/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7140587df96a2b1a49eb723fa7063dc0c641a6cb638f3140e8d3beb4deae4f5c.css" integrity="sha256-cUBYfflqKxpJ63I/pwY9wMZBpstjjzFA6NO&#43;tN6uT1w=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.e45e7c8e44c93caeb9e0372f4b51ce4109b297b6e75d9607917ab49316a147c0.css" integrity="sha256-5F58jkTJPK654DcvS1HOQQmyl7bnXZYHkXq0kxahR8A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -99,8 +99,8 @@
   "keywords": [
     "Website", "Hugo", "PaperMode", "GitHub"
   ],
-  "articleBody": " Images from Unsplash\nThis article aims to provide a comprehensive overview of how this site is set up and run.\nPre-requisite There are a few things to prepare before your own site can be created, as follows:\nA GitHub account Installed Microsoft Visual Studio Code Installed Git After you create a GitHub account and installing the necessary software, we are ready to begin!\nWebsite Foundations Setup The site that we are going to create will be based on Hugo, an open-source site generators where it provides a framework for us to deploy a site with speed and ease.\nTo build our website, we will need to install Hugo into our local machine. The installation process will be done on Windows Terminal with the support of Go language. Of course, you can also use other language such as chocolatey, scoop and winget.\nAfter installing go, here’s how to install Hugo on terminal:\n1 2 go install -tags extended github.com/gohugoio/hugo@latest hugo version # check if you are using the latest version With Hugo installed in our local system, we would like to now create the foundation or framework for our website. Here I encourage you to change your directory first, preferably to \\Desktop so that you can access all your files easily:\n1 2 cd C:\\Users\\Username\\Desktop hugo new site -f yml Now change your directory again and create a page on your website:\n1 2 cd hugo new docs/page.md Website Theme Setup With the site foundation ready, we now add a theme or a specific design to our site for better functionality and appearance. You can check out different theme here, but in my case we will proceed with the PaperMode theme.\nHere we will use git to install the website theme:\n1 2 3 git init git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod After that, navigate to GitHub to create an empty repository and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually README.md to avoid causing any error:\n1 2 3 4 5 6 echo \"# Test\" \u003e\u003e README.md git add README.md git commit -m \"Initial commit\" git branch -M main git remote add origin https://github.com/YOUR-GIT-NAME/REPOSITORY-NAME.git git push -u origin main If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:\n1 hugo server Website Deployment Workflow Just now your were shown to deploy the site locally, now to do it publicly - meaning on the web, you need the support from GitHub workflow.\nHere we will need to create an additional directory and put in some codes into it:\nmkdir -p .github/workflows After creating this directory, create a file with name deploy.yml in the workflow folder. Then navigate these two files (your can use file explorer) and put in these codes:\nconfig.yml After copying, change the first line baseurl: to the following format \"https://YOUR-NAME-ON-GITHUB.github.io/REPOSITORY-NAME/\" 1 copy the code from here (https://github.com/adityatelange/hugo-PaperMod/blob/exampleSite/config.yml) deploy.yml 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 name: Publish to GH Pages on: push: branches: - main pull_request: jobs: deploy: runs-on: ubuntu-latest steps: - name: Checkout source uses: actions/checkout@v3 with: submodules: true - name: Checkout destination uses: actions/checkout@v3 if: github.ref == 'refs/heads/main' with: ref: gh-pages path: built-site - name: Setup Hugo run: | curl -L -o /tmp/hugo.tar.gz 'https://github.com/gohugoio/hugo/releases/download/v0.110.0/hugo_extended_0.110.0_linux-amd64.tar.gz' tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo - name: Build run: ${RUNNER_TEMP}/hugo - name: Deploy if: github.ref == 'refs/heads/main' run: | cp -R public/* ${GITHUB_WORKSPACE}/built-site/ cd ${GITHUB_WORKSPACE}/built-site git add . git config user.name 'keanteng' # change to your username git config user.email 'u2004763@siswa.um.edu.my' # change to your email git commit -m 'Updated site' git push Before we link up our local files with the repository, you need to create a new branch on your repository called git-pages and you need to change the setting for GitHub actions.\nChange the setting here\nFinal Step For the last part of the website setup, we will link up our local files with the repository created so that we can view our site online:\n1 2 3 4 git status git add . git commit -m \"site update\" git push Now, just head to GitHub actions and click on pages build and deployment, and click on your website link on the web!\nClick on the link to view your site\nAcknowledgement ✨ I would like to thank Hugo and PaperMode for empowering me with the tool and foundations to build such a beautiful and impressive site. I want to thank dhij for the wonderful tutorial on YouTube for the site set-up, I failed on numerous attempt to set up the site by looking at some blogs on Medium until I look up his video. I am inspired to make this blog as comprehensive as possible so anyone that reads it can follow successfully. Thanks to Abdur Rahman for his own site set-up as well where I can reference to his code on GitHub such as markdown pages set-up. Finally, thanks to Lil’Log where I am inspired to kick-start my own site to share my learnings and some codes on her GitHub blog repository like embedding images and equations on pages, otherwise I might still struggle to add caption to all the images attached.\n",
-  "wordCount" : "946",
+  "articleBody": " Images from Unsplash\nThis article aims to provide a comprehensive overview of how this site is set up and run.\nPre-requisite There are a few things to prepare before your own site can be created, as follows:\nA GitHub account Installed Microsoft Visual Studio Code Installed Git After you create a GitHub account and installing the necessary software, we are ready to begin!\nWebsite Foundations Setup The site that we are going to create will be based on Hugo, an open-source site generators where it provides a framework for us to deploy a site with speed and ease.\nTo build our website, we will need to install Hugo into our local machine. The installation process will be done on Windows Terminal with the support of Go language. Of course, you can also use other language such as chocolatey, scoop and winget.\nAfter installing go, here’s how to install Hugo on terminal:\ngo install -tags extended github.com/gohugoio/hugo@latest hugo version # check if you are using the latest version With Hugo installed in our local system, we would like to now create the foundation or framework for our website. Here I encourage you to change your directory first, preferably to \\Desktop so that you can access all your files easily:\ncd C:\\Users\\Username\\Desktop hugo new site -f yml Now change your directory again and create a page on your website:\ncd hugo new docs/page.md Website Theme Setup With the site foundation ready, we now add a theme or a specific design to our site for better functionality and appearance. You can check out different theme here, but in my case we will proceed with the PaperMode theme.\nHere we will use git to install the website theme:\ngit init git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod After that, navigate to GitHub to create an empty repository and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually README.md to avoid causing any error:\necho \"# Test\" \u003e\u003e README.md git add README.md git commit -m \"Initial commit\" git branch -M main git remote add origin https://github.com/YOUR-GIT-NAME/REPOSITORY-NAME.git git push -u origin main If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:\nhugo server Website Deployment Workflow Just now your were shown to deploy the site locally, now to do it publicly - meaning on the web, you need the support from GitHub workflow.\nHere we will need to create an additional directory and put in some codes into it:\nmkdir -p .github/workflows After creating this directory, create a file with name deploy.yml in the workflow folder. Then navigate these two files (your can use file explorer) and put in these codes:\nconfig.yml After copying, change the first line baseurl: to the following format \"https://YOUR-NAME-ON-GITHUB.github.io/REPOSITORY-NAME/\" copy the code from here (https://github.com/adityatelange/hugo-PaperMod/blob/exampleSite/config.yml) deploy.yml name: Publish to GH Pages on: push: branches: - main pull_request: jobs: deploy: runs-on: ubuntu-latest steps: - name: Checkout source uses: actions/checkout@v3 with: submodules: true - name: Checkout destination uses: actions/checkout@v3 if: github.ref == 'refs/heads/main' with: ref: gh-pages path: built-site - name: Setup Hugo run: | curl -L -o /tmp/hugo.tar.gz 'https://github.com/gohugoio/hugo/releases/download/v0.110.0/hugo_extended_0.110.0_linux-amd64.tar.gz' tar -C ${RUNNER_TEMP} -zxvf /tmp/hugo.tar.gz hugo - name: Build run: ${RUNNER_TEMP}/hugo - name: Deploy if: github.ref == 'refs/heads/main' run: | cp -R public/* ${GITHUB_WORKSPACE}/built-site/ cd ${GITHUB_WORKSPACE}/built-site git add . git config user.name 'keanteng' # change to your username git config user.email 'u2004763@siswa.um.edu.my' # change to your email git commit -m 'Updated site' git push Before we link up our local files with the repository, you need to create a new branch on your repository called git-pages and you need to change the setting for GitHub actions.\nChange the setting here\nFinal Step For the last part of the website setup, we will link up our local files with the repository created so that we can view our site online:\ngit status git add . git commit -m \"site update\" git push Now, just head to GitHub actions and click on pages build and deployment, and click on your website link on the web!\nClick on the link to view your site\nAcknowledgement ✨ I would like to thank Hugo and PaperMode for empowering me with the tool and foundations to build such a beautiful and impressive site. I want to thank dhij for the wonderful tutorial on YouTube for the site set-up, I failed on numerous attempt to set up the site by looking at some blogs on Medium until I look up his video. I am inspired to make this blog as comprehensive as possible so anyone that reads it can follow successfully. Thanks to Abdur Rahman for his own site set-up as well where I can reference to his code on GitHub such as markdown pages set-up. Finally, thanks to Lil’Log where I am inspired to kick-start my own site to share my learnings and some codes on her GitHub blog repository like embedding images and equations on pages, otherwise I might still struggle to add caption to all the images attached.\n",
+  "wordCount" : "885",
   "inLanguage": "en",
   "datePublished": "2023-04-09T00:00:00Z",
   "dateModified": "2023-04-09T00:00:00Z",
@@ -270,82 +270,30 @@
 <p>The site that we are going to create will be based on <a href="https://gohugo.io/"><strong>Hugo</strong></a>, an open-source site generators where it provides a framework for us to deploy a site with speed and ease.</p>
 <p>To build our website, we will need to install Hugo into our local machine. The installation process will be done on Windows Terminal with the support of <a href="https://go.dev/doc/install"><strong>Go</strong></a> language. Of course, you can also use other language such as chocolatey, scoop and winget.</p>
 <p>After installing go, here&rsquo;s how to install Hugo on terminal:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">go install -tags extended github.com/gohugoio/hugo@latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">hugo version</span><span class="w"> </span><span class="c"># check if you are using the latest version</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>With Hugo installed in our local system, we would like to now create the foundation or framework for our website. Here I encourage you to change your directory first, preferably to <code>\Desktop</code> so that you can access all your files easily:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">cd C:\Users\Username\Desktop</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">go</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">tags</span> <span class="nx">extended</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">gohugoio</span><span class="o">/</span><span class="nx">hugo</span><span class="err">@</span><span class="nx">latest</span>
+</span></span><span class="line"><span class="cl"><span class="nx">hugo</span> <span class="nx">version</span> <span class="err">#</span> <span class="nx">check</span> <span class="k">if</span> <span class="nx">you</span> <span class="nx">are</span> <span class="nx">using</span> <span class="nx">the</span> <span class="nx">latest</span> <span class="nx">version</span>
+</span></span></code></pre></div><p>With Hugo installed in our local system, we would like to now create the foundation or framework for our website. Here I encourage you to change your directory first, preferably to <code>\Desktop</code> so that you can access all your files easily:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">cd C:\Users\Username\Desktop</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">hugo new site &lt;your_site_name&gt; -f yml </span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now change your directory again and create a page on your website:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">cd &lt;your_site_name&gt;</span><span class="w">
+</span></span></span></code></pre></div><p>Now change your directory again and create a page on your website:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">cd &lt;your_site_name&gt;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">hugo new docs/page.md</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="website-theme-setup">Website Theme Setup<a hidden class="anchor" aria-hidden="true" href="#website-theme-setup">#</a></h2>
+</span></span></span></code></pre></div><h2 id="website-theme-setup">Website Theme Setup<a hidden class="anchor" aria-hidden="true" href="#website-theme-setup">#</a></h2>
 <p>With the site foundation ready, we now add a theme or a specific design to our site for better functionality and appearance. You can check out different theme <a href="https://themes.gohugo.io/"><strong>here</strong></a>, but in my case we will proceed with the <a href="https://themes.gohugo.io/themes/hugo-papermod/"><strong>PaperMode</strong></a> theme.</p>
 <p>Here we will use git to install the website theme:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init
 </span></span><span class="line"><span class="cl">git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth<span class="o">=</span><span class="m">1</span>
 </span></span><span class="line"><span class="cl">git submodule add --depth<span class="o">=</span><span class="m">1</span> https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>After that, navigate to GitHub to create an <strong>empty repository</strong> and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually <code>README.md</code> to avoid causing any error:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;# Test&#34;</span> &gt;&gt; README.md
+</span></span></code></pre></div><p>After that, navigate to GitHub to create an <strong>empty repository</strong> and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually <code>README.md</code> to avoid causing any error:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;# Test&#34;</span> &gt;&gt; README.md
 </span></span><span class="line"><span class="cl">git add README.md
 </span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Initial commit&#34;</span>
 </span></span><span class="line"><span class="cl">git branch -M main
 </span></span><span class="line"><span class="cl">git remote add origin https://github.com/YOUR-GIT-NAME/REPOSITORY-NAME.git
 </span></span><span class="line"><span class="cl">git push -u origin main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo server
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="website-deployment-workflow">Website Deployment Workflow<a hidden class="anchor" aria-hidden="true" href="#website-deployment-workflow">#</a></h2>
+</span></span></code></pre></div><p>If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hugo server
+</span></span></code></pre></div><h2 id="website-deployment-workflow">Website Deployment Workflow<a hidden class="anchor" aria-hidden="true" href="#website-deployment-workflow">#</a></h2>
 <p>Just now your were shown to deploy the site locally, now to do it publicly - meaning on the web, you need the support from GitHub workflow.</p>
 <p>Here we will need to create an additional directory and put in some codes into it:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p .github/workflows
@@ -357,62 +305,11 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">copy the code from here (https://github.com/adityatelange/hugo-PaperMod/blob/exampleSite/config.yml)</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">copy the code from here (https://github.com/adityatelange/hugo-PaperMod/blob/exampleSite/config.yml)</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li><code>deploy.yml</code></li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Publish to GH Pages</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Publish to GH Pages</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
@@ -452,28 +349,16 @@
 </span></span></span><span class="line"><span class="cl"><span class="sd">          git config user.email &#39;u2004763@siswa.um.edu.my&#39; # change to your email
 </span></span></span><span class="line"><span class="cl"><span class="sd">          git commit -m &#39;Updated site&#39;
 </span></span></span><span class="line"><span class="cl"><span class="sd">          git push          </span><span class="w">          
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Before we link up our local files with the repository, you need to create a new branch on your repository called <code>git-pages</code> and you need to change the setting for GitHub actions.</p>
+</span></span></span></code></pre></div><p>Before we link up our local files with the repository, you need to create a new branch on your repository called <code>git-pages</code> and you need to change the setting for GitHub actions.</p>
 <img src="images/git_action.png"  class = "center"/>
 <p style="text-align: center; color:grey;"><i>Change the setting here</i></p>
 <h2 id="final-step">Final Step<a hidden class="anchor" aria-hidden="true" href="#final-step">#</a></h2>
 <p>For the last part of the website setup, we will link up our local files with the repository created so that we can view our site online:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">git status</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">git status</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">git add .</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">git commit -m &#34;site update&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">git push</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now, just head to GitHub actions and click on pages build and deployment, and click on your website link on the web!</p>
+</span></span></span></code></pre></div><p>Now, just head to GitHub actions and click on pages build and deployment, and click on your website link on the web!</p>
 <img src="images/website_link.png"  class = "center"/>
 <p style="text-align: center; color:grey;"><i>Click on the link to view your site</i></p>
 <h2 id="acknowledgement-">Acknowledgement ✨<a hidden class="anchor" aria-hidden="true" href="#acknowledgement-">#</a></h2>
@@ -490,10 +375,10 @@
       <li><a href="https://keanteng.github.io/home/tags/github/">GitHub</a></li>
     </ul>
 <nav class="paginav">
-  <a class="next" href="https://keanteng.github.io/home/docs/2023-02-25-stable-diffusion-webui-with-civitai-loras/">
+  <a class="next" href="https://keanteng.github.io/home/docs/2023-03-02-intermediate-machine-learning/">
     <span class="title">Next »</span>
     <br>
-    <span>Stable Diffusion WebUI with Civitai LORAs</span>
+    <span>Intermediate Machine Learning</span>
   </a>
 </nav>
 

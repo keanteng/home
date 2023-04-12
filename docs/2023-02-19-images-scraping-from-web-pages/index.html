@@ -10,7 +10,7 @@
 <meta name="description" content="A Functional Approach Towards Repetitious Images Saving">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023-02-19-images-scraping-from-web-pages/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7140587df96a2b1a49eb723fa7063dc0c641a6cb638f3140e8d3beb4deae4f5c.css" integrity="sha256-cUBYfflqKxpJ63I/pwY9wMZBpstjjzFA6NO&#43;tN6uT1w=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.e45e7c8e44c93caeb9e0372f4b51ce4109b297b6e75d9607917ab49316a147c0.css" integrity="sha256-5F58jkTJPK654DcvS1HOQQmyl7bnXZYHkXq0kxahR8A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -99,8 +99,8 @@
   "keywords": [
     "Images Scraping", "Web Scraping", "Python", "Website", "Jupyter"
   ],
-  "articleBody": " Images from Unsplash\nIn this article, we will learn how to image scraping on this National Geographic article: Asteroids vs. comets: How do they differ, and do they pose a threat to Earth? We will learn how to download in bulk the high-quality images in the webpage with Python code.\nThe process:\nFind the webpage data structure for the URL specified. Search for the images link and save in a list. Download all the images. Find the webpage data structure for the URL specified We will be using Visual Studio Code with Python and Jupyter notebook configured. However, a Python code file will also do the job. Here are the three packages to be installed using Window PowerShell:\n1 2 3 4 5 # Lauch Power Shell by pressing Start and then type Power Shell in the search bar # installation procedure py -m pip install requests py -m pip install bs4 py -m pip install urllib First, we start by importing the modules needed. Then, we need to make HTTP request to view the webpage data structure we want. This can be done as follows:\nimport requests from bs4 import BeautifulSoup import urllib.request def getdata(url): r = requests.get(url) return r.text htmldata = getdata(\"https://www.nationalgeographic.co.uk/space/2023/01/asteroids-vs-comets-how-do-they-differ-and-do-they-pose-a-threat-to-earth\") soup = BeautifulSoup(htmldata, 'html.parser') You can check the output by typing the variable name:\nOutput representing webpage structure.\nSearch for the images link and save in a list Now, we want to search for all the images links that embedded images in the webpage. We will use a test list to store each of the link as list of elements for download later. The print function is used to print out all the links that are being searched.\n1 2 3 4 test = list() for item in soup.find_all('img'): print(item['src']) test.append(item.get('src')) All the searched links in list\nDownload all the images Now simply using a for loop, we can save all the images inside our current folder. The number of iterations, n will be the number of images in the list. In our code, we will also rename the images with number 0,1,2,…,n to avoid duplicate file name.\n1 2 for i in range(len(test)): urllib.request.urlretrieve(test[i], str(i)+\".jpg\") All the images being downloaded\nExtra: Some website will have several images urls mixed up including .svg, .png., .gif and .jpg. We can use if statement to counter this issue:\n1 2 3 4 5 6 7 temp = list() for i in range(len(test)): if test[i].__contains__('.png' or '.jpg' or '.jpeg'): temp.append(test[i]) for i in range(len(temp)): urllib.request.urlretrieve(temp[i], str(i)+\".jpg\") That said, job well done. Do note that this approach has restriction on the type of web page for scraping. It works best for articles pages with images embedded. If you encounter connection time out error with your request, do have a check on the site accessibility (Internet Service Provider). Otherwise, it should work perfectly!\nReferences: Beautiful Soup Documentation — Beautiful Soup 4.4.0 documentation (beautiful-soup-4.readthedocs.io) urllib.request — Extensible library for opening URLs — Python 3.11.2 documentation ",
-  "wordCount" : "493",
+  "articleBody": " Images from Unsplash\nIn this article, we will learn how to image scraping on this National Geographic article: Asteroids vs. comets: How do they differ, and do they pose a threat to Earth? We will learn how to download in bulk the high-quality images in the webpage with Python code.\nThe process:\nFind the webpage data structure for the URL specified. Search for the images link and save in a list. Download all the images. Find the webpage data structure for the URL specified We will be using Visual Studio Code with Python and Jupyter notebook configured. However, a Python code file will also do the job. Here are the three packages to be installed using Window PowerShell:\n# Lauch Power Shell by pressing Start and then type Power Shell in the search bar # installation procedure py -m pip install requests py -m pip install bs4 py -m pip install urllib First, we start by importing the modules needed. Then, we need to make HTTP request to view the webpage data structure we want. This can be done as follows:\nimport requests from bs4 import BeautifulSoup import urllib.request def getdata(url): r = requests.get(url) return r.text htmldata = getdata(\"https://www.nationalgeographic.co.uk/space/2023/01/asteroids-vs-comets-how-do-they-differ-and-do-they-pose-a-threat-to-earth\") soup = BeautifulSoup(htmldata, 'html.parser') You can check the output by typing the variable name:\nOutput representing webpage structure.\nSearch for the images link and save in a list Now, we want to search for all the images links that embedded images in the webpage. We will use a test list to store each of the link as list of elements for download later. The print function is used to print out all the links that are being searched.\ntest = list() for item in soup.find_all('img'): print(item['src']) test.append(item.get('src')) All the searched links in list\nDownload all the images Now simply using a for loop, we can save all the images inside our current folder. The number of iterations, n will be the number of images in the list. In our code, we will also rename the images with number 0,1,2,…,n to avoid duplicate file name.\nfor i in range(len(test)): urllib.request.urlretrieve(test[i], str(i)+\".jpg\") All the images being downloaded\nExtra: Some website will have several images urls mixed up including .svg, .png., .gif and .jpg. We can use if statement to counter this issue:\ntemp = list() for i in range(len(test)): if test[i].__contains__('.png' or '.jpg' or '.jpeg'): temp.append(test[i]) for i in range(len(temp)): urllib.request.urlretrieve(temp[i], str(i)+\".jpg\") That said, job well done. Do note that this approach has restriction on the type of web page for scraping. It works best for articles pages with images embedded. If you encounter connection time out error with your request, do have a check on the site accessibility (Internet Service Provider). Otherwise, it should work perfectly!\nReferences: Beautiful Soup Documentation — Beautiful Soup 4.4.0 documentation (beautiful-soup-4.readthedocs.io) urllib.request — Extensible library for opening URLs — Python 3.11.2 documentation ",
+  "wordCount" : "475",
   "inLanguage": "en",
   "datePublished": "2023-02-19T00:00:00Z",
   "dateModified": "2023-02-19T00:00:00Z",
@@ -262,24 +262,13 @@
 </ul>
 <h3 id="find-the-webpage-data-structure-for-the-url-specified">Find the webpage data structure for the URL specified<a hidden class="anchor" aria-hidden="true" href="#find-the-webpage-data-structure-for-the-url-specified">#</a></h3>
 <p>We will be using Visual Studio Code with Python and Jupyter notebook configured. However, a Python code file will also do the job. Here are the three packages to be installed using Window PowerShell:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Lauch Power Shell by pressing Start and then type Power Shell in the search bar</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Lauch Power Shell by pressing Start and then type Power Shell in the search bar</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># installation procedure</span>
 </span></span><span class="line"><span class="cl"><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
 </span></span><span class="line"><span class="cl"><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">bs4</span>
 </span></span><span class="line"><span class="cl"><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">urllib</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>First, we start by importing the modules needed. Then, we need to make HTTP request to view the webpage data structure we want. This can be done as follows:</p>
-<div class="highlight" lineos="true"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span></code></pre></div><p>First, we start by importing the modules needed. Then, we need to make HTTP request to view the webpage data structure we want. This can be done as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">urllib.request</span>
 </span></span><span class="line"><span class="cl">
@@ -294,59 +283,28 @@
 <p style="text-align: center; color:grey;"><i>Output representing webpage structure.</i></p>
 <h3 id="search-for-the-images-link-and-save-in-a-list">Search for the images link and save in a list<a hidden class="anchor" aria-hidden="true" href="#search-for-the-images-link-and-save-in-a-list">#</a></h3>
 <p>Now, we want to search for all the images links that embedded images in the webpage. We will use a test list to store each of the link as list of elements for download later. The print function is used to print out all the links that are being searched.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">test</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">test</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">):</span> 
 </span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl">    <span class="n">test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">))</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><center><img src="images/img2.png"  class = "center"/></center>
+</span></span></code></pre></div><center><img src="images/img2.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i>All the searched links in list</i></p>
 <h3 id="download-all-the-images">Download all the images<a hidden class="anchor" aria-hidden="true" href="#download-all-the-images">#</a></h3>
 <p>Now simply using a for loop, we can save all the images inside our current folder. The number of iterations, n will be the number of images in the list. In our code, we will also rename the images with number 0,1,2,…,n to avoid duplicate file name.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;.jpg&#34;</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><center><img src="images/img3.png"  class = "center"/></center>
+</span></span></code></pre></div><center><img src="images/img3.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i>All the images being downloaded</i></p>
 <h3 id="extra">Extra:<a hidden class="anchor" aria-hidden="true" href="#extra">#</a></h3>
 <p>Some website will have several images urls mixed up including .svg, .png., .gif and .jpg. We can use if statement to counter this issue:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">temp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">temp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)):</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="fm">__contains__</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span> <span class="ow">or</span> <span class="s1">&#39;.jpg&#39;</span> <span class="ow">or</span> <span class="s1">&#39;.jpeg&#39;</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">        <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;.jpg&#34;</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>That said, job well done. Do note that this approach has restriction on the type of web page for scraping. <strong>It works best for articles pages with images embedded.</strong> If you encounter connection time out error with your request, do have a check on the site accessibility (Internet Service Provider). Otherwise, it should work perfectly!</p>
+</span></span></code></pre></div><p>That said, job well done. Do note that this approach has restriction on the type of web page for scraping. <strong>It works best for articles pages with images embedded.</strong> If you encounter connection time out error with your request, do have a check on the site accessibility (Internet Service Provider). Otherwise, it should work perfectly!</p>
 <h3 id="references">References:<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h3>
 <ol>
 <li><a href="https://beautiful-soup-4.readthedocs.io/en/latest/">Beautiful Soup Documentation — Beautiful Soup 4.4.0 documentation (beautiful-soup-4.readthedocs.io)</a></li>
@@ -365,10 +323,10 @@
       <li><a href="https://keanteng.github.io/home/tags/jupyter/">Jupyter</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://keanteng.github.io/home/docs/2023-02-25-stable-diffusion-webui-with-civitai-loras/">
+  <a class="prev" href="https://keanteng.github.io/home/docs/2023-02-24-intro-to-deep-learning/">
     <span class="title">« Prev</span>
     <br>
-    <span>Stable Diffusion WebUI with Civitai LORAs</span>
+    <span>Intro to Deep Learning</span>
   </a>
   <a class="next" href="https://keanteng.github.io/home/docs/2022-11-05-google-sheet-simple-web-scraping/">
     <span class="title">Next »</span>

@@ -48,6 +48,51 @@
     </item>
     
     <item>
+      <title>Data Analysis</title>
+      <link>https://keanteng.github.io/home/tags/data-analysis/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Science</title>
+      <link>https://keanteng.github.io/home/tags/data-science/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kaggle</title>
+      <link>https://keanteng.github.io/home/tags/kaggle/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/kaggle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://keanteng.github.io/home/tags/machine-learning/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://keanteng.github.io/home/tags/python/</link>
+      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>LORAs</title>
       <link>https://keanteng.github.io/home/tags/loras/</link>
       <pubDate>Sat, 25 Feb 2023 00:00:00 +0000</pubDate>
@@ -75,6 +120,15 @@
     </item>
     
     <item>
+      <title>Deep Learning</title>
+      <link>https://keanteng.github.io/home/tags/deep-learning/</link>
+      <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Images Scraping</title>
       <link>https://keanteng.github.io/home/tags/images-scraping/</link>
       <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
@@ -89,15 +143,6 @@
       <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/jupyter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/python/</guid>
       <description></description>
     </item>
     
