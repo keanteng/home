@@ -194,11 +194,11 @@ markup:
             unsafe: true
     highlight:
         noClasses: false
-        # anchorLineNos: true
-        # codeFences: true
-        # guessSyntax: true
-        # lineNos: true
-        # style: monokai
+        anchorLineNos: false
+        codeFences: true
+        guessSyntax: true
+        lineNos: false
+        style: monokai
 
 privacy:
     vimeo:

@@ -28,19 +28,19 @@ The site that we are going to create will be based on [**Hugo**](https://gohugo.
 To build our website, we will need to install Hugo into our local machine. The installation process will be done on Windows Terminal with the support of [**Go**](https://go.dev/doc/install) language. Of course, you can also use other language such as chocolatey, scoop and winget. 
 
 After installing go, here's how to install Hugo on terminal:
-```yaml {linenos=true}
+```go
 go install -tags extended github.com/gohugoio/hugo@latest
 hugo version # check if you are using the latest version
 ```
 
 With Hugo installed in our local system, we would like to now create the foundation or framework for our website. Here I encourage you to change your directory first, preferably to `\Desktop` so that you can access all your files easily:
-```yaml {linenos=true}
+```yaml
 cd C:\Users\Username\Desktop
 hugo new site <your_site_name> -f yml 
 ```
 
 Now change your directory again and create a page on your website:
-```yaml {linenos=true}
+```yaml 
 cd <your_site_name>
 hugo new docs/page.md
 ```
@@ -49,13 +49,13 @@ hugo new docs/page.md
 With the site foundation ready, we now add a theme or a specific design to our site for better functionality and appearance. You can check out different theme [**here**](https://themes.gohugo.io/), but in my case we will proceed with the [**PaperMode**](https://themes.gohugo.io/themes/hugo-papermod/) theme. 
 
 Here we will use git to install the website theme:
-```bash {linenos=true}
+```bash 
 git init
 git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod --depth=1
 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
 ```
 After that, navigate to GitHub to create an **empty repository** and head back to terminal where we need to link up our files with the repository created. Since we are using an empty repository, we need to create a first file, usually `README.md` to avoid causing any error:
-```bash {linenos=true}
+```bash
 echo "# Test" >> README.md
 git add README.md
 git commit -m "Initial commit"
@@ -65,7 +65,7 @@ git push -u origin main
 ```
 
 If you want to see how your website look like, you can deploy your site locally using Hugo. This is a good practice to check for error and website update before deploy your site publicly. Simply click the link or type 127.0.0.1 on your web browser:
-```bash {linenos=true}
+```bash 
 hugo server
 ```
 
@@ -80,11 +80,11 @@ mkdir -p .github/workflows
 After creating this directory, create a file with name `deploy.yml` in the workflow folder. Then navigate these two files (your can use file explorer) and put in these codes:
 - `config.yml`
     - After copying, change the first line `baseurl:` to the following format `"https://YOUR-NAME-ON-GITHUB.github.io/REPOSITORY-NAME/"`
-```yaml {linenos=true}
+```yaml 
 copy the code from here (https://github.com/adityatelange/hugo-PaperMod/blob/exampleSite/config.yml)
 ```
 - `deploy.yml`
-```yaml {linenos=true}
+```yaml 
 name: Publish to GH Pages
 on:
   push:
@@ -134,7 +134,7 @@ Before we link up our local files with the repository, you need to create a new 
 
 ## Final Step
 For the last part of the website setup, we will link up our local files with the repository created so that we can view our site online:
-```yaml {linenos=true}
+```yaml 
 git status
 git add .
 git commit -m "site update"

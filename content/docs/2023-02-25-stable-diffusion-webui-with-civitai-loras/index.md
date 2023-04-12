@@ -30,7 +30,7 @@ Google Collab offers a decent and fast GPU and long-running hours for any Google
 
 You can check out the models offered on [**Civitai**](https://civitai.com/) to look for prompt examples and user review of the model as well as other models offered on the platform.
 
-```yaml {linenos=true}
+```yaml 
 # prompts example
 positive:
 space, rocket, stallite, earth, milky ways, space dust, high res, 8k
