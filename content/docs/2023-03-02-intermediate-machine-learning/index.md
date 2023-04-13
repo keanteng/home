@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Python", "Data Analysis", "Data Science", "Machine Learning", "Kaggle"]
 weight: 5
-summary: ""
+summary: "Using machine learning in data analysis is a rather procedural approach. As we can notice from the approach, we will start by *Preparing data >> Defining a model >> Model diagnostic checking >> Model prediction* to complete our workflow. This workflow is often and commonly practiced when we are doing data analysis work."
 ---
 
 <center><img src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"  class = "center"/></center>

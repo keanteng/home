@@ -1,6 +1,6 @@
 baseURL: "https://keanteng.github.io/home/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 title: Kean Teng Blog
-paginate: 10
+paginate: 5
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -39,62 +39,6 @@ languages:
                   url: https://github.com/keanteng/home
                 - name: LinkedIn
                   url: https://my.linkedin.com/in/khorkeanteng
-
-    zh:
-        languageName: "ZH"
-        languageAltTitle: Chinese
-        weight: 2
-        title: Kean Teng Blog
-        taxonomies:
-          category: CHcategories
-          tag: CHtags
-          series: CHseries
-        profileMode:
-            enabled: true
-            title: Kean Teng Blog
-            imageUrl: "https://i.postimg.cc/0Qq5g2fX/favicon.png"
-            imageTitle: ProfileMode image
-            # imageWidth: 120
-            # imageHeight: 120
-            subtitle: " 👋 Welcome to my personal blog. 欢迎来到我的部落格。"
-            buttons:
-                - name: Blog
-                  url: archives/
-                - name: Profile Mode
-                  url: https://keanteng.github.io/home/
-        menu:
-            main:
-                - name: Archive
-                  url: archives/
-                  weight: 5
-                - name: CHTags
-                  url: chtags
-                  weight: 10
-                - name: CHCategories
-                  url: chcategories
-                  weight: 10
-                - name: CHSeries
-                  url: chseries
-                  weight: 10
-                - name: NullLink
-                  url: "#"
-
-    Jp:
-        languagedirection: rtl
-        weight: 3
-        title: PaperMod RTL
-        homeInfoParams:
-            Title: "Hi there \U0001F44B"
-            Content: Work in progresss
-        taxonomies:
-          category: FAcategories
-          tag: FAtags
-          series: FAseries
-        menu:
-            main:
-                - name: FATags
-                  url: fatags
-                  weight: 10
 
 outputs:
     home:
@@ -138,7 +82,7 @@ params:
     homeInfoParams:
         Title: "Kean Teng Blog"
         Content: >
-            Welcome to my personal blog. I will publish me learning notes on a variety of topics and ideas here. ✨ 
+            Welcome to my personal blog. I will publish my learning notes on a variety of topics and ideas here. ✨ 
     socialIcons:
         - name: github
           url: "https://github.com/keanteng/home"
@@ -148,14 +92,16 @@ params:
           url: https://twitter.com/realKeanTeng
         - name: medium
           url: https://khorkeanteng.medium.com/
+        - name: instagram
+          url: https://www.instagram.com/khorkeanteng/
         - name: Rss
           url: "index.xml"
         
 
-    editPost:
-        URL: "https://github.com/keanteng/home/"
-        Text: "Suggest Changes" # edit text
-        appendFilePath: true # to append file path to Edit link
+    # editPost:
+        # URL: "https://github.com/keanteng/home/"
+        # Text: "Suggest Changes" # edit text
+        # appendFilePath: true # to append file path to Edit link
 
      #label:
       #   text: "Home"
