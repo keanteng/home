@@ -48,11 +48,56 @@
     </item>
     
     <item>
+      <title>Computer Vision</title>
+      <link>https://keanteng.github.io/home/tags/computer-vision/</link>
+      <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/computer-vision/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Image Classification</title>
+      <link>https://keanteng.github.io/home/tags/image-classification/</link>
+      <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/image-classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kaggle</title>
+      <link>https://keanteng.github.io/home/tags/kaggle/</link>
+      <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/kaggle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://keanteng.github.io/home/tags/python/</link>
+      <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Analysis</title>
       <link>https://keanteng.github.io/home/tags/data-analysis/</link>
-      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 15 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>https://keanteng.github.io/home/tags/sql/</link>
+      <pubDate>Wed, 15 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/sql/</guid>
       <description></description>
     </item>
     
@@ -66,29 +111,11 @@
     </item>
     
     <item>
-      <title>Kaggle</title>
-      <link>https://keanteng.github.io/home/tags/kaggle/</link>
-      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/kaggle/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Machine Learning</title>
       <link>https://keanteng.github.io/home/tags/machine-learning/</link>
       <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/python/</guid>
       <description></description>
     </item>
     
