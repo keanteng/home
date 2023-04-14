@@ -12,8 +12,6 @@ enableEmoji: true
 pygmentsUseClasses: true
 # googleAnalytics: UA-123-45
 
-disqusShortname: keantengblog
-
 minify:
     disableXML: true
     # minifyOutput: true
@@ -65,7 +63,7 @@ params:
     ShowCodeCopyButtons: true
     ShowRssButtonInSectionTermList: true
     ShowToc: true
-    comments: true
+    comments: false
     images: ["papermod-cover.png"]
 
     profileMode:
@@ -100,10 +98,10 @@ params:
           url: "index.xml"
         
 
-    # editPost:
-        # URL: "https://github.com/keanteng/home/"
-        # Text: "Suggest Changes" # edit text
-        # appendFilePath: true # to append file path to Edit link
+    editPost:
+        URL: "https://github.com/keanteng/home/"
+        Text: "Suggest Changes" # edit text
+        appendFilePath: true # to append file path to Edit link
 
      #label:
       #   text: "Home"
