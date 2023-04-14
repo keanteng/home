@@ -1,6 +1,6 @@
 ---
 title: "Computer Vision"
-description: "My Kaggle Learning Note 3"
+description: "My Kaggle Learning Note 5"
 date: "2023-03-20"
 draft: false
 author: "Kean Teng Blog"

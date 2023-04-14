@@ -1,6 +1,6 @@
 baseURL: "https://keanteng.github.io/home/" # if your site is in 'https', then make sure your base url isn't written using 'http' otherwise your sitemap would contain http (as opposeed to https) URLs. This would affect Google indexing of your URLs.
 title: Kean Teng Blog
-paginate: 5
+paginate: 10
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -11,6 +11,8 @@ buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true
 # googleAnalytics: UA-123-45
+
+disqusShortname: keantengblog
 
 minify:
     disableXML: true
@@ -48,7 +50,7 @@ outputs:
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
+    description: "Kean Teng Blog - https://keanteng.github.io/home/"
     author: Kean Teng Blog
     # author: ["Me", "You"] # multiple authors
 
@@ -63,7 +65,7 @@ params:
     ShowCodeCopyButtons: true
     ShowRssButtonInSectionTermList: true
     ShowToc: true
-    # comments: false
+    comments: true
     images: ["papermod-cover.png"]
 
     profileMode:
