@@ -98,10 +98,10 @@ params:
           url: "index.xml"
         
 
-    editPost:
-        URL: "https://github.com/keanteng/home/"
-        Text: "Suggest Changes" # edit text
-        appendFilePath: true # to append file path to Edit link
+    # editPost:
+        # URL: "https://github.com/keanteng/home/"
+        # Text: "Suggest Changes" # edit text
+        # appendFilePath: false # to append file path to Edit link
 
      #label:
       #   text: "Home"

@@ -10,5 +10,3 @@ summary: ""
 ---
 
 > *Disclaimer: This article is my learning note from the courses I took from Kaggle.*
-
-{{ partial "disqus.html" . }}
