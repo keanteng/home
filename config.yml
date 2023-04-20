@@ -35,8 +35,8 @@ languages:
                 - name: Tags
                   url: tags/
                   weight: 10
-                - name: WiKi
-                  url: https://github.com/keanteng/home
+                - name: FAQs
+                  url: faqs/
                 - name: LinkedIn
                   url: https://my.linkedin.com/in/khorkeanteng
 
