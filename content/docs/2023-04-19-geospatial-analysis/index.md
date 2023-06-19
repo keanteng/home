@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Python", "Data Analysis", "Geospatial Analysis", "Kaggle"]
 weight: 5
-summary: ""
+summary: "Geospatial analysis is the gathering, display and manipulation of imagery, GPS, satellite photography and historical data, described explicitly in terms of geographic coordinates. This course will learn on methods to visualize geospatial data and perform some analysis concerning a particular geographic location or region."
 ---
 
 <center><img src="https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1441&q=80"  class = "center"/></center>
