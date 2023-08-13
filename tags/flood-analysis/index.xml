@@ -10,14 +10,23 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/flood-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/flood-analysis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Streamlit App For Flood Analysis</title>
-      <link>https://keanteng.github.io/home/docs/2023-08-05-a-streamit-app-for-flood-analysis/</link>
-      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      <link>https://keanteng.github.io/home/docs/2023-08-13-a-streamit-app-for-flood-analysis/</link>
+      <pubDate>Sun, 13 Aug 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://keanteng.github.io/home/docs/2023-08-05-a-streamit-app-for-flood-analysis/</guid>
+      <guid>https://keanteng.github.io/home/docs/2023-08-13-a-streamit-app-for-flood-analysis/</guid>
       <description>Malaysia Flood Incidents 2015-2021</description>
+    </item>
+    
+    <item>
+      <title>Flood Risk Modeling With Logistic Regression</title>
+      <link>https://keanteng.github.io/home/docs/2023-08-13-flood-risk-modeling/</link>
+      <pubDate>Sun, 13 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-08-13-flood-risk-modeling/</guid>
+      <description>With Streamlit Web App Deployment</description>
     </item>
     
   </channel>
