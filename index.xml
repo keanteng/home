@@ -10,7 +10,16 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 13 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Visualization</title>
+      <link>https://keanteng.github.io/home/docs/2023-08-15-data-visualization/</link>
+      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-08-15-data-visualization/</guid>
+      <description>My Kaggle Learning Note </description>
+    </item>
+    
     <item>
       <title>A Streamlit App For Flood Analysis</title>
       <link>https://keanteng.github.io/home/docs/2023-08-13-a-streamit-app-for-flood-analysis/</link>
