@@ -10,20 +10,38 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Data Visualization</title>
-      <link>https://keanteng.github.io/home/tags/data-visualization/</link>
-      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+      <title>Data Cleaning</title>
+      <link>https://keanteng.github.io/home/tags/data-cleaning/</link>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://keanteng.github.io/home/tags/data-visualization/</guid>
+      <guid>https://keanteng.github.io/home/tags/data-cleaning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Frame</title>
+      <link>https://keanteng.github.io/home/tags/data-frame/</link>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/data-frame/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Manipulation</title>
+      <link>https://keanteng.github.io/home/tags/data-manipulation/</link>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/data-manipulation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Pandas</title>
       <link>https://keanteng.github.io/home/tags/pandas/</link>
-      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/pandas/</guid>
       <description></description>
@@ -32,9 +50,18 @@
     <item>
       <title>Python</title>
       <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Visualization</title>
+      <link>https://keanteng.github.io/home/tags/data-visualization/</link>
+      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/data-visualization/</guid>
       <description></description>
     </item>
     
