@@ -22,7 +22,7 @@ In this course, we will explore on data visualization using `seaborn`, a Python 
 Let's explore the Python code to create different plot type with `seaborn`
 
 ### 1. Lineplot
-In the code below, we use `sns.lineplot()` where it tells Python that we want to produce a line charts with the specified datasets. We only need to change the `data` parameters if we would like to plot for a different dataset.
+In the code below, we use `sns.lineplot()` where it tells Python that we want to produce a line chart with the specified datasets. We only need to change the `data` parameters if we would like to plot for a different dataset.
 
 Moreover, we can also set the size of the plot by calling `plt.figure(figsize = (w,h))`. By adjusting the height and width of the plot we can set our plot to the desired size. 
 
@@ -146,7 +146,7 @@ For density plot, we will use the kernel density estimate plot, it looks like a 
 sns.kdeplot(data = iris_data['Petal Length'], shade = True)
 ```
 
-!<center><img src="images/kde.png"  class = "center"/></center>
+<center><img src="images/kde.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i>KDE Plot</i></p>
 
 Here's the code to produce two-dimensional kernel density plot:
