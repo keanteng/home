@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Pandas", "Data Frame", "Data Cleaning", "Data Manipulation", "Python"]
 weight: 5
-summary: ""
+summary: "Data cleaning is the process of fixing or removing incorrect, corrupted, incorrectly formatted, duplicate, or incomplete data within a dataset. It is a key part of data science, and it can be deeply frustrating. What should we do to the missing values? Why the dates are not in the correct format? How to clean up inconsistent data entry? These are some of the problems that we will learn to tackle in this course. "
 ---
 
 <center><img src="https://images.unsplash.com/photo-1493953659556-556b14bdaca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1333&q=800"  class = "center"/></center>
