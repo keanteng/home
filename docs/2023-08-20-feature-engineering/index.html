@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Feature Engineering | Kean Teng Blog</title>
+<meta name="keywords" content="Pandas, Data Frame, Feature Engineerig, Python">
+<meta name="description" content="My Kaggle Learning Note ">
+<meta name="author" content="Kean Teng Blog">
+<link rel="canonical" href="https://keanteng.github.io/home/docs/2023-08-20-feature-engineering/">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.e45e7c8e44c93caeb9e0372f4b51ce4109b297b6e75d9607917ab49316a147c0.css" integrity="sha256-5F58jkTJPK654DcvS1HOQQmyl7bnXZYHkXq0kxahR8A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://keanteng.github.io/home/apple-touch-icon.png">
+<link rel="mask-icon" href="https://keanteng.github.io/home/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Feature Engineering" />
+<meta property="og:description" content="My Kaggle Learning Note " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://keanteng.github.io/home/docs/2023-08-20-feature-engineering/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-08-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-20T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Feature Engineering"/>
+<meta name="twitter:description" content="My Kaggle Learning Note "/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Docs",
+      "item": "https://keanteng.github.io/home/docs/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Feature Engineering",
+      "item": "https://keanteng.github.io/home/docs/2023-08-20-feature-engineering/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Feature Engineering",
+  "name": "Feature Engineering",
+  "description": "My Kaggle Learning Note ",
+  "keywords": [
+    "Pandas", "Data Frame", "Feature Engineerig", "Python"
+  ],
+  "articleBody": " Images from Unsplash\nDisclaimer: This article is my learning note from the courses I took from Kaggle.\nIn this course, we will learn on how to:\ndetermine which features are the most important with mutual information invent new features in several real-world problem domains encode high-cardinality categoricals with a target encoding create segmentation features with k-means clustering decompose a dataset’s variation into features with principal component analysis 1. Introduction The reason we perform feature engineering is we want to make our data more suited to the problem at hand. Consider “apparent temperature” measures like the heat index and the wind chill. These quantities attempt to measure the perceived temperature to humans based on air temperature, humidity, and wind speed, things which we can measure directly. You could think of an apparent temperature as the result of a kind of feature engineering, an attempt to make the observed data more relevant to what we actually care about: how it actually feels outside!\nFor a feature to be useful, it needs to have a relationship with the target that the model can learn. For example, linear model can only learn linear relationship. So, when using a linear model, your goal is to transform the features to make their relationship to the target linear.\nLet’s say we square the Length feature to get Area, however, we create a linear relationship. Adding Area to the feature set means this linear model can now fit a parabola. Squaring a feature, in other words, gave the linear model the ability to fit squared features.\nWe can see that the model fit the are and length feature well\n1.1 Example We will use the concrete dataset for this section. We’ll first establish a baseline by training the model on the un-augmented dataset. This will help us determine whether our new features are actually useful.\nEstablishing baselines like this is good practice at the start of the feature engineering process. A baseline score can help you decide whether your new features are worth keeping, or whether you should discard them and possibly try something else.\nX = df.copy() y = X.pop(\"CompressiveStrength\") # Train and score baseline model baseline = RandomForestRegressor(criterion=\"absolute_error\", random_state=0) baseline_score = cross_val_score( baseline, X, y, cv=5, scoring=\"neg_mean_absolute_error\" ) baseline_score = -1 * baseline_score.mean() print(f\"MAE Baseline Score: {baseline_score:.4}\") If you ever cook at home, you might know that the ratio of ingredients in a recipe is usually a better predictor of how the recipe turns out than their absolute amounts. We might reason then that ratios of the features above would be a good predictor of CompressiveStrength.\nThe cell below adds three new ratio features to the dataset. The output in fact, shows the performance of our model improved:\nX = df.copy() y = X.pop(\"CompressiveStrength\") # Create synthetic features X[\"FCRatio\"] = X[\"FineAggregate\"] / X[\"CoarseAggregate\"] X[\"AggCmtRatio\"] = (X[\"CoarseAggregate\"] + X[\"FineAggregate\"]) / X[\"Cement\"] X[\"WtrCmtRatio\"] = X[\"Water\"] / X[\"Cement\"] # Train and score model on dataset with additional ratio features model = RandomForestRegressor(criterion=\"absolute_error\", random_state=0) score = cross_val_score( model, X, y, cv=5, scoring=\"neg_mean_absolute_error\" ) score = -1 * score.mean() print(f\"MAE Score with Ratio Features: {score:.4}\") 2. Mutual Information Let’s say you encounter a dataset with hundreds or even thousands of features, it can be overwhelming to think of where should we choose to begin our study. A great option that we can choose is to construct a ranking with feature utility metric - to measure the associations between a feature and a target. Then, we can choose a smaller set of the most useful features to develop our initial model.\nSuch metric is known as mutual information - it is a lot like correlation that measures the relationship between two quantities. The good thing is mutual information can detect any kind of relationship, but for correlation, it is only for linear relationship.\nMutual information describes relationship in terms of uncertainty. For two quantities, it is a measure of the extent to which knowledge of one quantity reduces uncertainty about the other. If we know the value of a feature, how much more confident can we get about the target.\nFrom the above image, it seems that knowing the value of ExterQual should make you more certain about the corresponding SalePrice – each category of ExterQual tends to concentrate SalePrice to within a certain range. The mutual information that ExterQual has with SalePrice is the average reduction of uncertainty in SalePrice taken over the four values of ExterQual. Since Fair occurs less often than Typical, for instance, Fair gets less weight in the MI score.\nThe least possible mutual information between quantities is 0.0. When MI is zero, the quantities are independent: neither can tell you anything about the other. Conversely, in theory there’s no upper bound to what MI can be. In practice though values above 2.0 or so are uncommon\nNote:\nMI can help you to understand the relative potential of a feature as a predictor of the target, considered by itself. It’s possible for a feature to be very informative when interacting with other features, but not so informative all alone. MI can’t detect interactions between features. It is a univariate metric. The actual usefulness of a feature depends on the model you use it with. A feature is only useful to the extent that its relationship with the target is one your model can learn. Just because a feature has a high MI score doesn’t mean your model will be able to do anything with that information. You may need to transform the feature first to expose the association. 2.1 Example Now we have an automobile dataset with a few features related to cars. Here’s how we can compute the MI score for the dataset:\nThe scikit-learn algorithm for MI treats discrete features differently from continuous features. Consequently, you need to tell it which are which. As a rule of thumb, anything that must have a float dtype is not discrete. Categoricals (object or categorial dtype) can be treated as discrete by giving them a label encoding.\nX = df.copy() y = X.pop(\"price\") # Label encoding for categoricals for colname in X.select_dtypes(\"object\"): X[colname], _ = X[colname].factorize() # All discrete features should now have integer dtypes (double-check this before using MI!) discrete_features = X.dtypes == int from sklearn.feature_selection import mutual_info_regression def make_mi_scores(X, y, discrete_features): mi_scores = mutual_info_regression(X, y, discrete_features=discrete_features) mi_scores = pd.Series(mi_scores, name=\"MI Scores\", index=X.columns) mi_scores = mi_scores.sort_values(ascending=False) return mi_scores mi_scores = make_mi_scores(X, y, discrete_features) mi_scores[::3] # show a few features with their MI scores curb_weight 1.540126 highway_mpg 0.951700 length 0.621566 fuel_system 0.485085 stroke 0.389321 num_of_cylinders 0.330988 compression_ratio 0.133927 fuel_type 0.048139 Name: MI Scores, dtype: float64 Let’s visualize the above output with a bar plot:\ndef plot_mi_scores(scores): scores = scores.sort_values(ascending=True) width = np.arange(len(scores)) ticks = list(scores.index) plt.barh(width, scores) plt.yticks(width, ticks) plt.title(\"Mutual Information Scores\") plt.figure(dpi=100, figsize=(8, 5)) plot_mi_scores(mi_scores) W\nAs we might expect, the high-scoring curb_weight feature exhibits a strong relationship with price, the target.\nsns.relplot(x=\"curb_weight\", y=\"price\", data=df); The fuel_type feature has a fairly low MI score, but as we can see from the figure, it clearly separates two price populations with different trends within the horsepower feature. This indicates that fuel_type contributes an interaction effect and might not be unimportant after all. Before deciding a feature is unimportant from its MI score, it’s good to investigate any possible interaction effects – domain knowledge can offer a lot of guidance here.\nsns.lmplot(x=\"horsepower\", y=\"price\", hue=\"fuel_type\", data=df); 3. Creating Features In the Automobile dataset are features describing a car’s engine. Research yields a variety of formulas for creating potentially useful new features. The “stroke ratio”, for instance, is a measure of how efficient an engine is versus how performant:\nautos[\"stroke_ratio\"] = autos.stroke / autos.bore autos[[\"stroke\", \"bore\", \"stroke_ratio\"]].head() The more complicated a combination is, the more difficult it will be for a model to learn, like this formula for an engine’s “displacement”, a measure of its power:\nautos[\"displacement\"] = ( np.pi * ((0.5 * autos.bore) ** 2) * autos.stroke * autos.num_of_cylinders ) We can use data visualization to get an idea on how to perform transformation (using powers or logarithms). For example, the distribution of WindSpeed in US Accidents is highly skewed, we can perform a log-transformation:\n# If the feature has 0.0 values, use np.log1p (log(1+x)) instead of np.log accidents[\"LogWindSpeed\"] = accidents.WindSpeed.apply(np.log1p) # Plot a comparison fig, axs = plt.subplots(1, 2, figsize=(8, 4)) sns.kdeplot(accidents.WindSpeed, shade=True, ax=axs[0]) sns.kdeplot(accidents.LogWindSpeed, shade=True, ax=axs[1]); 3.1 Counts When the have features describing the presence or absence of something, they often come in sets, we can aggregate them by creating a count:\nIn Traffic Accidents are several features indicating whether some roadway object was near the accident. This will create a count of the total number of roadway features nearby using the sum method:\nroadway_features = [\"Amenity\", \"Bump\", \"Crossing\", \"GiveWay\", \"Junction\", \"NoExit\", \"Railway\", \"Roundabout\", \"Station\", \"Stop\", \"TrafficCalming\", \"TrafficSignal\"] accidents[\"RoadwayFeatures\"] = accidents[roadway_features].sum(axis=1) accidents[roadway_features + [\"RoadwayFeatures\"]].head(10) In the Concrete dataset are the amounts of components in a concrete formulation. Many formulations lack one or more components (that is, the component has a value of 0). This will count how many components are in a formulation with the dataframe’s built-in greater-than gt method:\ncomponents = [ \"Cement\", \"BlastFurnaceSlag\", \"FlyAsh\", \"Water\", \"Superplasticizer\", \"CoarseAggregate\", \"FineAggregate\"] concrete[\"Components\"] = concrete[components].gt(0).sum(axis=1) concrete[components + [\"Components\"]].head(10) 3.2 Building-Up \u0026 Breaking Down Features Often you’ll have complex strings that can usefully be broken into simpler pieces. Some common examples:\nID numbers: '123-45-6789' Phone numbers: '(999) 555-0123' Features like these will often have some kind of structure that you can make use of. US phone numbers, for instance, have an area code (the ‘(999)’ part) that tells you the location of the caller\nstr accessor lets you apply string methods like split directly to columns. The Customer Lifetime Value dataset contains features describing customers of an insurance company. From the Policy feature, we could separate the Type from the Level of coverage:\ncustomer[[\"Type\", \"Level\"]] = ( # Create two new features customer[\"Policy\"] # from the Policy feature .str # through the string accessor .split(\" \", expand=True) # by splitting on \" \" # and expanding the result into separate columns ) customer[[\"Policy\", \"Type\", \"Level\"]].head(10) Of course, we can join simple features into a composed feature if there was some interaction in the combination:\nautos[\"make_and_style\"] = autos[\"make\"] + \"_\" + autos[\"body_style\"] autos[[\"make\", \"body_style\", \"make_and_style\"]].head() 3.3 Group Transform Group transform aggregate infromation across multiple rows grouped by some category. We can create features like “the average income of a person’s state of residence,” or “the proportion of movies released on a weekday, by genre.”.\nUsing an aggregation function, a group transform combines two features: a categorical feature that provides the grouping and another feature whose values you wish to aggregate. For an “average income by state”, you would choose State for the grouping feature, mean for the aggregation function, and Income for the aggregated feature. To compute this in Pandas, we use the groupby and transform methods:\ncustomer[\"AverageIncome\"] = ( customer.groupby(\"State\") # for each state [\"Income\"] # select the income .transform(\"mean\") # and compute its mean ) customer[[\"State\", \"Income\", \"AverageIncome\"]].head(10) Here’s a function to create a DataFrame that calculate the frequency with which each state occurs in the dataset:\ncustomer[\"StateFreq\"] = ( customer.groupby(\"State\") [\"State\"] .transform(\"count\") / customer.State.count() ) customer[[\"State\", \"StateFreq\"]].head(10) If you’re using training and validation splits, to preserve their independence, it’s best to create a grouped feature using only the training set and then join it to the validation set. We can use the validation set’s merge method after creating a unique set of values with drop_duplicates on the training set:\n# Create splits df_train = customer.sample(frac=0.5) df_valid = customer.drop(df_train.index) # Create the average claim amount by coverage type, on the training set df_train[\"AverageClaim\"] = df_train.groupby(\"Coverage\")[\"ClaimAmount\"].transform(\"mean\") # Merge the values into the validation set df_valid = df_valid.merge( df_train[[\"Coverage\", \"AverageClaim\"]].drop_duplicates(), on=\"Coverage\", how=\"left\", ) df_valid[[\"Coverage\", \"AverageClaim\"]].head(10) 4. Clustering with K-means Clustering means the assigning of data points to group based on how similar the points are to each other. In feature engineering, we attempt to discover groups of customers representing a market segment or geographic area that share similar weather patterns. By adding a feature of cluster labels, it helps machine learning models untangle complicated relationships of space and proximity.\nCluster is a categorical variable. The motivating idea for adding cluster labels is that the clusters will break up complicated relationships across features into simpler chunks. Our model can then just learn the simpler chunks one-by-one instead having to learn the complicated whole all at once. It’s a “divide and conquer” strategy.\nClustering the YearBuilt feature helps this linear model learn its relationship to SalePrice.\nThe figure shows how clustering can improve a simple linear model. The curved relationship between the YearBuilt and SalePrice is too complicated for this kind of model – it underfits. On smaller chunks however the relationship is almost linear, and that the model can learn easily.\n4.1 k-Means Clustering K-means clustering measures similarity using ordinary straight-line distance (Euclidean distance, in other words). It creates clusters by placing a number of points, called centroids, inside the feature-space. Each point in the dataset is assigned to the cluster of whichever centroid it’s closest to. The “k” in “k-means” is how many centroids (that is, clusters) it creates. You define the k yourself.\nYou could imagine each centroid capturing points through a sequence of radiating circles. When sets of circles from competing centroids overlap they form a line. The result is what’s called a Voronoi tessallation. The tessallation shows you to what clusters future data will be assigned; the tessallation is essentially what k-means learns from its training data.\nThe k-means algorithm:\nRandomly initialize some predefined number of centroids Assign points to the nearest cluster centroid Move each centroid to minimize the distance to its point Iterate from second step until centroid not moving anymore 4.2 Example As spatial features, California Housing’s ‘Latitude’ and ‘Longitude’ make natural candidates for k-means clustering. Since k-means clustering is sensitive to scale, it can be a good idea rescale or normalize data with extreme values. Our features are already roughly on the same scale, so we’ll leave them as-is.\n# Create cluster feature kmeans = KMeans(n_clusters=6) X[\"Cluster\"] = kmeans.fit_predict(X) X[\"Cluster\"] = X[\"Cluster\"].astype(\"category\") X.head() Let’s see the cluster on a plot:\nsns.relplot( x=\"Longitude\", y=\"Latitude\", hue=\"Cluster\", data=X, height=6, ); Let’s compare the distributions of the target within each cluster using box-plot.\nIf the clustering is informative, these distributions should, for the most part, separate across MedHouseVal, which is indeed what we see.\nX[\"MedHouseVal\"] = df[\"MedHouseVal\"] sns.catplot(x=\"MedHouseVal\", y=\"Cluster\", data=X, kind=\"boxen\", height=6); 5. Principal Component Analysis (PCA) PCA is typically applied to standardized data. With standardized data “variation” means “correlation”. With unstandardized data “variation” means “covariance”. All data in this section will be standardized before applying PCA.\nIn the Abalone dataset are physical measurements taken from several thousand Tasmanian abalone. (An abalone is a sea creature much like a clam or an oyster.) We’ll just look at a couple features for now: the ‘Height’ and ‘Diameter’ of their shells.\nWe can think that in this data, there are axes of variation that describe the ways the abalone tend to differ from one to another. We can give names to these axes of variation. The longer axis we might call the “Size” component: small height and small diameter (lower left) contrasted with large height and large diameter (upper right). The shorter axis we might call the “Shape” component: small height and large diameter (flat shape) contrasted with large height and small diameter (round shape).\nOf course, we can also describe the abalone with size and shape. The whole idea of PCA: instead of describing the data with the original features, we describe it with its axes of variation. The axes of variation become the new features.\nIn fact these new features are actually just linear combinations of the original features:\ndf[\"Size\"] = 0.707 * X[\"Height\"] + 0.707 * X[\"Diameter\"] df[\"Shape\"] = 0.707 * X[\"Height\"] - 0.707 * X[\"Diameter\"] The size and shape features are known as the principal components of the data. The weights are called loadings. There will be as many principal components as there are features in the original dataset: if we had used ten features instead of two, we would have ended up with ten components.\nMoreover, PCA also tells us the amount of variation in each component:\nThe Size component captures the majority of the variation between Height and Diameter. It’s important to remember, however, that the amount of variance in a component doesn’t necessarily correspond to how good it is as a predictor: it depends on what you’re trying to predict.\n5.1 PCA for Feature Engineering We can use PCA for feature engineering in two ways. First, we can use it as a descriptive technique. Since the components tell you about the variation, you could compute the MI scores for the components and see what kind of variation is most predictive of your target. That could give you ideas for kinds of features to create – a product of ‘Height’ and ‘Diameter’ if ‘Size’ is important, say, or a ratio of ‘Height’ and ‘Diameter’ if Shape is important. You could even try clustering on one or more of the high-scoring components.\nOn the other hand, we can use the components themselves as features. Because the components expose the variational structure of the data directly, they can often be more informative than the original features. Here are some use-cases:\nDimensionality reduction: When your features are highly redundant (multicollinear, specifically), PCA will partition out the redundancy into one or more near-zero variance components, which you can then drop since they will contain little or no information. Anomaly detection: Unusual variation, not apparent from the original features, will often show up in the low-variance components. These components could be highly informative in an anomaly or outlier detection task. Noise reduction: A collection of sensor readings will often share some common background noise. PCA can sometimes collect the (informative) signal into a smaller number of features while leaving the noise alone, thus boosting the signal-to-noise ratio. Decorrelation: Some ML algorithms struggle with highly-correlated features. PCA transforms correlated features into uncorrelated components, which could be easier for your algorithm to work with. 5.2 Example We will use the Automobile dataset from previous study and apply PCA to discover some features from the dataset:\nfeatures = [\"highway_mpg\", \"engine_size\", \"horsepower\", \"curb_weight\"] X = df.copy() y = X.pop('price') X = X.loc[:, features] # Standardize X_scaled = (X - X.mean(axis=0)) / X.std(axis=0) Now we can fit scikit-learn’s PCA estimator and create the principal components. You can see here the first few rows of the transformed dataset.\nfrom sklearn.decomposition import PCA # Create principal components pca = PCA() X_pca = pca.fit_transform(X_scaled) # Convert to dataframe component_names = [f\"PC{i+1}\" for i in range(X_pca.shape[1])] X_pca = pd.DataFrame(X_pca, columns=component_names) X_pca.head() After fitting, the PCA instance contains the loadings in its components_ attribute. (Terminology for PCA is inconsistent, unfortunately. We’re following the convention that calls the transformed columns in X_pca the components, which otherwise don’t have a name.) We’ll wrap the loadings up in a dataframe.\nloadings = pd.DataFrame( pca.components_.T, # transpose the matrix of loadings columns=component_names, # so the columns are the principal components index=X.columns, # and the rows are the original features ) loadings PC1\tPC2\tPC3\tPC4 highway_mpg\t-0.492347\t0.770892\t0.070142\t-0.397996 engine_size\t0.503859\t0.626709\t0.019960\t0.594107 horsepower\t0.500448\t0.013788\t0.731093\t-0.463534 curb_weight\t0.503262\t0.113008\t-0.678369\t-0.523232 Recall that the signs and magnitudes of a component’s loadings tell us what kind of variation it’s captured. The first component (PC1) shows a contrast between large, powerful vehicles with poor gas milage, and smaller, more economical vehicles with good gas milage. We might call this the “Luxury/Economy” axis. The next figure shows that our four chosen features mostly vary along the Luxury/Economy axis.\n# Look at explained variance plot_variance(pca); Let’s check the MI score of the components.\nmi_scores = make_mi_scores(X_pca, y, discrete_features=False) mi_scores PC1 1.013264 PC2 0.379156 PC3 0.306703 PC4 0.203329 Name: MI Scores, dtype: float64 PC1 is highly informative, though the remaining components, despite their small variance, still have a significant relationship with price. Examining those components could be worthwhile to find relationships not captured by the main Luxury/Economy axis.\nPC3 shows a contrast between horsepower and curb_weight – sports cars vs. wagons, it seems.\n# Show dataframe sorted by PC3 idx = X_pca[\"PC3\"].sort_values(ascending=False).index cols = [\"make\", \"body_style\", \"horsepower\", \"curb_weight\"] df.loc[idx, cols] make\tbody_style\thorsepower\tcurb_weight 118\tporsche\thardtop\t207\t2756 117\tporsche\thardtop\t207\t2756 119\tporsche\tconvertible\t207\t2800 45\tjaguar\tsedan\t262\t3950 96\tnissan\thatchback\t200\t3139 We will create a new ratio features from this:\ndf[\"sports_or_wagon\"] = X.curb_weight / X.horsepower sns.regplot(x=\"sports_or_wagon\", y='price', data=df, order=2); 6. Target Encoding A target encoding is any kind of encoding that replaces a feature’s categories with some number derived from the target.\nautos[\"make_encoded\"] = autos.groupby(\"make\")[\"price\"].transform(\"mean\") autos[[\"make\", \"price\", \"make_encoded\"]].head(10) From the above code, we are performing a mean encoding to the dataset. We can do this to a binary dataset as well - and we call it as bin counting.\nTarget encoding for the above example presents a couple of problems, however. First are unknown categories. Target encodings create a special risk of overfitting, which means they need to be trained on an independent “encoding” split. When you join the encoding to future splits, Pandas will fill in missing values for any categories not present in the encoding split. These missing values you would have to impute somehow.\nMoreover, for rare categories. When a category only occurs a few times in the dataset, any statistics calculated on its group are unlikely to be very accurate. In the Automobiles dataset, the mercury make only occurs once. The “mean” price we calculated is just the price of that one vehicle, which might not be very representative of any Mercuries we might see in the future. Target encoding rare categories can make overfitting more likely.\nTo avoid the above issues, we need to apply smoothing. That is, to blend in-category average with the overall average.\nencoding = weight * in_category + (1 - weight) * overall So how do we compute for the weight? We can do it by computing the m-estimate.\nweight = n / (n + m) n is the total number of times that category occurs in the data. The parameter m determines the “smoothing factor”. Larger values of m put more weight on the overall estimate.\nLet’s say in the Automobile dataset and there are 3 cars with the make of chevrolet. For m = 2, chevrolet category would be encoded with 60% of the average Chevrelot price and 40% of the overall average price.\nWhen choosing a value for m, consider how noisy you expect the categories to be. Does the price of a vehicle vary a great deal within each make? Would you need a lot of data to get good estimates? If so, it could be better to choose a larger value for m; if the average price for each make were relatively stable, a smaller value could be okay.\nBenefits of Target Encoding:\nHigh-cardinality features: A feature with many categories can be troublesome to encode: a one-hot encoding would generate too many features and alternatives, like a label encoding, might not be appropriate for that feature. A target encoding derives numbers for the categories using the feature’s most important property: its relationship with the target. Domain-motivated features: From prior experience, you might suspect that a categorical feature should be important even if it scored poorly with a feature metric. A target encoding can help reveal a feature’s true informativeness. 6.1 Example In this final example, we will be using MovieLens1M dataset with one-million movie rating by users of the MovieLens website. With over 3000 categories, the Zipcode feature makes a good candidate for target encoding, and the size of this dataset (over one-million rows) means we can spare some data to create the encoding.\n# 25% split to train the encoder X = df.copy() y = X.pop('Rating') X_encode = X.sample(frac=0.25) y_encode = y[X_encode.index] X_pretrain = X.drop(X_encode.index) y_train = y[X_pretrain.index] from category_encoders import MEstimateEncoder # Create the encoder instance. Choose m to control noise. encoder = MEstimateEncoder(cols=[\"Zipcode\"], m=5.0) # Fit the encoder on the encoding split. encoder.fit(X_encode, y_encode) # Encode the Zipcode column to create the final training data X_train = encoder.transform(X_pretrain) Now we want to compare the encoded values to the target to see how informative it is:\nplt.figure(dpi=90) ax = sns.distplot(y, kde=False, norm_hist=True) ax = sns.kdeplot(X_train.Zipcode, color='r', ax=ax) ax.set_xlabel(\"Rating\") ax.legend(labels=['Zipcode', 'Rating']); We can see that the distribution of the encoded Zipcode feature roughly follows the distribution of the actual ratings, meaning that movie-watchers differed enough in their ratings from zipcode to zipcode that our target encoding was able to capture useful information.\n",
+  "wordCount" : "4099",
+  "inLanguage": "en",
+  "datePublished": "2023-08-20T00:00:00Z",
+  "dateModified": "2023-08-20T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kean Teng Blog"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://keanteng.github.io/home/docs/2023-08-20-feature-engineering/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kean Teng Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://i.postimg.cc/0Qq5g2fX/favicon.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/faqs/" title="FAQs">
+                    <span>FAQs</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://my.linkedin.com/in/khorkeanteng" title="LinkedIn">
+                    <span>LinkedIn</span>&nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://keanteng.github.io/home/">Home</a>&nbsp;»&nbsp;<a href="https://keanteng.github.io/home/docs/">Docs</a></div>
+    <h1 class="post-title">
+      Feature Engineering
+    </h1>
+    <div class="post-description">
+      My Kaggle Learning Note 
+    </div>
+    <div class="post-meta"><span title='2023-08-20 00:00:00 +0000 UTC'>August 20, 2023</span>&nbsp;·&nbsp;20 min&nbsp;·&nbsp;Kean Teng Blog
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-introduction" aria-label="1. Introduction">1. Introduction</a><ul>
+                        
+                <li>
+                    <a href="#11-example" aria-label="1.1 Example">1.1 Example</a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-mutual-information" aria-label="2. Mutual Information">2. Mutual Information</a><ul>
+                        
+                <li>
+                    <a href="#21-example" aria-label="2.1 Example">2.1 Example</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-creating-features" aria-label="3. Creating Features">3. Creating Features</a><ul>
+                        
+                <li>
+                    <a href="#31-counts" aria-label="3.1 Counts">3.1 Counts</a></li>
+                <li>
+                    <a href="#32-building-up--breaking-down-features" aria-label="3.2 Building-Up &amp;amp; Breaking Down Features">3.2 Building-Up &amp; Breaking Down Features</a></li>
+                <li>
+                    <a href="#33-group-transform" aria-label="3.3 Group Transform">3.3 Group Transform</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-clustering-with-k-means" aria-label="4. Clustering with K-means">4. Clustering with K-means</a><ul>
+                        
+                <li>
+                    <a href="#41-k-means-clustering" aria-label="4.1 k-Means Clustering">4.1 k-Means Clustering</a></li>
+                <li>
+                    <a href="#42-example" aria-label="4.2 Example">4.2 Example</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-principal-component-analysis-pca" aria-label="5. Principal Component Analysis (PCA)">5. Principal Component Analysis (PCA)</a><ul>
+                        
+                <li>
+                    <a href="#51-pca-for-feature-engineering" aria-label="5.1 PCA for Feature Engineering">5.1 PCA for Feature Engineering</a></li>
+                <li>
+                    <a href="#52-example" aria-label="5.2 Example">5.2 Example</a></li></ul>
+                </li>
+                <li>
+                    <a href="#6-target-encoding" aria-label="6. Target Encoding">6. Target Encoding</a><ul>
+                        
+                <li>
+                    <a href="#61-example" aria-label="6.1 Example">6.1 Example</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><center><img src="https://plus.unsplash.com/premium_photo-1661335257817-4552acab9656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Images from Unsplash</i></p>
+<blockquote>
+<p><em>Disclaimer: This article is my learning note from the courses I took from Kaggle.</em></p>
+</blockquote>
+<p>In this course, we will learn on how to:</p>
+<ul>
+<li>determine which features are the most important with mutual information</li>
+<li>invent new features in several real-world problem domains</li>
+<li>encode high-cardinality categoricals with a target encoding</li>
+<li>create segmentation features with k-means clustering</li>
+<li>decompose a dataset&rsquo;s variation into features with principal component analysis</li>
+</ul>
+<h2 id="1-introduction">1. Introduction<a hidden class="anchor" aria-hidden="true" href="#1-introduction">#</a></h2>
+<p>The reason we perform feature engineering is we want to make our data more suited to the problem at hand. Consider &ldquo;apparent temperature&rdquo; measures like the heat index and the wind chill. These quantities attempt to measure the perceived temperature to humans based on air temperature, humidity, and wind speed, things which we can measure directly. You could think of an apparent temperature as the result of a kind of feature engineering, an attempt to make the observed data more relevant to what we actually care about: how it actually feels outside!</p>
+<p>For a feature to be useful, it needs to have a relationship with the target that the model can learn. For example, linear model can only learn linear relationship. So, when using a linear model, your goal is to transform the features to make their relationship to the target linear.</p>
+<p>Let&rsquo;s say we square the <code>Length</code> feature to get <code>Area</code>, however, we create a linear relationship. Adding <code>Area</code> to the feature set means this linear model can now fit a parabola. Squaring a feature, in other words, gave the linear model the ability to fit squared features.</p>
+<center><img src="a1.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>We can see that the model fit the are and length feature well</i></p>
+<h3 id="11-example">1.1 Example<a hidden class="anchor" aria-hidden="true" href="#11-example">#</a></h3>
+<p>We will use the concrete dataset for this section. We&rsquo;ll first establish a baseline by training the model on the un-augmented dataset. This will help us determine whether our new features are actually useful.</p>
+<p>Establishing baselines like this is good practice at the start of the feature engineering process. A baseline score can help you decide whether your new features are worth keeping, or whether you should discard them and possibly try something else.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;CompressiveStrength&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Train and score baseline model</span>
+</span></span><span class="line"><span class="cl"><span class="n">baseline</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s2">&#34;absolute_error&#34;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">baseline_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">baseline</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&#34;neg_mean_absolute_error&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">baseline_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">baseline_score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;MAE Baseline Score: </span><span class="si">{</span><span class="n">baseline_score</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>If you ever cook at home, you might know that the ratio of ingredients in a recipe is usually a better predictor of how the recipe turns out than their absolute amounts. We might reason then that ratios of the features above would be a good predictor of <code>CompressiveStrength</code>.</p>
+<p>The cell below adds three new ratio features to the dataset. The output in fact, shows the performance of our model improved:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;CompressiveStrength&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create synthetic features</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">[</span><span class="s2">&#34;FCRatio&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;FineAggregate&#34;</span><span class="p">]</span> <span class="o">/</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;CoarseAggregate&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">[</span><span class="s2">&#34;AggCmtRatio&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="s2">&#34;CoarseAggregate&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;FineAggregate&#34;</span><span class="p">])</span> <span class="o">/</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;Cement&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">[</span><span class="s2">&#34;WtrCmtRatio&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;Water&#34;</span><span class="p">]</span> <span class="o">/</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;Cement&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Train and score model on dataset with additional ratio features</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s2">&#34;absolute_error&#34;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&#34;neg_mean_absolute_error&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;MAE Score with Ratio Features: </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="2-mutual-information">2. Mutual Information<a hidden class="anchor" aria-hidden="true" href="#2-mutual-information">#</a></h2>
+<p>Let&rsquo;s say you encounter a dataset with hundreds or even thousands of features, it can be overwhelming to think of where should we choose to begin our study. A great option that we can choose is to construct a ranking with feature utility metric - to measure the associations between a feature and a target. Then, we can choose a smaller set of the most useful features to develop our initial model.</p>
+<p>Such metric is known as mutual information - it is a lot like correlation that measures the relationship between two quantities. The good thing is mutual information can detect any kind of relationship, but for correlation, it is only for linear relationship.</p>
+<p>Mutual information describes relationship in terms of uncertainty. For two quantities, it is a measure of the extent to which knowledge of one quantity reduces uncertainty about the other. If we know the value of a feature, how much more confident can we get about the target.</p>
+<center><img src="a2.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>From the above image, it seems that knowing the value of <code>ExterQual</code> should make you more certain about the corresponding <code>SalePrice</code> &ndash; each category of <code>ExterQual</code> tends to concentrate <code>SalePrice</code> to within a certain range. The mutual information that <code>ExterQual</code> has with <code>SalePrice</code> is the average reduction of uncertainty in <code>SalePrice</code> taken over the four values of <code>ExterQual</code>. Since <code>Fair</code> occurs less often than <code>Typical</code>, for instance, <code>Fair</code> gets less weight in the MI score.</p>
+<p>The least possible mutual information between quantities is 0.0. When MI is zero, the quantities are independent: neither can tell you anything about the other. Conversely, in theory there&rsquo;s no upper bound to what MI can be. In practice though values above 2.0 or so are uncommon</p>
+<center><img src="a3.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>Note:</p>
+<ul>
+<li>MI can help you to understand the relative potential of a feature as a predictor of the target, considered by itself.</li>
+<li>It&rsquo;s possible for a feature to be very informative when interacting with other features, but not so informative all alone. MI can&rsquo;t detect interactions between features. It is a univariate metric.</li>
+<li>The actual usefulness of a feature depends on the model you use it with. A feature is only useful to the extent that its relationship with the target is one your model can learn. Just because a feature has a high MI score doesn&rsquo;t mean your model will be able to do anything with that information. You may need to transform the feature first to expose the association.</li>
+</ul>
+<h3 id="21-example">2.1 Example<a hidden class="anchor" aria-hidden="true" href="#21-example">#</a></h3>
+<p>Now we have an automobile dataset with a few features related to cars. Here&rsquo;s how we can compute the MI score for the dataset:</p>
+<p>The <code>scikit-learn</code> algorithm for MI treats discrete features differently from continuous features. Consequently, you need to tell it which are which. As a rule of thumb, anything that must have a float <code>dtype</code> is not discrete. Categoricals (object or categorial <code>dtype</code>) can be treated as discrete by giving them a label encoding.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&#34;price&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Label encoding for categoricals</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">colname</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&#34;object&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X</span><span class="p">[</span><span class="n">colname</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">colname</span><span class="p">]</span><span class="o">.</span><span class="n">factorize</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># All discrete features should now have integer dtypes (double-check this before using MI!)</span>
+</span></span><span class="line"><span class="cl"><span class="n">discrete_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="nb">int</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">mutual_info_regression</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">make_mi_scores</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">discrete_features</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mi_scores</span> <span class="o">=</span> <span class="n">mutual_info_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">discrete_features</span><span class="o">=</span><span class="n">discrete_features</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mi_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">mi_scores</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;MI Scores&#34;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mi_scores</span> <span class="o">=</span> <span class="n">mi_scores</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">mi_scores</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mi_scores</span> <span class="o">=</span> <span class="n">make_mi_scores</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">discrete_features</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mi_scores</span><span class="p">[::</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># show a few features with their MI scores</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curb_weight          1.540126
+</span></span><span class="line"><span class="cl">highway_mpg          0.951700
+</span></span><span class="line"><span class="cl">length               0.621566
+</span></span><span class="line"><span class="cl">fuel_system          0.485085
+</span></span><span class="line"><span class="cl">stroke               0.389321
+</span></span><span class="line"><span class="cl">num_of_cylinders     0.330988
+</span></span><span class="line"><span class="cl">compression_ratio    0.133927
+</span></span><span class="line"><span class="cl">fuel_type            0.048139
+</span></span><span class="line"><span class="cl">Name: MI Scores, dtype: float64
+</span></span></code></pre></div><p>Let&rsquo;s visualize the above output with a bar plot:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">plot_mi_scores</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ticks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">ticks</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Mutual Information Scores&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_mi_scores</span><span class="p">(</span><span class="n">mi_scores</span><span class="p">)</span>
+</span></span></code></pre></div><center><img src="a4.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>W</i></p>
+<p>As we might expect, the high-scoring <code>curb_weight</code> feature exhibits a strong relationship with <code>price</code>, the target.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&#34;curb_weight&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&#34;price&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+</span></span></code></pre></div><center><img src="a5.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>The <code>fuel_type</code> feature has a fairly low MI score, but as we can see from the figure, it clearly separates two price populations with different trends within the horsepower feature. This indicates that fuel_type contributes an interaction effect and might not be unimportant after all. Before deciding a feature is unimportant from its MI score, it&rsquo;s good to investigate any possible interaction effects &ndash; domain knowledge can offer a lot of guidance here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&#34;horsepower&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&#34;price&#34;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&#34;fuel_type&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+</span></span></code></pre></div><center><img src="a6.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<h2 id="3-creating-features">3. Creating Features<a hidden class="anchor" aria-hidden="true" href="#3-creating-features">#</a></h2>
+<p>In the Automobile dataset are features describing a car&rsquo;s engine. Research yields a variety of formulas for creating potentially useful new features. The &ldquo;stroke ratio&rdquo;, for instance, is a measure of how efficient an engine is versus how performant:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[</span><span class="s2">&#34;stroke_ratio&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">autos</span><span class="o">.</span><span class="n">stroke</span> <span class="o">/</span> <span class="n">autos</span><span class="o">.</span><span class="n">bore</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[[</span><span class="s2">&#34;stroke&#34;</span><span class="p">,</span> <span class="s2">&#34;bore&#34;</span><span class="p">,</span> <span class="s2">&#34;stroke_ratio&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><p>The more complicated a combination is, the more difficult it will be for a model to learn, like this formula for an engine&rsquo;s &ldquo;displacement&rdquo;, a measure of its power:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[</span><span class="s2">&#34;displacement&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">((</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">autos</span><span class="o">.</span><span class="n">bore</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">autos</span><span class="o">.</span><span class="n">stroke</span> <span class="o">*</span> <span class="n">autos</span><span class="o">.</span><span class="n">num_of_cylinders</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>We can use data visualization to get an idea on how to perform transformation (using powers or logarithms). For example, the distribution of <code>WindSpeed</code> in US Accidents is highly skewed, we can perform a log-transformation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># If the feature has 0.0 values, use np.log1p (log(1+x)) instead of np.log</span>
+</span></span><span class="line"><span class="cl"><span class="n">accidents</span><span class="p">[</span><span class="s2">&#34;LogWindSpeed&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidents</span><span class="o">.</span><span class="n">WindSpeed</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Plot a comparison</span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">accidents</span><span class="o">.</span><span class="n">WindSpeed</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">accidents</span><span class="o">.</span><span class="n">LogWindSpeed</span><span class="p">,</span> <span class="n">shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div><center><img src="a7.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<h3 id="31-counts">3.1 Counts<a hidden class="anchor" aria-hidden="true" href="#31-counts">#</a></h3>
+<p>When the have features describing the presence or absence of something, they often come in sets, we can aggregate them by creating a count:</p>
+<p>In Traffic Accidents are several features indicating whether some roadway object was near the accident. This will create a count of the total number of roadway features nearby using the sum method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">roadway_features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;Amenity&#34;</span><span class="p">,</span> <span class="s2">&#34;Bump&#34;</span><span class="p">,</span> <span class="s2">&#34;Crossing&#34;</span><span class="p">,</span> <span class="s2">&#34;GiveWay&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Junction&#34;</span><span class="p">,</span> <span class="s2">&#34;NoExit&#34;</span><span class="p">,</span> <span class="s2">&#34;Railway&#34;</span><span class="p">,</span> <span class="s2">&#34;Roundabout&#34;</span><span class="p">,</span> <span class="s2">&#34;Station&#34;</span><span class="p">,</span> <span class="s2">&#34;Stop&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;TrafficCalming&#34;</span><span class="p">,</span> <span class="s2">&#34;TrafficSignal&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">accidents</span><span class="p">[</span><span class="s2">&#34;RoadwayFeatures&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accidents</span><span class="p">[</span><span class="n">roadway_features</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">accidents</span><span class="p">[</span><span class="n">roadway_features</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&#34;RoadwayFeatures&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>In the Concrete dataset are the amounts of components in a concrete formulation. Many formulations lack one or more components (that is, the component has a value of 0). This will count how many components are in a formulation with the dataframe&rsquo;s built-in greater-than gt method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">components</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&#34;Cement&#34;</span><span class="p">,</span> <span class="s2">&#34;BlastFurnaceSlag&#34;</span><span class="p">,</span> <span class="s2">&#34;FlyAsh&#34;</span><span class="p">,</span> <span class="s2">&#34;Water&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;Superplasticizer&#34;</span><span class="p">,</span> <span class="s2">&#34;CoarseAggregate&#34;</span><span class="p">,</span> <span class="s2">&#34;FineAggregate&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">concrete</span><span class="p">[</span><span class="s2">&#34;Components&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">concrete</span><span class="p">[</span><span class="n">components</span><span class="p">]</span><span class="o">.</span><span class="n">gt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">concrete</span><span class="p">[</span><span class="n">components</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&#34;Components&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="32-building-up--breaking-down-features">3.2 Building-Up &amp; Breaking Down Features<a hidden class="anchor" aria-hidden="true" href="#32-building-up--breaking-down-features">#</a></h3>
+<p>Often you&rsquo;ll have complex strings that can usefully be broken into simpler pieces. Some common examples:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ID numbers: &#39;123-45-6789&#39;
+</span></span><span class="line"><span class="cl">Phone numbers: &#39;(999) 555-0123&#39;
+</span></span></code></pre></div><p>Features like these will often have some kind of structure that you can make use of. US phone numbers, for instance, have an area code (the &lsquo;(999)&rsquo; part) that tells you the location of the caller</p>
+<p><code>str</code> accessor lets you apply string methods like split directly to columns. The Customer Lifetime Value dataset contains features describing customers of an insurance company. From the Policy feature, we could separate the Type from the Level of coverage:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[[</span><span class="s2">&#34;Type&#34;</span><span class="p">,</span> <span class="s2">&#34;Level&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>  <span class="c1"># Create two new features</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customer</span><span class="p">[</span><span class="s2">&#34;Policy&#34;</span><span class="p">]</span>           <span class="c1"># from the Policy feature</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">str</span>                         <span class="c1"># through the string accessor</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>     <span class="c1"># by splitting on &#34; &#34;</span>
+</span></span><span class="line"><span class="cl">                                 <span class="c1"># and expanding the result into separate columns</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[[</span><span class="s2">&#34;Policy&#34;</span><span class="p">,</span> <span class="s2">&#34;Type&#34;</span><span class="p">,</span> <span class="s2">&#34;Level&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>Of course, we can join simple features into a composed feature if there was some interaction in the combination:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[</span><span class="s2">&#34;make_and_style&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">autos</span><span class="p">[</span><span class="s2">&#34;make&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="n">autos</span><span class="p">[</span><span class="s2">&#34;body_style&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[[</span><span class="s2">&#34;make&#34;</span><span class="p">,</span> <span class="s2">&#34;body_style&#34;</span><span class="p">,</span> <span class="s2">&#34;make_and_style&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><h3 id="33-group-transform">3.3 Group Transform<a hidden class="anchor" aria-hidden="true" href="#33-group-transform">#</a></h3>
+<p>Group transform aggregate infromation across multiple rows grouped by some category. We can create features like &ldquo;the average income of a person&rsquo;s state of residence,&rdquo; or &ldquo;the proportion of movies released on a weekday, by genre.&rdquo;.</p>
+<p>Using an aggregation function, a group transform combines two features: a categorical feature that provides the grouping and another feature whose values you wish to aggregate. For an &ldquo;average income by state&rdquo;, you would choose State for the grouping feature, mean for the aggregation function, and Income for the aggregated feature. To compute this in Pandas, we use the groupby and transform methods:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[</span><span class="s2">&#34;AverageIncome&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customer</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;State&#34;</span><span class="p">)</span>  <span class="c1"># for each state</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="s2">&#34;Income&#34;</span><span class="p">]</span>                 <span class="c1"># select the income</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&#34;mean&#34;</span><span class="p">)</span>         <span class="c1"># and compute its mean</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[[</span><span class="s2">&#34;State&#34;</span><span class="p">,</span> <span class="s2">&#34;Income&#34;</span><span class="p">,</span> <span class="s2">&#34;AverageIncome&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>Here&rsquo;s a function to create a <code>DataFrame</code> that calculate the frequency with which each state occurs in the dataset:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[</span><span class="s2">&#34;StateFreq&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">customer</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;State&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="s2">&#34;State&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&#34;count&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">/</span> <span class="n">customer</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[[</span><span class="s2">&#34;State&#34;</span><span class="p">,</span> <span class="s2">&#34;StateFreq&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>If you&rsquo;re using training and validation splits, to preserve their independence, it&rsquo;s best to create a grouped feature using only the training set and then join it to the validation set. We can use the validation set&rsquo;s merge method after creating a unique set of values with drop_duplicates on the training set:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create splits</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_train</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_valid</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create the average claim amount by coverage type, on the training set</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_train</span><span class="p">[</span><span class="s2">&#34;AverageClaim&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;Coverage&#34;</span><span class="p">)[</span><span class="s2">&#34;ClaimAmount&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&#34;mean&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Merge the values into the validation set</span>
+</span></span><span class="line"><span class="cl"><span class="n">df_valid</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">df_train</span><span class="p">[[</span><span class="s2">&#34;Coverage&#34;</span><span class="p">,</span> <span class="s2">&#34;AverageClaim&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">on</span><span class="o">=</span><span class="s2">&#34;Coverage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">how</span><span class="o">=</span><span class="s2">&#34;left&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df_valid</span><span class="p">[[</span><span class="s2">&#34;Coverage&#34;</span><span class="p">,</span> <span class="s2">&#34;AverageClaim&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="4-clustering-with-k-means">4. Clustering with K-means<a hidden class="anchor" aria-hidden="true" href="#4-clustering-with-k-means">#</a></h2>
+<p>Clustering means the assigning of data points to group based on how similar the points are to each other. In feature engineering, we attempt to discover groups of customers representing a market segment or geographic area that share similar weather patterns. By adding a feature of cluster labels, it helps machine learning models untangle complicated relationships of space and proximity.</p>
+<center><img src="a8.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p><code>Cluster</code> is a categorical variable. The motivating idea for adding cluster labels is that the clusters will break up complicated relationships across features into simpler chunks. Our model can then just learn the simpler chunks one-by-one instead having to learn the complicated whole all at once. It&rsquo;s a &ldquo;divide and conquer&rdquo; strategy.</p>
+<center><img src="a9.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Clustering the YearBuilt feature helps this linear model learn its relationship to SalePrice.</i></p>
+<p>The figure shows how clustering can improve a simple linear model. The curved relationship between the YearBuilt and SalePrice is too complicated for this kind of model &ndash; it underfits. On smaller chunks however the relationship is almost linear, and that the model can learn easily.</p>
+<h3 id="41-k-means-clustering">4.1 k-Means Clustering<a hidden class="anchor" aria-hidden="true" href="#41-k-means-clustering">#</a></h3>
+<p>K-means clustering measures similarity using ordinary straight-line distance (Euclidean distance, in other words). It creates clusters by placing a number of points, called centroids, inside the feature-space. Each point in the dataset is assigned to the cluster of whichever centroid it&rsquo;s closest to. The &ldquo;k&rdquo; in &ldquo;k-means&rdquo; is how many centroids (that is, clusters) it creates. You define the k yourself.</p>
+<p>You could imagine each centroid capturing points through a sequence of radiating circles. When sets of circles from competing centroids overlap they form a line. The result is what&rsquo;s called a Voronoi tessallation. The tessallation shows you to what clusters future data will be assigned; the tessallation is essentially what k-means learns from its training data.</p>
+<center><img src="a10.jpg"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>The k-means algorithm:</p>
+<ul>
+<li>Randomly initialize some predefined number of centroids</li>
+<li>Assign points to the nearest cluster centroid</li>
+<li>Move each centroid to minimize the distance to its point</li>
+<li>Iterate from second step until centroid not moving anymore</li>
+</ul>
+<h3 id="42-example">4.2 Example<a hidden class="anchor" aria-hidden="true" href="#42-example">#</a></h3>
+<p>As spatial features, California Housing&rsquo;s &lsquo;Latitude&rsquo; and &lsquo;Longitude&rsquo; make natural candidates for k-means clustering. Since k-means clustering is sensitive to scale, it can be a good idea rescale or normalize data with extreme values. Our features are already roughly on the same scale, so we&rsquo;ll leave them as-is.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create cluster feature</span>
+</span></span><span class="line"><span class="cl"><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">[</span><span class="s2">&#34;Cluster&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="p">[</span><span class="s2">&#34;Cluster&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s2">&#34;Cluster&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&#34;category&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><p>Let&rsquo;s see the cluster on a plot:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="o">=</span><span class="s2">&#34;Longitude&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&#34;Latitude&#34;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&#34;Cluster&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></div><center><img src="a11.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>Let&rsquo;s compare the distributions of the target within each cluster using box-plot.</p>
+<blockquote>
+<p>If the clustering is informative, these distributions should, for the most part, separate across <code>MedHouseVal</code>, which is indeed what we see.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">X</span><span class="p">[</span><span class="s2">&#34;MedHouseVal&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&#34;MedHouseVal&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&#34;MedHouseVal&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&#34;Cluster&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&#34;boxen&#34;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">);</span>
+</span></span></code></pre></div><center><img src="a12.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<h2 id="5-principal-component-analysis-pca">5. Principal Component Analysis (PCA)<a hidden class="anchor" aria-hidden="true" href="#5-principal-component-analysis-pca">#</a></h2>
+<p>PCA is typically applied to standardized data. With standardized data &ldquo;variation&rdquo; means &ldquo;correlation&rdquo;. With unstandardized data &ldquo;variation&rdquo; means &ldquo;covariance&rdquo;. All data in this section will be standardized before applying PCA.</p>
+<p>In the Abalone dataset are physical measurements taken from several thousand Tasmanian abalone. (An abalone is a sea creature much like a clam or an oyster.) We&rsquo;ll just look at a couple features for now: the &lsquo;Height&rsquo; and &lsquo;Diameter&rsquo; of their shells.</p>
+<center><img src="a13.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>We can think that in this data, there are axes of variation that describe the ways the abalone tend to differ from one to another. We can give names to these axes of variation. The longer axis we might call the &ldquo;Size&rdquo; component: small height and small diameter (lower left) contrasted with large height and large diameter (upper right). The shorter axis we might call the &ldquo;Shape&rdquo; component: small height and large diameter (flat shape) contrasted with large height and small diameter (round shape).</p>
+<p>Of course, we can also describe the abalone with size and shape. The whole idea of PCA: instead of describing the data with the original features, we describe it with its axes of variation. The axes of variation become the new features.</p>
+<center><img src="a14.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>In fact these new features are actually just linear combinations of the original features:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">df[&#34;Size&#34;] = 0.707 * X[&#34;Height&#34;] + 0.707 * X[&#34;Diameter&#34;]
+</span></span><span class="line"><span class="cl">df[&#34;Shape&#34;] = 0.707 * X[&#34;Height&#34;] - 0.707 * X[&#34;Diameter&#34;]
+</span></span></code></pre></div><p>The size and shape features are known as the principal components of the data. The weights are called loadings. There will be as many principal components as there are features in the original dataset: if we had used ten features instead of two, we would have ended up with ten components.</p>
+<p>Moreover, PCA also tells us the amount of variation in each component:</p>
+<center><img src="a15.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>The Size component captures the majority of the variation between Height and Diameter. It&rsquo;s important to remember, however, that the amount of variance in a component doesn&rsquo;t necessarily correspond to how good it is as a predictor: it depends on what you&rsquo;re trying to predict.</p>
+<h3 id="51-pca-for-feature-engineering">5.1 PCA for Feature Engineering<a hidden class="anchor" aria-hidden="true" href="#51-pca-for-feature-engineering">#</a></h3>
+<p>We can use PCA for feature engineering in two ways. First, we can use it as a descriptive technique. Since the components tell you about the variation, you could compute the MI scores for the components and see what kind of variation is most predictive of your target. That could give you ideas for kinds of features to create &ndash; a product of &lsquo;Height&rsquo; and &lsquo;Diameter&rsquo; if &lsquo;Size&rsquo; is important, say, or a ratio of &lsquo;Height&rsquo; and &lsquo;Diameter&rsquo; if Shape is important. You could even try clustering on one or more of the high-scoring components.</p>
+<p>On the other hand, we can use the components themselves as features. Because the components expose the variational structure of the data directly, they can often be more informative than the original features. Here are some use-cases:</p>
+<ul>
+<li>Dimensionality reduction: When your features are highly redundant (multicollinear, specifically), PCA will partition out the redundancy into one or more near-zero variance components, which you can then drop since they will contain little or no information.</li>
+<li>Anomaly detection: Unusual variation, not apparent from the original features, will often show up in the low-variance components. These components could be highly informative in an anomaly or outlier detection task.</li>
+<li>Noise reduction: A collection of sensor readings will often share some common background noise. PCA can sometimes collect the (informative) signal into a smaller number of features while leaving the noise alone, thus boosting the signal-to-noise ratio.</li>
+<li>Decorrelation: Some ML algorithms struggle with highly-correlated features. PCA transforms correlated features into uncorrelated components, which could be easier for your algorithm to work with.</li>
+</ul>
+<h3 id="52-example">5.2 Example<a hidden class="anchor" aria-hidden="true" href="#52-example">#</a></h3>
+<p>We will use the Automobile dataset from previous study and apply PCA to discover some features from the dataset:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;highway_mpg&#34;</span><span class="p">,</span> <span class="s2">&#34;engine_size&#34;</span><span class="p">,</span> <span class="s2">&#34;horsepower&#34;</span><span class="p">,</span> <span class="s2">&#34;curb_weight&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">features</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Standardize</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now we can fit scikit-learn&rsquo;s PCA estimator and create the principal components. You can see here the first few rows of the transformed dataset.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create principal components</span>
+</span></span><span class="line"><span class="cl"><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Convert to dataframe</span>
+</span></span><span class="line"><span class="cl"><span class="n">component_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&#34;PC</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&#34;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_pca</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_pca</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_pca</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">component_names</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_pca</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><p>After fitting, the PCA instance contains the loadings in its components_ attribute. (Terminology for PCA is inconsistent, unfortunately. We&rsquo;re following the convention that calls the transformed columns in X_pca the components, which otherwise don&rsquo;t have a name.) We&rsquo;ll wrap the loadings up in a dataframe.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">loadings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>  <span class="c1"># transpose the matrix of loadings</span>
+</span></span><span class="line"><span class="cl">    <span class="n">columns</span><span class="o">=</span><span class="n">component_names</span><span class="p">,</span>  <span class="c1"># so the columns are the principal components</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>  <span class="c1"># and the rows are the original features</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">loadings</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	         PC1	        PC2	        PC3	        PC4
+</span></span><span class="line"><span class="cl">highway_mpg	 -0.492347	0.770892	0.070142	-0.397996
+</span></span><span class="line"><span class="cl">engine_size	 0.503859	0.626709	0.019960	0.594107
+</span></span><span class="line"><span class="cl">horsepower	 0.500448	0.013788	0.731093	-0.463534
+</span></span><span class="line"><span class="cl">curb_weight	 0.503262	0.113008	-0.678369	-0.523232
+</span></span></code></pre></div><p>Recall that the signs and magnitudes of a component&rsquo;s loadings tell us what kind of variation it&rsquo;s captured. The first component (PC1) shows a contrast between large, powerful vehicles with poor gas milage, and smaller, more economical vehicles with good gas milage. We might call this the &ldquo;Luxury/Economy&rdquo; axis. The next figure shows that our four chosen features mostly vary along the Luxury/Economy axis.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Look at explained variance</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_variance</span><span class="p">(</span><span class="n">pca</span><span class="p">);</span>
+</span></span></code></pre></div><center><img src="a16.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>Let&rsquo;s check the MI score of the components.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">mi_scores</span> <span class="o">=</span> <span class="n">make_mi_scores</span><span class="p">(</span><span class="n">X_pca</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">discrete_features</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mi_scores</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PC1    1.013264
+</span></span><span class="line"><span class="cl">PC2    0.379156
+</span></span><span class="line"><span class="cl">PC3    0.306703
+</span></span><span class="line"><span class="cl">PC4    0.203329
+</span></span><span class="line"><span class="cl">Name: MI Scores, dtype: float64
+</span></span></code></pre></div><p>PC1 is highly informative, though the remaining components, despite their small variance, still have a significant relationship with price. Examining those components could be worthwhile to find relationships not captured by the main Luxury/Economy axis.</p>
+<p>PC3 shows a contrast between horsepower and curb_weight &ndash; sports cars vs. wagons, it seems.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Show dataframe sorted by PC3</span>
+</span></span><span class="line"><span class="cl"><span class="n">idx</span> <span class="o">=</span> <span class="n">X_pca</span><span class="p">[</span><span class="s2">&#34;PC3&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+</span></span><span class="line"><span class="cl"><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;make&#34;</span><span class="p">,</span> <span class="s2">&#34;body_style&#34;</span><span class="p">,</span> <span class="s2">&#34;horsepower&#34;</span><span class="p">,</span> <span class="s2">&#34;curb_weight&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    make	body_style	horsepower	curb_weight
+</span></span><span class="line"><span class="cl">118	porsche	hardtop	    207	        2756
+</span></span><span class="line"><span class="cl">117	porsche	hardtop	    207	        2756
+</span></span><span class="line"><span class="cl">119	porsche	convertible	207	        2800
+</span></span><span class="line"><span class="cl">45	jaguar	sedan	    262	        3950
+</span></span><span class="line"><span class="cl">96	nissan	hatchback	200	        3139
+</span></span></code></pre></div><p>We will create a new ratio features from this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s2">&#34;sports_or_wagon&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">curb_weight</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">horsepower</span>
+</span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&#34;sports_or_wagon&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
+</span></span></code></pre></div><center><img src="a17.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<h2 id="6-target-encoding">6. Target Encoding<a hidden class="anchor" aria-hidden="true" href="#6-target-encoding">#</a></h2>
+<p>A target encoding is any kind of encoding that replaces a feature&rsquo;s categories with some number derived from the target.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[</span><span class="s2">&#34;make_encoded&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">autos</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&#34;make&#34;</span><span class="p">)[</span><span class="s2">&#34;price&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&#34;mean&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">autos</span><span class="p">[[</span><span class="s2">&#34;make&#34;</span><span class="p">,</span> <span class="s2">&#34;price&#34;</span><span class="p">,</span> <span class="s2">&#34;make_encoded&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>From the above code, we are performing a mean encoding to the dataset. We can do this to a binary dataset as well - and we call it as bin counting.</p>
+<p>Target encoding for the above example presents a couple of problems, however. First are unknown categories. Target encodings create a special risk of overfitting, which means they need to be trained on an independent &ldquo;encoding&rdquo; split. When you join the encoding to future splits, Pandas will fill in missing values for any categories not present in the encoding split. These missing values you would have to impute somehow.</p>
+<p>Moreover, for rare categories. When a category only occurs a few times in the dataset, any statistics calculated on its group are unlikely to be very accurate. In the Automobiles dataset, the mercury make only occurs once. The &ldquo;mean&rdquo; price we calculated is just the price of that one vehicle, which might not be very representative of any Mercuries we might see in the future. Target encoding rare categories can make overfitting more likely.</p>
+<p>To avoid the above issues, we need to apply smoothing. That is, to blend in-category average with the overall average.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">encoding = weight * in_category + (1 - weight) * overall
+</span></span></code></pre></div><p>So how do we compute for the weight? We can do it by computing the m-estimate.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">weight = n / (n + m)
+</span></span></code></pre></div><p><code>n</code> is the total number of times that category occurs in the data. The parameter m determines the &ldquo;smoothing factor&rdquo;. Larger values of m put more weight on the overall estimate.</p>
+<center><img src="a18.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>Let&rsquo;s say in the Automobile dataset and there are 3 cars with the make of <code>chevrolet</code>. For m = 2, <code>chevrolet</code> category would be encoded with 60% of the average Chevrelot price and 40% of the overall average price.</p>
+<blockquote>
+<p>When choosing a value for m, consider how noisy you expect the categories to be. Does the price of a vehicle vary a great deal within each make? Would you need a lot of data to get good estimates? If so, it could be better to choose a larger value for m; if the average price for each make were relatively stable, a smaller value could be okay.</p>
+</blockquote>
+<p>Benefits of Target Encoding:</p>
+<ul>
+<li>High-cardinality features:
+<ul>
+<li>A feature with many categories can be troublesome to encode: a one-hot encoding would generate too many features and alternatives, like a label encoding, might not be appropriate for that feature. A target encoding derives numbers for the categories using the feature&rsquo;s most important property: its relationship with the target.</li>
+</ul>
+</li>
+<li>Domain-motivated features:
+<ul>
+<li>From prior experience, you might suspect that a categorical feature should be important even if it scored poorly with a feature metric. A target encoding can help reveal a feature&rsquo;s true informativeness.</li>
+</ul>
+</li>
+</ul>
+<h3 id="61-example">6.1 Example<a hidden class="anchor" aria-hidden="true" href="#61-example">#</a></h3>
+<p>In this final example, we will be using <code>MovieLens1M</code> dataset with one-million movie rating by users of the MovieLens website. With over 3000 categories, the Zipcode feature makes a good candidate for target encoding, and the size of this dataset (over one-million rows) means we can spare some data to create the encoding.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 25% split to train the encoder</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;Rating&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_encode</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_encode</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">X_encode</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_pretrain</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">X_encode</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">X_pretrain</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">category_encoders</span> <span class="kn">import</span> <span class="n">MEstimateEncoder</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create the encoder instance. Choose m to control noise.</span>
+</span></span><span class="line"><span class="cl"><span class="n">encoder</span> <span class="o">=</span> <span class="n">MEstimateEncoder</span><span class="p">(</span><span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;Zipcode&#34;</span><span class="p">],</span> <span class="n">m</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Fit the encoder on the encoding split.</span>
+</span></span><span class="line"><span class="cl"><span class="n">encoder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_encode</span><span class="p">,</span> <span class="n">y_encode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Encode the Zipcode column to create the final training data</span>
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_pretrain</span><span class="p">)</span>
+</span></span></code></pre></div><p>Now we want to compare the encoded values to the target to see how informative it is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">norm_hist</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">Zipcode</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&#34;Rating&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Zipcode&#39;</span><span class="p">,</span> <span class="s1">&#39;Rating&#39;</span><span class="p">]);</span>
+</span></span></code></pre></div><center><img src="a19.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>We can see that the distribution of the encoded Zipcode feature roughly follows the distribution of the actual ratings, meaning that movie-watchers differed enough in their ratings from zipcode to zipcode that our target encoding was able to capture useful information.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://keanteng.github.io/home/tags/pandas/">Pandas</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/data-frame/">Data Frame</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/feature-engineerig/">Feature Engineerig</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://keanteng.github.io/home/docs/2023-08-19-data-cleaning/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Data Cleaning</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Feature Engineering on twitter"
+        href="https://twitter.com/intent/tweet/?text=Feature%20Engineering&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f&amp;hashtags=Pandas%2cDataFrame%2cFeatureEngineerig%2cPython">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Feature Engineering on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f&amp;title=Feature%20Engineering&amp;summary=Feature%20Engineering&amp;source=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Feature Engineering on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f&title=Feature%20Engineering">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Feature Engineering on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Feature Engineering on whatsapp"
+        href="https://api.whatsapp.com/send?text=Feature%20Engineering%20-%20https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Feature Engineering on telegram"
+        href="https://telegram.me/share/url?text=Feature%20Engineering&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023-08-20-feature-engineering%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

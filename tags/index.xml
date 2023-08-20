@@ -10,22 +10,49 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 19 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Frame</title>
+      <link>https://keanteng.github.io/home/tags/data-frame/</link>
+      <pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/data-frame/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Feature Engineerig</title>
+      <link>https://keanteng.github.io/home/tags/feature-engineerig/</link>
+      <pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/feature-engineerig/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pandas</title>
+      <link>https://keanteng.github.io/home/tags/pandas/</link>
+      <pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/pandas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://keanteng.github.io/home/tags/python/</link>
+      <pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Data Cleaning</title>
       <link>https://keanteng.github.io/home/tags/data-cleaning/</link>
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/data-cleaning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Frame</title>
-      <link>https://keanteng.github.io/home/tags/data-frame/</link>
-      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/data-frame/</guid>
       <description></description>
     </item>
     
@@ -44,24 +71,6 @@
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/forecasting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pandas</title>
-      <link>https://keanteng.github.io/home/tags/pandas/</link>
-      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/pandas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/python/</guid>
       <description></description>
     </item>
     
