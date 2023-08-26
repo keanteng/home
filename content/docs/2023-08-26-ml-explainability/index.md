@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Python"]
 weight: 5
-summary: "Many people tend to say that machine learning models are "black boxes" because they can make good predictions but cannot understand the logic behind those predictions. "
+summary: "Many people tend to say that machine learning models are black boxes because they can make good predictions but cannot understand the logic behind those predictions."
 ---
 
 <center><img src="https://images.unsplash.com/photo-1495592822108-9e6261896da8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"  class = "center"/></center>
