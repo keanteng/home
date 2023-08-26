@@ -4,7 +4,7 @@ description: "My Kaggle Learning Note "
 date: "2023-08-26"
 draft: false
 author: "Kean Teng Blog"
-tags: ["Machine Learning", "SHAP", "Python"]
+tags: ["Python"]
 weight: 5
 summary: "Many people tend to say that machine learning models are "black boxes" because they can make good predictions but cannot understand the logic behind those predictions. "
 ---
