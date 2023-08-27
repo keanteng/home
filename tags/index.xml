@@ -12,11 +12,47 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 26 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Earth Engine</title>
+      <link>https://keanteng.github.io/home/tags/earth-engine/</link>
+      <pubDate>Sat, 26 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/earth-engine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google Earth</title>
+      <link>https://keanteng.github.io/home/tags/google-earth/</link>
+      <pubDate>Sat, 26 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/google-earth/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://keanteng.github.io/home/tags/machine-learning/</link>
+      <pubDate>Sat, 26 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://keanteng.github.io/home/tags/python/</link>
       <pubDate>Sat, 26 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SHAP</title>
+      <link>https://keanteng.github.io/home/tags/shap/</link>
+      <pubDate>Sat, 26 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/shap/</guid>
       <description></description>
     </item>
     
@@ -242,15 +278,6 @@
       <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/data-science/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Machine Learning</title>
-      <link>https://keanteng.github.io/home/tags/machine-learning/</link>
-      <pubDate>Thu, 02 Mar 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/machine-learning/</guid>
       <description></description>
     </item>
     

@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://keanteng.github.io/home/docs/2023-08-26-land-cover-elevation-and-slope/</loc>
+    <lastmod>2023-08-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://keanteng.github.io/home/docs/2023-08-26-ml-explainability/</loc>
     <lastmod>2023-08-26T00:00:00+00:00</lastmod>
   </url><url>
@@ -59,10 +62,22 @@
     <loc>https://keanteng.github.io/home/docs/</loc>
     <lastmod>2023-08-26T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://keanteng.github.io/home/tags/earth-engine/</loc>
+    <lastmod>2023-08-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/google-earth/</loc>
+    <lastmod>2023-08-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://keanteng.github.io/home/</loc>
     <lastmod>2023-08-26T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://keanteng.github.io/home/tags/machine-learning/</loc>
+    <lastmod>2023-08-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://keanteng.github.io/home/tags/python/</loc>
+    <lastmod>2023-08-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/shap/</loc>
     <lastmod>2023-08-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/</loc>
@@ -141,9 +156,6 @@
     <lastmod>2023-03-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/data-science/</loc>
-    <lastmod>2023-03-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://keanteng.github.io/home/tags/machine-learning/</loc>
     <lastmod>2023-03-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/loras/</loc>
