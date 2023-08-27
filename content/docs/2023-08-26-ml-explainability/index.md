@@ -4,7 +4,7 @@ description: "My Kaggle Learning Note "
 date: "2023-08-26"
 draft: false
 author: "Kean Teng Blog"
-tags: ["Python"]
+tags: ["Python", “Machine Learning", "SHAP"]
 weight: 5
 summary: "Many people tend to say that machine learning models are black boxes because they can make good predictions but cannot understand the logic behind those predictions."
 ---
@@ -48,11 +48,15 @@ Many people won't assume they can trust your model for important decisions witho
 
 Permutation importance is calculated after a model has been fitted. Imagine that now, we want to predict a person's height when they become 20 years old using only data that is available at age 10.
 
-![Alt text](wjMAysV.png)
+<center><img src="wjMAysV.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 Now, if we randomly shuffle a single column of the validation data but all the other columns remain in place, how would the accuracy of the prediction be affected?
 
-![Alt text](h17tMUU.png)
+<center><img src="h17tMUU.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 Of course, such an approach would reduce the model accuracy, since the data no longer corresponds to what we can observe in the real world. Model accuracy especially suffers if we shuffle a column that the model relied on heavily for predictions. In this case, shuffling height at age 10 would cause terrible predictions. If we shuffled socks owned instead, the resulting predictions wouldn't suffer nearly as much.
 
@@ -98,7 +102,8 @@ tree_graph = tree.export_graphviz(tree_model, out_file=None, feature_names=featu
 graphviz.Source(tree_graph)
 ```
 
-![Alt text](image-1.png)
+<center><img src="image-1.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 Produce a partial dependence plot:
 
@@ -111,7 +116,9 @@ disp1 = PartialDependenceDisplay.from_estimator(tree_model, val_X, ['Goal Scored
 plt.show()
 ```
 
-![Alt text](__results___6_0.png)
+<center><img src="__results___6_0.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 The y-axis is interpreted as change in the prediction from what it would be predicted at the baseline or leftmost value.
 
@@ -123,7 +130,9 @@ disp2 = PartialDependenceDisplay.from_estimator(tree_model, val_X, [feature_to_p
 plt.show()
 ```
 
-![Alt text](__results___8_0.png)
+<center><img src="__results___8_0.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 This graph seems too simple to represent reality. But that's because the model is so simple. You should be able to see from the decision tree above that this is representing exactly the model's structure.
 
@@ -135,7 +144,9 @@ disp3 = PartialDependenceDisplay.from_estimator(rf_model, val_X, [feature_to_plo
 plt.show()
 ```
 
-![Alt text](__results___10_0.png)
+<center><img src="__results___10_0.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 > This model thinks you are more likely to win Man of the Match if your players run a total of 100km over the course of the game. Though running much more causes lower predictions.
 
@@ -153,7 +164,9 @@ disp4 = PartialDependenceDisplay.from_estimator(tree_model, val_X, f_names, ax=a
 plt.show()
 ```
 
-![Alt text](__results___12_0.png)
+<center><img src="__results___12_0.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 From the plot above, we see the highest predictions when a team scores at least 1 goal and they run a total distance close to 100km. If they score 0 goals, distance covered doesn't matter. Can you see this by tracing through the decision tree with 0 goals? 
 
@@ -171,7 +184,8 @@ But for each team, they are many features, so if we answer for the `number of go
 sum(SHAP values for all features) = pred_for_team - pred_for_baseline_values
 ```
 
-![Alt text](JVD2U7k.png)
+<center><img src="JVD2U7k.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 To interpret the graph:
 
@@ -225,9 +239,11 @@ shap.force_plot(explainer.expected_value[1], shap_values[1], data_for_prediction
 
 The `shap_values` object above is a list with two arrays. The first array is the SHAP values for a negative outcome (don't win the award), and the second array is the list of SHAP values for the positive outcome (wins the award). We typically think about predictions in terms of the prediction of a positive outcome, so we'll pull out SHAP values for positive outcomes (pulling out `shap_values[1]`).
 
-![Alt text](image-2.png)
+<center><img src="image-2.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
-Of course, SHAP pacakge also has explainers for every type of model:
+
+Of course, SHAP package also has explainers for every type of model:
 - `shap.DeepExplainer` works with Deep Learning models.
 - `shap.KernelExplainer` works with all models, though it is slower than other Explainers and it offers an approximation rather than exact Shap values.
 
@@ -245,13 +261,16 @@ If x1 takes the value 2, instead of a baseline value of 0, then our SHAP value f
 
 These are harder to calculate with the sophisticated models we use in practice. But through some algorithmic cleverness, Shap values allow us to decompose any prediction into the sum of effects of each feature value, yielding a graph like this:
 
-![Alt text](JVD2U7k-1.png)
+<center><img src="JVD2U7K-1.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 In addition to this nice breakdown for each prediction, the Shap library offers great visualizations of groups of Shap values. We will focus on two of these visualizations. These visualizations have conceptual similarities to permutation importance and partial dependence plots
 
 SHAP summary plots give us a birds-eye view of feature importance and what is driving it. We'll walk through an example plot for the soccer data:
 
-![Alt text](Ew9X3su.png)
+<center><img src="Ew9X3su.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+
 
 This plot is made of many dots. Each dot has three characteristics:
 
@@ -299,7 +318,8 @@ shap_values = explainer.shap_values(val_X)
 shap.summary_plot(shap_values[1], val_X)
 ```
 
-![Alt text](__results___4_0.png)
+<center><img src="__results___4_0.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 The code isn't too complex. But there are a few caveats.
 
@@ -310,19 +330,22 @@ The code isn't too complex. But there are a few caveats.
 
 For SHAP dependence contribution plots provide a similar insight to partial dependence plot's, but they add a lot more detail.
 
-![Alt text](uQ2JmBm.png)
+<center><img src="uQ2JmBm.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 Each dot represents a row of the data. The horizontal location is the actual value from the dataset, and the vertical location shows what having that value did to the prediction. The fact this slopes upward says that the more you possess the ball, the higher the model's prediction is for winning the Man of the Match award.
 
 The spread suggests that other features must interact with Ball Possession %. For example, here we have highlighted two points with similar ball possession values. That value caused one prediction to increase, and it caused the other prediction to decrease.
 
-![Alt text](tFzp6jc.png)
+<center><img src="tFzp6jc.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 For comparison, a simple linear regression would produce plots that are perfect lines, without this spread.
 
 This suggests we delve into the interactions, and the plots include color coding to help do that. While the primary trend is upward, you can visually inspect whether that varies by dot color.
 
-![Alt text](NVB3eNW.png)
+<center><img src="NVB3eNW.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 These two points stand out spatially as being far away from the upward trend. They are both colored purple, indicating the team scored one goal. You can interpret this to say In general, having the ball increases a team's chance of having their player win the award. But if they only score one goal, that trend reverses and the award judges may penalize them for having the ball so much if they score that little.
 
@@ -341,6 +364,7 @@ shap_values = explainer.shap_values(X)
 shap.dependence_plot('Ball Possession %', shap_values[1], X, interaction_index="Goal Scored")
 ```
 
-![Alt text](__results___6_0-1.png)
+<center><img src="__results___6_0-1.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
 
 If you don't supply an argument for interaction_index, Shapley uses some logic to pick one that may be interesting!
