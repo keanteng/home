@@ -18,7 +18,7 @@ In this article, I will share about the ways that we can obtain information such
 
 Before we get started, make sure you have already installed the Earth Engine library on Python and you also have an **Earth Engine account**:
 
-```
+```py
 py -m pip install ee
 ```
 
@@ -36,7 +36,7 @@ The elevation of a geographic location is its height above or below a fixed refe
 
 To obtain elevation data for any particular location, we can use the [Shuttle Radar Topography Mission digital elevation data](https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003#description), we can get the data by calling:
 
-```
+```py
 ee.Initialize()
 DEM = ee.Image("USGS/SRTMGL1_003")
 ```
