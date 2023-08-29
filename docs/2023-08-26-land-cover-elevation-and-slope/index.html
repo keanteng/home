@@ -10,7 +10,7 @@
 <meta name="description" content="What Can Earth Engine Tell Us from a Geocoordinate?">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023-08-26-land-cover-elevation-and-slope/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.c3e2a067219797e6d15efaf90b8b8ac356a88daea0c015d1617244fbcb18ed5a.css" integrity="sha256-w&#43;KgZyGXl&#43;bRXvr5C4uKw1aoja6gwBXRYXJE&#43;8sY7Vo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.c331eeb6c8e16b7bf4786d8dccce1d520034a1fd5b9d7ebed906475b119e892a.css" integrity="sha256-wzHutsjha3v0eG2NzM4dUgA0of1bnX6&#43;2QZHWxGeiSo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -235,7 +235,7 @@
 <p>Google Earth Engine is used by scientists, engineers and developers to detect change, map trends and quantify differences on the Earth’s surface.</p>
 <p>In this article, I will share about the ways that we can obtain information such as elevation, slope and land cover from Earth Engine by telling the services the geo coordinates that we are interested in. All in simple Python code.</p>
 <p>Before we get started, make sure you have already installed the Earth Engine library on Python and you also have an <strong>Earth Engine account</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">py -m pip install ee
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">ee</span>
 </span></span></code></pre></div><p>To use the Earth Engine API on Python, you also need to perform some authentication, you can run the following command on a Jupyter notebook or Python script:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">ee</span>
 </span></span><span class="line"><span class="cl"><span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
@@ -243,8 +243,8 @@
 <h2 id="1-elevation">1. Elevation<a hidden class="anchor" aria-hidden="true" href="#1-elevation">#</a></h2>
 <p>The elevation of a geographic location is its height above or below a fixed reference point, most commonly a reference geoid, a mathematical model of the Earth’s Sea level as an equipotential gravitational surface.</p>
 <p>To obtain elevation data for any particular location, we can use the <a href="https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003#description">Shuttle Radar Topography Mission digital elevation data</a>, we can get the data by calling:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ee.Initialize()
-</span></span><span class="line"><span class="cl">DEM = ee.Image(&#34;USGS/SRTMGL1_003&#34;)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">DEM</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s2">&#34;USGS/SRTMGL1_003&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><p>Let’s say I have already prepared a dataset called regression_data containing all the latitude and longitude for a particular location as follows:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">latitude longtitude
 </span></span><span class="line"><span class="cl">2.234    103.24242
