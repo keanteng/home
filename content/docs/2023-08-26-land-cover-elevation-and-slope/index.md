@@ -16,6 +16,9 @@ Google Earth Engine is used by scientists, engineers and developers to detect ch
 
 In this article, I will share about the ways that we can obtain information such as elevation, slope and land cover from Earth Engine by telling the services the geo coordinates that we are interested in. All in simple Python code.
 
+<center><img src="image.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Land Cover, Slope and Elevation</i></p>
+
 Before we get started, make sure you have already installed the Earth Engine library on Python and you also have an **Earth Engine account**:
 
 ```py
