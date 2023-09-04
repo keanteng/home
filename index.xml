@@ -10,7 +10,25 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 26 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating a Site Using Materials Mkdocs</title>
+      <link>https://keanteng.github.io/home/docs/2023-09-04-creating-a-site-using-materials-mkdocs/</link>
+      <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-09-04-creating-a-site-using-materials-mkdocs/</guid>
+      <description>A Quick Guide</description>
+    </item>
+    
+    <item>
+      <title>Publish a Package on Pypi</title>
+      <link>https://keanteng.github.io/home/docs/2023-09-04-how-to-publish-on-pypi/</link>
+      <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2023-09-04-how-to-publish-on-pypi/</guid>
+      <description>A Quick Guide</description>
+    </item>
+    
     <item>
       <title>Land Cover, Elevation &amp; Slope</title>
       <link>https://keanteng.github.io/home/docs/2023-08-26-land-cover-elevation-and-slope/</link>
