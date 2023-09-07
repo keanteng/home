@@ -10,7 +10,43 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Automate</title>
+      <link>https://keanteng.github.io/home/tags/automate/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/automate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Automation</title>
+      <link>https://keanteng.github.io/home/tags/automation/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://keanteng.github.io/home/tags/python/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reporting</title>
+      <link>https://keanteng.github.io/home/tags/reporting/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/reporting/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Mkdocs</title>
       <link>https://keanteng.github.io/home/tags/mkdocs/</link>
@@ -35,15 +71,6 @@
       <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/pypi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/python/</guid>
       <description></description>
     </item>
     

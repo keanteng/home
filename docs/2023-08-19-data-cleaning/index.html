@@ -10,7 +10,7 @@
 <meta name="description" content="My Kaggle Learning Note ">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023-08-19-data-cleaning/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.c331eeb6c8e16b7bf4786d8dccce1d520034a1fd5b9d7ebed906475b119e892a.css" integrity="sha256-wzHutsjha3v0eG2NzM4dUgA0of1bnX6&#43;2QZHWxGeiSo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -393,8 +393,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># set seed for reproducibility</span>
 </span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span></span></code></pre></div><p>Character encoding are specific sets of rules for mapping from raw binary byte strings to character that make-up human-readable text. If you tried to read in text with a different encoding than the one it was originally written in, you ended up with scrambled text called <code>mojibake</code> (said like <code>mo-gee-bah-kay</code>). Here&rsquo;s an example of <code>mojibake</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">æ–‡å—åŒ–ã??
-</span></span></code></pre></div><p>In fact, character encoding mismatches are less common today. There are a lot of different character encoding out there, the main one for you to know is UTF-8.</p>
+<pre tabindex="0"><code>æ–‡å—åŒ–ã??
+</code></pre><p>In fact, character encoding mismatches are less common today. There are a lot of different character encoding out there, the main one for you to know is UTF-8.</p>
 <p>UTF-8 is the standard text encoding. All Python code is in UTF-8 and, ideally, all your data should be as well. It&rsquo;s when things aren&rsquo;t in UTF-8 that you run into trouble.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># start with a string</span>
 </span></span><span class="line"><span class="cl"><span class="n">before</span> <span class="o">=</span> <span class="s2">&#34;This is the euro symbol: €&#34;</span>
@@ -440,15 +440,15 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># sort them alphabetically and then take a closer look</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">array([&#39; Germany&#39;, &#39; New Zealand&#39;, &#39; Sweden&#39;, &#39; USA&#39;, &#39;Australia&#39;,
-</span></span><span class="line"><span class="cl">       &#39;Austria&#39;, &#39;Canada&#39;, &#39;China&#39;, &#39;Finland&#39;, &#39;France&#39;, &#39;Greece&#39;,
-</span></span><span class="line"><span class="cl">       &#39;HongKong&#39;, &#39;Ireland&#39;, &#39;Italy&#39;, &#39;Japan&#39;, &#39;Macau&#39;, &#39;Malaysia&#39;,
-</span></span><span class="line"><span class="cl">       &#39;Mauritius&#39;, &#39;Netherland&#39;, &#39;New Zealand&#39;, &#39;Norway&#39;, &#39;Pakistan&#39;,
-</span></span><span class="line"><span class="cl">       &#39;Portugal&#39;, &#39;Russian Federation&#39;, &#39;Saudi Arabia&#39;, &#39;Scotland&#39;,
-</span></span><span class="line"><span class="cl">       &#39;Singapore&#39;, &#39;South Korea&#39;, &#39;SouthKorea&#39;, &#39;Spain&#39;, &#39;Sweden&#39;,
-</span></span><span class="line"><span class="cl">       &#39;Thailand&#39;, &#39;Turkey&#39;, &#39;UK&#39;, &#39;USA&#39;, &#39;USofA&#39;, &#39;Urbana&#39;, &#39;germany&#39;],
-</span></span><span class="line"><span class="cl">      dtype=object)
-</span></span></code></pre></div><p>We notice that there are some problems with this array of data. For instance, &lsquo;germany&rsquo; and &lsquo;Germany&rsquo;; &lsquo;New Zealand&rsquo; and &rsquo; New Zealand&rsquo;. Firstly, we would convert everything to the lower case and remove the white spaces at the beginning and the end:</p>
+</span></span></code></pre></div><pre tabindex="0"><code>array([&#39; Germany&#39;, &#39; New Zealand&#39;, &#39; Sweden&#39;, &#39; USA&#39;, &#39;Australia&#39;,
+       &#39;Austria&#39;, &#39;Canada&#39;, &#39;China&#39;, &#39;Finland&#39;, &#39;France&#39;, &#39;Greece&#39;,
+       &#39;HongKong&#39;, &#39;Ireland&#39;, &#39;Italy&#39;, &#39;Japan&#39;, &#39;Macau&#39;, &#39;Malaysia&#39;,
+       &#39;Mauritius&#39;, &#39;Netherland&#39;, &#39;New Zealand&#39;, &#39;Norway&#39;, &#39;Pakistan&#39;,
+       &#39;Portugal&#39;, &#39;Russian Federation&#39;, &#39;Saudi Arabia&#39;, &#39;Scotland&#39;,
+       &#39;Singapore&#39;, &#39;South Korea&#39;, &#39;SouthKorea&#39;, &#39;Spain&#39;, &#39;Sweden&#39;,
+       &#39;Thailand&#39;, &#39;Turkey&#39;, &#39;UK&#39;, &#39;USA&#39;, &#39;USofA&#39;, &#39;Urbana&#39;, &#39;germany&#39;],
+      dtype=object)
+</code></pre><p>We notice that there are some problems with this array of data. For instance, &lsquo;germany&rsquo; and &lsquo;Germany&rsquo;; &lsquo;New Zealand&rsquo; and &rsquo; New Zealand&rsquo;. Firstly, we would convert everything to the lower case and remove the white spaces at the beginning and the end:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 </span></span></code></pre></div><p>Next, we want to perform fuzzy matching to correct inconsistent data entry.</p>
@@ -458,31 +458,31 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># sort them alphabetically and then take a closer look</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">array([&#39;australia&#39;, &#39;austria&#39;, &#39;canada&#39;, &#39;china&#39;, &#39;finland&#39;, &#39;france&#39;,
-</span></span><span class="line"><span class="cl">       &#39;germany&#39;, &#39;greece&#39;, &#39;hongkong&#39;, &#39;ireland&#39;, &#39;italy&#39;, &#39;japan&#39;,
-</span></span><span class="line"><span class="cl">       &#39;macau&#39;, &#39;malaysia&#39;, &#39;mauritius&#39;, &#39;netherland&#39;, &#39;new zealand&#39;,
-</span></span><span class="line"><span class="cl">       &#39;norway&#39;, &#39;pakistan&#39;, &#39;portugal&#39;, &#39;russian federation&#39;,
-</span></span><span class="line"><span class="cl">       &#39;saudi arabia&#39;, &#39;scotland&#39;, &#39;singapore&#39;, &#39;south korea&#39;,
-</span></span><span class="line"><span class="cl">       &#39;southkorea&#39;, &#39;spain&#39;, &#39;sweden&#39;, &#39;thailand&#39;, &#39;turkey&#39;, &#39;uk&#39;,
-</span></span><span class="line"><span class="cl">       &#39;urbana&#39;, &#39;usa&#39;, &#39;usofa&#39;], dtype=object)
-</span></span></code></pre></div><p>So what is it about fuzzy matching? Fuzzy matching is the process of automatically finding text strings that are very similar to the target string. In general, a string is considered &ldquo;closer&rdquo; to another one the fewer characters you&rsquo;d need to change if you were transforming one string into another. So &ldquo;apple&rdquo; and &ldquo;snapple&rdquo; are two changes away from each other (add &ldquo;s&rdquo; and &ldquo;n&rdquo;) while &ldquo;in&rdquo; and &ldquo;on&rdquo; and one change away (replace &ldquo;i&rdquo; with &ldquo;o&rdquo;). You won&rsquo;t always be able to rely on fuzzy matching 100%, but it will usually end up saving you at least a little time.</p>
+</span></span></code></pre></div><pre tabindex="0"><code>array([&#39;australia&#39;, &#39;austria&#39;, &#39;canada&#39;, &#39;china&#39;, &#39;finland&#39;, &#39;france&#39;,
+       &#39;germany&#39;, &#39;greece&#39;, &#39;hongkong&#39;, &#39;ireland&#39;, &#39;italy&#39;, &#39;japan&#39;,
+       &#39;macau&#39;, &#39;malaysia&#39;, &#39;mauritius&#39;, &#39;netherland&#39;, &#39;new zealand&#39;,
+       &#39;norway&#39;, &#39;pakistan&#39;, &#39;portugal&#39;, &#39;russian federation&#39;,
+       &#39;saudi arabia&#39;, &#39;scotland&#39;, &#39;singapore&#39;, &#39;south korea&#39;,
+       &#39;southkorea&#39;, &#39;spain&#39;, &#39;sweden&#39;, &#39;thailand&#39;, &#39;turkey&#39;, &#39;uk&#39;,
+       &#39;urbana&#39;, &#39;usa&#39;, &#39;usofa&#39;], dtype=object)
+</code></pre><p>So what is it about fuzzy matching? Fuzzy matching is the process of automatically finding text strings that are very similar to the target string. In general, a string is considered &ldquo;closer&rdquo; to another one the fewer characters you&rsquo;d need to change if you were transforming one string into another. So &ldquo;apple&rdquo; and &ldquo;snapple&rdquo; are two changes away from each other (add &ldquo;s&rdquo; and &ldquo;n&rdquo;) while &ldquo;in&rdquo; and &ldquo;on&rdquo; and one change away (replace &ldquo;i&rdquo; with &ldquo;o&rdquo;). You won&rsquo;t always be able to rely on fuzzy matching 100%, but it will usually end up saving you at least a little time.</p>
 <p>Fuzzywuzzy returns a ratio given two strings. The closer the ratio is to 100, the smaller the edit distance between the two strings. Here, we&rsquo;re going to get the ten strings from our list of cities that have the closest distance to &ldquo;south korea&rdquo;.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># get the top 10 closest matches to &#34;south korea&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="n">matches</span> <span class="o">=</span> <span class="n">fuzzywuzzy</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&#34;south korea&#34;</span><span class="p">,</span> <span class="n">countries</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">scorer</span><span class="o">=</span><span class="n">fuzzywuzzy</span><span class="o">.</span><span class="n">fuzz</span><span class="o">.</span><span class="n">token_sort_ratio</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># take a look at them</span>
 </span></span><span class="line"><span class="cl"><span class="n">matches</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[(&#39;south korea&#39;, 100),
-</span></span><span class="line"><span class="cl"> (&#39;southkorea&#39;, 48),
-</span></span><span class="line"><span class="cl"> (&#39;saudi arabia&#39;, 43),
-</span></span><span class="line"><span class="cl"> (&#39;norway&#39;, 35),
-</span></span><span class="line"><span class="cl"> (&#39;austria&#39;, 33),
-</span></span><span class="line"><span class="cl"> (&#39;ireland&#39;, 33),
-</span></span><span class="line"><span class="cl"> (&#39;pakistan&#39;, 32),
-</span></span><span class="line"><span class="cl"> (&#39;portugal&#39;, 32),
-</span></span><span class="line"><span class="cl"> (&#39;scotland&#39;, 32),
-</span></span><span class="line"><span class="cl"> (&#39;australia&#39;, 30)]
-</span></span></code></pre></div><p>We can see that the first two items appear to be similar. Let&rsquo;s replace all rows in the &lsquo;Country&rsquo; column that have a ratio &gt; 47 with &ldquo;south korea&rdquo;.</p>
+</span></span></code></pre></div><pre tabindex="0"><code>[(&#39;south korea&#39;, 100),
+ (&#39;southkorea&#39;, 48),
+ (&#39;saudi arabia&#39;, 43),
+ (&#39;norway&#39;, 35),
+ (&#39;austria&#39;, 33),
+ (&#39;ireland&#39;, 33),
+ (&#39;pakistan&#39;, 32),
+ (&#39;portugal&#39;, 32),
+ (&#39;scotland&#39;, 32),
+ (&#39;australia&#39;, 30)]
+</code></pre><p>We can see that the first two items appear to be similar. Let&rsquo;s replace all rows in the &lsquo;Country&rsquo; column that have a ratio &gt; 47 with &ldquo;south korea&rdquo;.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># function to replace rows in the provided column of the provided dataframe</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># that match the provided string above the provided ratio with the provided string</span>
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">replace_matches_in_column</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">string_to_match</span><span class="p">,</span> <span class="n">min_ratio</span> <span class="o">=</span> <span class="mi">47</span><span class="p">):</span>
@@ -514,14 +514,14 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># sort them alphabetically and then take a closer look</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">array([&#39;australia&#39;, &#39;austria&#39;, &#39;canada&#39;, &#39;china&#39;, &#39;finland&#39;, &#39;france&#39;,
-</span></span><span class="line"><span class="cl">       &#39;germany&#39;, &#39;greece&#39;, &#39;hongkong&#39;, &#39;ireland&#39;, &#39;italy&#39;, &#39;japan&#39;,
-</span></span><span class="line"><span class="cl">       &#39;macau&#39;, &#39;malaysia&#39;, &#39;mauritius&#39;, &#39;netherland&#39;, &#39;new zealand&#39;,
-</span></span><span class="line"><span class="cl">       &#39;norway&#39;, &#39;pakistan&#39;, &#39;portugal&#39;, &#39;russian federation&#39;,
-</span></span><span class="line"><span class="cl">       &#39;saudi arabia&#39;, &#39;scotland&#39;, &#39;singapore&#39;, &#39;south korea&#39;, &#39;spain&#39;,
-</span></span><span class="line"><span class="cl">       &#39;sweden&#39;, &#39;thailand&#39;, &#39;turkey&#39;, &#39;uk&#39;, &#39;urbana&#39;, &#39;usa&#39;, &#39;usofa&#39;],
-</span></span><span class="line"><span class="cl">      dtype=object)
-</span></span></code></pre></div><p>Now we can see that we only have &ldquo;south korea&rdquo; in the <code>DataFrame</code>!</p>
+</span></span></code></pre></div><pre tabindex="0"><code>array([&#39;australia&#39;, &#39;austria&#39;, &#39;canada&#39;, &#39;china&#39;, &#39;finland&#39;, &#39;france&#39;,
+       &#39;germany&#39;, &#39;greece&#39;, &#39;hongkong&#39;, &#39;ireland&#39;, &#39;italy&#39;, &#39;japan&#39;,
+       &#39;macau&#39;, &#39;malaysia&#39;, &#39;mauritius&#39;, &#39;netherland&#39;, &#39;new zealand&#39;,
+       &#39;norway&#39;, &#39;pakistan&#39;, &#39;portugal&#39;, &#39;russian federation&#39;,
+       &#39;saudi arabia&#39;, &#39;scotland&#39;, &#39;singapore&#39;, &#39;south korea&#39;, &#39;spain&#39;,
+       &#39;sweden&#39;, &#39;thailand&#39;, &#39;turkey&#39;, &#39;uk&#39;, &#39;urbana&#39;, &#39;usa&#39;, &#39;usofa&#39;],
+      dtype=object)
+</code></pre><p>Now we can see that we only have &ldquo;south korea&rdquo; in the <code>DataFrame</code>!</p>
 
 
   </div>

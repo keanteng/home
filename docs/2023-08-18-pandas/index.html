@@ -10,7 +10,7 @@
 <meta name="description" content="My Kaggle Learning Note ">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023-08-18-pandas/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.c331eeb6c8e16b7bf4786d8dccce1d520034a1fd5b9d7ebed906475b119e892a.css" integrity="sha256-wzHutsjha3v0eG2NzM4dUgA0of1bnX6&#43;2QZHWxGeiSo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -285,31 +285,31 @@
 </span></span><span class="line"><span class="cl">    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">| x | y |
-</span></span><span class="line"><span class="cl">|---|---|
-</span></span><span class="line"><span class="cl">| 1 | 3 |
-</span></span><span class="line"><span class="cl">| 2 | 2 |
-</span></span><span class="line"><span class="cl">| 3 | 1 |
-</span></span></code></pre></div><p>In the above code we are defining x and y as the column names, and we assigned values to the column. Now, let&rsquo;s try to put an index or row labels to the <code>DataFrame</code>:</p>
+</span></span></code></pre></div><pre tabindex="0"><code>| x | y |
+|---|---|
+| 1 | 3 |
+| 2 | 2 |
+| 3 | 1 |
+</code></pre><p>In the above code we are defining x and y as the column names, and we assigned values to the column. Now, let&rsquo;s try to put an index or row labels to the <code>DataFrame</code>:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
 </span></span><span class="line"><span class="cl">    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]},</span>
 </span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Row 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 3&#39;</span><span class="p">]</span>    
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|     | x | y |
-</span></span><span class="line"><span class="cl">|-----|---|---|
-</span></span><span class="line"><span class="cl">|Row 1| 1 | 3 |
-</span></span><span class="line"><span class="cl">|Row 2| 2 | 2 |
-</span></span><span class="line"><span class="cl">|Row 3| 3 | 1 |
-</span></span></code></pre></div><p>On the other hand, for Series, it represents a sequence of data values. Just now we have shown that <code>DataFrame</code> is in the form of table, but Series is in the form of a list. Let&rsquo;s try defining one:</p>
+</span></span></code></pre></div><pre tabindex="0"><code>|     | x | y |
+|-----|---|---|
+|Row 1| 1 | 3 |
+|Row 2| 2 | 2 |
+|Row 3| 3 | 1 |
+</code></pre><p>On the other hand, for Series, it represents a sequence of data values. Just now we have shown that <code>DataFrame</code> is in the form of table, but Series is in the form of a list. Let&rsquo;s try defining one:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
 </span></span></code></pre></div><p>We can think of a series as only a single column of a <code>DataFrane</code>. In fact, we can add row label or index to Series too:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Row 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 4&#39;</span><span class="p">],</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;My Series&#34;</span><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|Row 1| 1 |
-</span></span><span class="line"><span class="cl">|Row 2| 2 |
-</span></span><span class="line"><span class="cl">|Row 3| 3 |
-</span></span><span class="line"><span class="cl">Name: Product A
-</span></span></code></pre></div><h3 id="11-reading-data-files">1.1 Reading Data Files<a hidden class="anchor" aria-hidden="true" href="#11-reading-data-files">#</a></h3>
+</span></span></code></pre></div><pre tabindex="0"><code>|Row 1| 1 |
+|Row 2| 2 |
+|Row 3| 3 |
+Name: Product A
+</code></pre><h3 id="11-reading-data-files">1.1 Reading Data Files<a hidden class="anchor" aria-hidden="true" href="#11-reading-data-files">#</a></h3>
 <p>We can use <code>pandas</code> to read <code>.csv</code> file as well, by typing <code>df = pd.read_csv('file.csv')</code>.</p>
 <p>To check how large the <code>DataFrame</code> is:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
@@ -346,12 +346,12 @@
 </span></span></code></pre></div><p>When we compare <code>iloc</code> and <code>loc</code>, <code>iloc</code> seems to be conceptually simpler than <code>loc</code>. This is because we ignore the dataset&rsquo;s indices. Using <code>iloc</code>, dataset is treated like a big matrix, that we index into by position. For <code>loc</code>, we make use of the information in the indices to do its work. Of course, dataset usually comes with indices and this makes <code>loc</code> to be easier to work with.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;regions&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">]]</span> <span class="c1"># display all rows for the column of country, regions and states</span>
 </span></span></code></pre></div><p>So, how do we choose between <code>iloc</code> and <code>loc</code>? For <code>iloc</code>, it uses the Python standard library indexing scheme, where the first element in the range is included, and the last one is excluded. But for <code>loc</code>, it will include both the first and last element. Of course, using <code>iloc</code> can be confusing sometimes. Here&rsquo;s a comparison:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Using loc: 0:10
-</span></span><span class="line"><span class="cl">Output: 0,1,...,10
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Using iloc 0:10
-</span></span><span class="line"><span class="cl">Output: 0,1,...,9
-</span></span></code></pre></div><h3 id="22-manipulation-index">2.2 Manipulation Index<a hidden class="anchor" aria-hidden="true" href="#22-manipulation-index">#</a></h3>
+<pre tabindex="0"><code>Using loc: 0:10
+Output: 0,1,...,10
+
+Using iloc 0:10
+Output: 0,1,...,9
+</code></pre><h3 id="22-manipulation-index">2.2 Manipulation Index<a hidden class="anchor" aria-hidden="true" href="#22-manipulation-index">#</a></h3>
 <p>When using label-based selection, the power of it comes from the labels in the index. We can manipulate index in any way we see fit as well by using <code>set_index()</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&#34;country&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><h3 id="23-conditional-selection">2.3 Conditional Selection<a hidden class="anchor" aria-hidden="true" href="#23-conditional-selection">#</a></h3>
@@ -421,12 +421,12 @@
 <p>A multi-index example:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;province&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="nb">len</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries_reviewed</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">| country |     province     | len |
-</span></span><span class="line"><span class="cl">|---------|------------------|-----|
-</span></span><span class="line"><span class="cl">|Argentina| Mendoza Province | 3264|
-</span></span><span class="line"><span class="cl">|         | Other            | 536 |
-</span></span><span class="line"><span class="cl">|...      | ...              |     |
-</span></span></code></pre></div><p>If we check the type:</p>
+</span></span></code></pre></div><pre tabindex="0"><code>| country |     province     | len |
+|---------|------------------|-----|
+|Argentina| Mendoza Province | 3264|
+|         | Other            | 536 |
+|...      | ...              |     |
+</code></pre><p>If we check the type:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">mi</span> <span class="o">=</span> <span class="n">countries_reviewed</span><span class="o">.</span><span class="n">index</span>
 </span></span><span class="line"><span class="cl"><span class="nb">type</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -434,12 +434,12 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># pandas.core.indexes.multi.MultiIndex</span>
 </span></span></code></pre></div><p>There are a few ways to deal with this tiered structure which are absent for single-level indices. To retrieve a value, we need to provide two levels of labels. For the first method, we can convert the index back to the regular index:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">| | country |     province     | len |
-</span></span><span class="line"><span class="cl">|-|---------|------------------|-----|
-</span></span><span class="line"><span class="cl">|0|Argentina| Mendoza Province | 3264|
-</span></span><span class="line"><span class="cl">|1|Argentina| Other            | 536 |
-</span></span><span class="line"><span class="cl">|2|...      | ...              | ... |
-</span></span></code></pre></div><h3 id="43-sorting">4.3. Sorting<a hidden class="anchor" aria-hidden="true" href="#43-sorting">#</a></h3>
+</span></span></code></pre></div><pre tabindex="0"><code>| | country |     province     | len |
+|-|---------|------------------|-----|
+|0|Argentina| Mendoza Province | 3264|
+|1|Argentina| Other            | 536 |
+|2|...      | ...              | ... |
+</code></pre><h3 id="43-sorting">4.3. Sorting<a hidden class="anchor" aria-hidden="true" href="#43-sorting">#</a></h3>
 <p>Previously, we learned about the grouping function to group data in index order. But what about in value order? Can we order the rows from the grouping result based on values in the data rather than index?</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span> <span class="o">=</span> <span class="n">countries_reviewed</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span><span class="p">)</span>

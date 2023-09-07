@@ -10,7 +10,7 @@
 <meta name="description" content="What Can Earth Engine Tell Us from a Geocoordinate?">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023-08-26-land-cover-elevation-and-slope/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.c331eeb6c8e16b7bf4786d8dccce1d520034a1fd5b9d7ebed906475b119e892a.css" integrity="sha256-wzHutsjha3v0eG2NzM4dUgA0of1bnX6&#43;2QZHWxGeiSo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -248,12 +248,12 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">DEM</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s2">&#34;USGS/SRTMGL1_003&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><p>Let’s say I have already prepared a dataset called regression_data containing all the latitude and longitude for a particular location as follows:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">latitude longtitude
-</span></span><span class="line"><span class="cl">2.234    103.24242
-</span></span><span class="line"><span class="cl">3.435    101.5364
-</span></span><span class="line"><span class="cl">4.345    105.1454
-</span></span><span class="line"><span class="cl">...      ...
-</span></span></code></pre></div><p>I will then convert these coordinates into a point with the format <code>(latitude, longtitude)</code>. Subsequently, all the points will then be converted into features in list order:</p>
+<pre tabindex="0"><code>latitude longtitude
+2.234    103.24242
+3.435    101.5364
+4.345    105.1454
+...      ...
+</code></pre><p>I will then convert these coordinates into a point with the format <code>(latitude, longtitude)</code>. Subsequently, all the points will then be converted into features in list order:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;regression_data.csv&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
@@ -277,11 +277,11 @@
 </span></span></code></pre></div><p>Do note that the data is stored as an Earth Engine object, and we could not view it directly. But here we can use <code>geemap</code> to convert the output into a <code>csv</code> file that contains all the elevation for each of the coordinate:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">geemap</span>
 </span></span><span class="line"><span class="cl"><span class="n">geemap</span><span class="o">.</span><span class="n">ee_to_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;altitude3.csv&#39;</span><span class="p">)</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// output
-</span></span><span class="line"><span class="cl">node1 23
-</span></span><span class="line"><span class="cl">node2 50
-</span></span><span class="line"><span class="cl">node3 0
-</span></span></code></pre></div><h2 id="2-slope">2. Slope<a hidden class="anchor" aria-hidden="true" href="#2-slope">#</a></h2>
+</span></span></code></pre></div><pre tabindex="0"><code>// output
+node1 23
+node2 50
+node3 0
+</code></pre><h2 id="2-slope">2. Slope<a hidden class="anchor" aria-hidden="true" href="#2-slope">#</a></h2>
 <p>Well, how about slope. Slope can be defined as the angle of inclination where it describes the steepness of the ground’s surface, the slope data is also available in the <a href="https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003#description">Shuttle Radar Topography Mission</a> digital elevation data that we used to find elevation data earlier.</p>
 <p>In fact, by just changing the output from elevation to slope:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># extract points from DEM</span>

@@ -10,7 +10,7 @@
 <meta name="description" content="My Kaggle Learning Note ">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023-08-20-feature-engineering/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.c331eeb6c8e16b7bf4786d8dccce1d520034a1fd5b9d7ebed906475b119e892a.css" integrity="sha256-wzHutsjha3v0eG2NzM4dUgA0of1bnX6&#43;2QZHWxGeiSo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -358,16 +358,16 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">mi_scores</span> <span class="o">=</span> <span class="n">make_mi_scores</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">discrete_features</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">mi_scores</span><span class="p">[::</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># show a few features with their MI scores</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curb_weight          1.540126
-</span></span><span class="line"><span class="cl">highway_mpg          0.951700
-</span></span><span class="line"><span class="cl">length               0.621566
-</span></span><span class="line"><span class="cl">fuel_system          0.485085
-</span></span><span class="line"><span class="cl">stroke               0.389321
-</span></span><span class="line"><span class="cl">num_of_cylinders     0.330988
-</span></span><span class="line"><span class="cl">compression_ratio    0.133927
-</span></span><span class="line"><span class="cl">fuel_type            0.048139
-</span></span><span class="line"><span class="cl">Name: MI Scores, dtype: float64
-</span></span></code></pre></div><p>Let&rsquo;s visualize the above output with a bar plot:</p>
+</span></span></code></pre></div><pre tabindex="0"><code>curb_weight          1.540126
+highway_mpg          0.951700
+length               0.621566
+fuel_system          0.485085
+stroke               0.389321
+num_of_cylinders     0.330988
+compression_ratio    0.133927
+fuel_type            0.048139
+Name: MI Scores, dtype: float64
+</code></pre><p>Let&rsquo;s visualize the above output with a bar plot:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">plot_mi_scores</span><span class="p">(</span><span class="n">scores</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="n">width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
@@ -425,9 +425,9 @@
 </span></span><span class="line"><span class="cl"><span class="n">concrete</span><span class="p">[</span><span class="n">components</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&#34;Components&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </span></span></code></pre></div><h3 id="32-building-up--breaking-down-features">3.2 Building-Up &amp; Breaking Down Features<a hidden class="anchor" aria-hidden="true" href="#32-building-up--breaking-down-features">#</a></h3>
 <p>Often you&rsquo;ll have complex strings that can usefully be broken into simpler pieces. Some common examples:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ID numbers: &#39;123-45-6789&#39;
-</span></span><span class="line"><span class="cl">Phone numbers: &#39;(999) 555-0123&#39;
-</span></span></code></pre></div><p>Features like these will often have some kind of structure that you can make use of. US phone numbers, for instance, have an area code (the &lsquo;(999)&rsquo; part) that tells you the location of the caller</p>
+<pre tabindex="0"><code>ID numbers: &#39;123-45-6789&#39;
+Phone numbers: &#39;(999) 555-0123&#39;
+</code></pre><p>Features like these will often have some kind of structure that you can make use of. US phone numbers, for instance, have an area code (the &lsquo;(999)&rsquo; part) that tells you the location of the caller</p>
 <p><code>str</code> accessor lets you apply string methods like split directly to columns. The Customer Lifetime Value dataset contains features describing customers of an insurance company. From the Policy feature, we could separate the Type from the Level of coverage:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">customer</span><span class="p">[[</span><span class="s2">&#34;Type&#34;</span><span class="p">,</span> <span class="s2">&#34;Level&#34;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>  <span class="c1"># Create two new features</span>
 </span></span><span class="line"><span class="cl">    <span class="n">customer</span><span class="p">[</span><span class="s2">&#34;Policy&#34;</span><span class="p">]</span>           <span class="c1"># from the Policy feature</span>
@@ -527,9 +527,9 @@
 <center><img src="a14.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i></i></p>
 <p>In fact these new features are actually just linear combinations of the original features:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">df[&#34;Size&#34;] = 0.707 * X[&#34;Height&#34;] + 0.707 * X[&#34;Diameter&#34;]
-</span></span><span class="line"><span class="cl">df[&#34;Shape&#34;] = 0.707 * X[&#34;Height&#34;] - 0.707 * X[&#34;Diameter&#34;]
-</span></span></code></pre></div><p>The size and shape features are known as the principal components of the data. The weights are called loadings. There will be as many principal components as there are features in the original dataset: if we had used ten features instead of two, we would have ended up with ten components.</p>
+<pre tabindex="0"><code>df[&#34;Size&#34;] = 0.707 * X[&#34;Height&#34;] + 0.707 * X[&#34;Diameter&#34;]
+df[&#34;Shape&#34;] = 0.707 * X[&#34;Height&#34;] - 0.707 * X[&#34;Diameter&#34;]
+</code></pre><p>The size and shape features are known as the principal components of the data. The weights are called loadings. There will be as many principal components as there are features in the original dataset: if we had used ten features instead of two, we would have ended up with ten components.</p>
 <p>Moreover, PCA also tells us the amount of variation in each component:</p>
 <center><img src="a15.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i></i></p>
@@ -572,12 +572,12 @@
 </span></span><span class="line"><span class="cl">    <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>  <span class="c1"># and the rows are the original features</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">loadings</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">	         PC1	        PC2	        PC3	        PC4
-</span></span><span class="line"><span class="cl">highway_mpg	 -0.492347	0.770892	0.070142	-0.397996
-</span></span><span class="line"><span class="cl">engine_size	 0.503859	0.626709	0.019960	0.594107
-</span></span><span class="line"><span class="cl">horsepower	 0.500448	0.013788	0.731093	-0.463534
-</span></span><span class="line"><span class="cl">curb_weight	 0.503262	0.113008	-0.678369	-0.523232
-</span></span></code></pre></div><p>Recall that the signs and magnitudes of a component&rsquo;s loadings tell us what kind of variation it&rsquo;s captured. The first component (PC1) shows a contrast between large, powerful vehicles with poor gas milage, and smaller, more economical vehicles with good gas milage. We might call this the &ldquo;Luxury/Economy&rdquo; axis. The next figure shows that our four chosen features mostly vary along the Luxury/Economy axis.</p>
+</span></span></code></pre></div><pre tabindex="0"><code>	         PC1	        PC2	        PC3	        PC4
+highway_mpg	 -0.492347	0.770892	0.070142	-0.397996
+engine_size	 0.503859	0.626709	0.019960	0.594107
+horsepower	 0.500448	0.013788	0.731093	-0.463534
+curb_weight	 0.503262	0.113008	-0.678369	-0.523232
+</code></pre><p>Recall that the signs and magnitudes of a component&rsquo;s loadings tell us what kind of variation it&rsquo;s captured. The first component (PC1) shows a contrast between large, powerful vehicles with poor gas milage, and smaller, more economical vehicles with good gas milage. We might call this the &ldquo;Luxury/Economy&rdquo; axis. The next figure shows that our four chosen features mostly vary along the Luxury/Economy axis.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Look at explained variance</span>
 </span></span><span class="line"><span class="cl"><span class="n">plot_variance</span><span class="p">(</span><span class="n">pca</span><span class="p">);</span>
 </span></span></code></pre></div><center><img src="a16.png"  class = "center"/></center>
@@ -585,24 +585,24 @@
 <p>Let&rsquo;s check the MI score of the components.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">mi_scores</span> <span class="o">=</span> <span class="n">make_mi_scores</span><span class="p">(</span><span class="n">X_pca</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">discrete_features</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">mi_scores</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PC1    1.013264
-</span></span><span class="line"><span class="cl">PC2    0.379156
-</span></span><span class="line"><span class="cl">PC3    0.306703
-</span></span><span class="line"><span class="cl">PC4    0.203329
-</span></span><span class="line"><span class="cl">Name: MI Scores, dtype: float64
-</span></span></code></pre></div><p>PC1 is highly informative, though the remaining components, despite their small variance, still have a significant relationship with price. Examining those components could be worthwhile to find relationships not captured by the main Luxury/Economy axis.</p>
+</span></span></code></pre></div><pre tabindex="0"><code>PC1    1.013264
+PC2    0.379156
+PC3    0.306703
+PC4    0.203329
+Name: MI Scores, dtype: float64
+</code></pre><p>PC1 is highly informative, though the remaining components, despite their small variance, still have a significant relationship with price. Examining those components could be worthwhile to find relationships not captured by the main Luxury/Economy axis.</p>
 <p>PC3 shows a contrast between horsepower and curb_weight &ndash; sports cars vs. wagons, it seems.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Show dataframe sorted by PC3</span>
 </span></span><span class="line"><span class="cl"><span class="n">idx</span> <span class="o">=</span> <span class="n">X_pca</span><span class="p">[</span><span class="s2">&#34;PC3&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
 </span></span><span class="line"><span class="cl"><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;make&#34;</span><span class="p">,</span> <span class="s2">&#34;body_style&#34;</span><span class="p">,</span> <span class="s2">&#34;horsepower&#34;</span><span class="p">,</span> <span class="s2">&#34;curb_weight&#34;</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">cols</span><span class="p">]</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    make	body_style	horsepower	curb_weight
-</span></span><span class="line"><span class="cl">118	porsche	hardtop	    207	        2756
-</span></span><span class="line"><span class="cl">117	porsche	hardtop	    207	        2756
-</span></span><span class="line"><span class="cl">119	porsche	convertible	207	        2800
-</span></span><span class="line"><span class="cl">45	jaguar	sedan	    262	        3950
-</span></span><span class="line"><span class="cl">96	nissan	hatchback	200	        3139
-</span></span></code></pre></div><p>We will create a new ratio features from this:</p>
+</span></span></code></pre></div><pre tabindex="0"><code>    make	body_style	horsepower	curb_weight
+118	porsche	hardtop	    207	        2756
+117	porsche	hardtop	    207	        2756
+119	porsche	convertible	207	        2800
+45	jaguar	sedan	    262	        3950
+96	nissan	hatchback	200	        3139
+</code></pre><p>We will create a new ratio features from this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s2">&#34;sports_or_wagon&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">curb_weight</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">horsepower</span>
 </span></span><span class="line"><span class="cl"><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&#34;sports_or_wagon&#34;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
 </span></span></code></pre></div><center><img src="a17.png"  class = "center"/></center>
@@ -616,10 +616,10 @@
 <p>Target encoding for the above example presents a couple of problems, however. First are unknown categories. Target encodings create a special risk of overfitting, which means they need to be trained on an independent &ldquo;encoding&rdquo; split. When you join the encoding to future splits, Pandas will fill in missing values for any categories not present in the encoding split. These missing values you would have to impute somehow.</p>
 <p>Moreover, for rare categories. When a category only occurs a few times in the dataset, any statistics calculated on its group are unlikely to be very accurate. In the Automobiles dataset, the mercury make only occurs once. The &ldquo;mean&rdquo; price we calculated is just the price of that one vehicle, which might not be very representative of any Mercuries we might see in the future. Target encoding rare categories can make overfitting more likely.</p>
 <p>To avoid the above issues, we need to apply smoothing. That is, to blend in-category average with the overall average.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">encoding = weight * in_category + (1 - weight) * overall
-</span></span></code></pre></div><p>So how do we compute for the weight? We can do it by computing the m-estimate.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">weight = n / (n + m)
-</span></span></code></pre></div><p><code>n</code> is the total number of times that category occurs in the data. The parameter m determines the &ldquo;smoothing factor&rdquo;. Larger values of m put more weight on the overall estimate.</p>
+<pre tabindex="0"><code>encoding = weight * in_category + (1 - weight) * overall
+</code></pre><p>So how do we compute for the weight? We can do it by computing the m-estimate.</p>
+<pre tabindex="0"><code>weight = n / (n + m)
+</code></pre><p><code>n</code> is the total number of times that category occurs in the data. The parameter m determines the &ldquo;smoothing factor&rdquo;. Larger values of m put more weight on the overall estimate.</p>
 <center><img src="a18.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i></i></p>
 <p>Let&rsquo;s say in the Automobile dataset and there are 3 cars with the make of <code>chevrolet</code>. For m = 2, <code>chevrolet</code> category would be encoded with 60% of the average Chevrelot price and 40% of the overall average price.</p>
