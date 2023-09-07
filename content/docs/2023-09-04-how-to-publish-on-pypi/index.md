@@ -150,7 +150,8 @@ For License file, you just need to copy and paste the license content where you 
 It's time to publish your package. On Windows terminal type:
 
 ```py
-py -m setup.py sdist
+pip install --user --upgrade setuptools wheel
+python3 setup.py sdist bdist_wheel
 ```
 
 Then you need to install `twine`, a Python package for you to upload the package:
@@ -174,6 +175,12 @@ Then you can type your username and password like this and hit Enter:
 ```
 username: __token__
 password: PASTETOKENHERE
+```
+
+If you face error, you can also try this:
+
+```
+py -m twine upload -u USERNAME -p PASSWORD dist/*
 ```
 
 Congrats, and now your package is uploaded to [Pypi](https://pypi.org/) and you can view it there.

@@ -3,10 +3,18 @@
 }
 
 .post-content pre code {
+    display: block;
+    margin: auto 0;
     padding: 20px !important;
-    background: #F9F9F9 !important;
+    background: #F1F3F4 !important;
     color: rgb(0, 0, 0);
+    overflow-x: auto;
     
+}
+
+.post-content .highlight pre {
+    background-color: var(--theme) !important;
+    margin: 0;
 }
 
 /* Background */ .bg { background-color: #ffffff; }
