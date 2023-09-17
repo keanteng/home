@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Python", "Automate", "Reporting", "Automation"]
 weight: 5
-summary: ""
+summary: "Reporting is a crucial aspect of various sectors across industries to ensure transparency, compliance, decision-making, and accountability. "
 ---
 
 <center><img src="https://images.unsplash.com/photo-1609705024702-abb9b26a0bae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"  class = "center"/></center>
@@ -19,6 +19,12 @@ summary: ""
 Reporting is a crucial aspect of various sectors across industries to ensure transparency, compliance, decision-making, and accountability. It helps in decision-making to build trust, manage risk and informed decision. Generally, workflows for reporting involves gathering raw data, cleaning of raw data and compiling raw data into their respective template using Microsoft Excel. This can be a repetitive and routine tasks in large organization which is time-consuming and mistake-prone when dealing with large number of raw data during these processes due to human errors.
 
 `blueautomata` is a Python package built to provide a framework to automate the workflow for reporting in a company. Such framework allows you to automate the data cleaning, data compilation and data preparation in reportable format on Excel by auto-calling written macros processes. 
+
+The package can be installed by writing:
+
+```py
+pip install blueautomata
+```
 
 ## 1. A Case Study
 
