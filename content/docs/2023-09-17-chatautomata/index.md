@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Python", "Streamlit", "Automation"]
 weight: 5
-summary: ""
+summary: "In this article, I provide example to integrate the package into application, preferably a Chatbot as an agent as we are seeing user-agent interaction is starting to redefine how do we work today in industry. The usage of Chatbot is helping us to perform routine tasks more quickly so that more time can be spent on something more productive and meaningful."
 ---
 
 <center><img src="https://images.unsplash.com/photo-1692607431259-951c39946cbf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"  class = "center"/></center>
