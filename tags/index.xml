@@ -10,31 +10,49 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 07 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Automate</title>
-      <link>https://keanteng.github.io/home/tags/automate/</link>
-      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/automate/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Automation</title>
       <link>https://keanteng.github.io/home/tags/automation/</link>
-      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/automation/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Logistic Regression</title>
+      <link>https://keanteng.github.io/home/tags/logistic-regression/</link>
+      <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/logistic-regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Streamlit</title>
+      <link>https://keanteng.github.io/home/tags/streamlit/</link>
+      <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Automate</title>
+      <link>https://keanteng.github.io/home/tags/automate/</link>
+      <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/automate/</guid>
       <description></description>
     </item>
     
@@ -233,15 +251,6 @@
       <pubDate>Sun, 13 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/selenium/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Streamlit</title>
-      <link>https://keanteng.github.io/home/tags/streamlit/</link>
-      <pubDate>Sun, 13 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/streamlit/</guid>
       <description></description>
     </item>
     
