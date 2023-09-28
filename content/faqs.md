@@ -1,6 +1,7 @@
 ---
 title: "FAQs" # in any language you want
 url: "/faqs"
+description: "Some Common Questions"
 ---
 
 1. **Where can I check on the raw code that this site used to set up?**

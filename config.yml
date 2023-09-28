@@ -31,14 +31,15 @@ languages:
                   weight: 5
                 - name: Search
                   url: search/
-                  weight: 10
+                  weight: 6
                 - name: Tags
                   url: tags/
-                  weight: 10
+                  weight: 7
+                - name: Projects
+                  url: projects/
+                  weight: 8
                 - name: FAQs
                   url: faqs/
-                - name: LinkedIn
-                  url: https://my.linkedin.com/in/khorkeanteng
 
 outputs:
     home:
