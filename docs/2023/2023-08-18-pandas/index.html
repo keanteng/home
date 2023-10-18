@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Pandas | Kean Teng Blog</title>
+<meta name="keywords" content="Pandas, Data Frame, Python">
+<meta name="description" content="My Kaggle Learning Note ">
+<meta name="author" content="Kean Teng Blog">
+<link rel="canonical" href="https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://keanteng.github.io/home/apple-touch-icon.png">
+<link rel="mask-icon" href="https://keanteng.github.io/home/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Pandas" />
+<meta property="og:description" content="My Kaggle Learning Note " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-08-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-18T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Pandas"/>
+<meta name="twitter:description" content="My Kaggle Learning Note "/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Docs",
+      "item": "https://keanteng.github.io/home/docs/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Pandas",
+      "item": "https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Pandas",
+  "name": "Pandas",
+  "description": "My Kaggle Learning Note ",
+  "keywords": [
+    "Pandas", "Data Frame", "Python"
+  ],
+  "articleBody": " Images from Unsplash\nDisclaimer: This article is my learning note from the courses I took from Kaggle.\nIn this course, we will explore on the Python pandas module which is a popular library for data analysis. With pandas, we can use it to create data and also work or manipulate the existing data.\n1. Introduction pandas has two core objects known as DataFrame and Series. A DataFrame is a table where it consists of individual entries in the form of an array. Each entry corresponds to a row and a column. For example:\nLet us define a DataFrame, we can also write string in the DataFrame:\nimport pandas as pd pd.DataFrame({ 'x': [1,2,3], 'y': [3,2,1], }) | x | y | |---|---| | 1 | 3 | | 2 | 2 | | 3 | 1 | In the above code we are defining x and y as the column names, and we assigned values to the column. Now, let’s try to put an index or row labels to the DataFrame:\npd.DataFrame({ 'x': [1,2,3], 'y': [3,2,1]}, index = ['Row 1', 'Row 2', 'Row 3'] ) | | x | y | |-----|---|---| |Row 1| 1 | 3 | |Row 2| 2 | 2 | |Row 3| 3 | 1 | On the other hand, for Series, it represents a sequence of data values. Just now we have shown that DataFrame is in the form of table, but Series is in the form of a list. Let’s try defining one:\npd.Series([1,2,3,4]) We can think of a series as only a single column of a DataFrane. In fact, we can add row label or index to Series too:\npd.Series([1,2,3,4], index = ['Row 1', 'Row 2', 'Row 3', 'Row 4'], name = \"My Series\") |Row 1| 1 | |Row 2| 2 | |Row 3| 3 | Name: Product A 1.1 Reading Data Files We can use pandas to read .csv file as well, by typing df = pd.read_csv('file.csv').\nTo check how large the DataFrame is:\ndf.shape() Here’s how we can take a preview of the first five rows of the DataFrame:\ndf.head() # try df.head(10) for first 10 rows You might be wondering, can we display only the last five rows? Of course:\ndf.tail() 2. Indexing, Selecting \u0026 Assigning We have learned how to create a Series and a DataFrame. Now let’s look at how do we select specific value in the DataFrame in a quick and effective manner.\nLet’s say we have a DataFrame called df with the following column names: country, points, price, province, state and so on. If we would like to only see the country column, we could access the column by doing this:\ndf.country # or alternatively df['country'] Notice two approaches are provided above. Neither of them is more or less syntactically valid than the other. But let’s say we have a column name My House, we just could not write df.My House, it wouldn’t work.\nIf we want to know the first item in the country column, we can use the indexing operator to drill down to a single specific value:\ndf['country'][0] 2.1 Indexing in Pandas In pandas, indexing works in one of two paradigms. We will start with the first one, the index-based selection where data is selected based on its numerical position in the data. To select the first row of a data:\ndf.iloc[0] For the loc and iloc function, row will come first then column.\ndf.iloc[:,0] # display all row of first column The : operator means everything. We can use it to indicate the range of values that we are interested in:\ndf.iloc[:3, 0] # first three rows of the first column (index 3 or fourth row excluded) df.iloc[1:3, 0] # second and third rows of the first column # alternatively df.iloc[[1,2], 0] Interestingly, we can also use negative number to select data items. For negative number, it will start counting from the end of the values:\ndf.iloc[-5:] # get the last five rows for all columns Furthermore, a second paradigm for attribute selection is done by using the loc operator, called as label-based selection. For this approach, it is the data index value, rather than the position that matters.\ndf.loc[0, 'country'] # first item in the country column When we compare iloc and loc, iloc seems to be conceptually simpler than loc. This is because we ignore the dataset’s indices. Using iloc, dataset is treated like a big matrix, that we index into by position. For loc, we make use of the information in the indices to do its work. Of course, dataset usually comes with indices and this makes loc to be easier to work with.\ndf.loc[:, ['country', 'regions', 'states']] # display all rows for the column of country, regions and states So, how do we choose between iloc and loc? For iloc, it uses the Python standard library indexing scheme, where the first element in the range is included, and the last one is excluded. But for loc, it will include both the first and last element. Of course, using iloc can be confusing sometimes. Here’s a comparison:\nUsing loc: 0:10 Output: 0,1,...,10 Using iloc 0:10 Output: 0,1,...,9 2.2 Manipulation Index When using label-based selection, the power of it comes from the labels in the index. We can manipulate index in any way we see fit as well by using set_index()\ndf.set_index(\"country\") 2.3 Conditional Selection In order to do some interesting things with our dataset, we often need to ask questions based on certain conditions. Suppose that we want to know the better-than-average wine produced in Sweden, we can start by checking whether the wine is from Sweden or not:\nwine.country == 'Sweden' # alternatively wine.loc[wine.country == 'Sweden'] Now we would like to add an extra condition. We want the wine review to also be at least 90 points:\nwine.loc[(wine.country == 'Sweden') \u0026 (wine.points \u003e= 90)] If we would like to know whether a wine is from Sweden or a wine is rated above average:\nwine.loc[(wine.country == 'Sweden') | (wine.points \u003e= 90)] What if we want to know whether a wine is produced in Sweden or Italy?\nwine.loc[wine.country.isin(['Sweden', 'Italy'])] We notice that for the wine data produced in Sweden or Italy, there are some rows where the points given is empty, we would like to filter them out:\nwine.loc[wine.points.notnull()] # to check for the null rows wine.loc[wine.points.isnull()] 2.4 Assigning Data Now let’s look at the method to assign data to a DataFrame:\nwine['critic'] = everyone # assingning a constant to the column named critic wine['index_reverse'] = range(len('country'),0,-1) 3. Summary Functions \u0026 Maps In the previous section, we learned about selecting relevant data from a DataFrame and a Series. However, data does not always come out in the format that we want, and often we would want to do some more works to reformat the data at hand. For starter, we could use the describe function to generate a high-level summary of the attributes of the given column:\nwine.describe() We can select the column that we want to know the summary:\nwinde.critic.describe() Notice that for numerical column, the describe function is telling use about the name, the maximum and the minimum value and a few other information. If we only want to know, says, the mean or the unique labels in a column, we could:\nwine.points.mean() wine.critic.unique() Let’s say we want to know for a list of unique value, how frequent they occur in the dataset:\nwine.critic.value_counts() 3.1 Maps Map is a mathematical term where it describes that a function takes one set of values and maps them to another set of value. Oftentimes, we have to create new representations from existing data or perform transformation to the data. Maps are extremely important to help us to achieve our works.\nAn example where we remean the scores the wines received to 0:\nwine_points_mean = wine.points.mean() wine_points_mean.map(lambda p : p - wine_points_mean) # alternative wine_points_mean = wine.points.mean() wine.points - wine_points_mean In the function above, map() expects a single value from the Series and return a transformed version of that value. A new series with all the transformed values will be returned by map().\nOn the other hand, we can use apply() which is also an equivalent method. Now we want to transform the whole DataFrame by calling a function on each row:\ndef remean(row): row.points = row.points - wine_points_mean return row wine.apply(remean, axis = 'columns') If we set the axis = index, then we would need to give a function to transform each column rather than each row.\nmap and apply do not modify the original data they’re call on. They return new, transformed series and DataFrame respectively.\nPandas understand what we do when we perform operations between Series of equal length. These operations are faster than using map or apply. Of course, we can use these functions with more advanced case like conditional logic.\nwine.country + \" - \" + wine_region 4. Grouping \u0026 Sorting 4.1 Groupwise Analysis In previous section, we learned about value_counts() to count for the unique labels’ occurrences. Here’s an alternative:\nwine.groupby('points').points.count() This groupby function creates a group of reviews which allotted the same point values to the given wine. Then from these groups, we select the points column and count how many times they appear. For example, we want to get the cheapest wine in each point value category:\nwine.groupby('points').price.min() We can think of each group as a slice of our DataFrame with only data with values that match. This DataFrane is accessible to use directly using apply, and we can manipulate the data. If we want to select the name of the first wine reviewed from each winery:\nwine.groupby('winery').apply(lambda df : df.title.iloc[0]) We can also group more than one column. Let’s say we want to pick out the best wine by country and province:\nwine.groupby(['country', 'province']).apply(lambda x : x.loc[x.points.idmax()]) Furthermore, if we want to run a bunch of different functions on the DataFrame at once, we can generate a simple statistical summary of the dataset with agg:\nwine.groupby(['country']).price.agg([len, min, max]) 4.2 Multi-indexes A multi-index example:\ncountries_reviewed = wine.groupby(['country', 'province']).description.agg([len]) countries_reviewed | country | province | len | |---------|------------------|-----| |Argentina| Mendoza Province | 3264| | | Other | 536 | |... | ... | | If we check the type:\nmi = countries_reviewed.index type(mi) # output # pandas.core.indexes.multi.MultiIndex There are a few ways to deal with this tiered structure which are absent for single-level indices. To retrieve a value, we need to provide two levels of labels. For the first method, we can convert the index back to the regular index:\ncountries_reviewed.reset_index() | | country | province | len | |-|---------|------------------|-----| |0|Argentina| Mendoza Province | 3264| |1|Argentina| Other | 536 | |2|... | ... | ... | 4.3. Sorting Previously, we learned about the grouping function to group data in index order. But what about in value order? Can we order the rows from the grouping result based on values in the data rather than index?\ncountries_reviewed = countries_reviewed.reset_index() countries_reviewed.sort_values(by = 'len') By default, the sorting will be in ascending order, we can change that by changing the ascending parameter:\ncountries_reviewed.sort_values(by = 'len', ascending = False) Moreover, if we just want to sort by index values, simply leave the by parameter blank:\ncountries_reviewed.sort_values() Of course, we could sort more than one column at a time:\ncountries_reviewed.sort_values(by = ['country', 'len']) 5. Data Types \u0026 Missing Values In this section, we will explore how to investigate data types within a DataFrame and how to replace entries in it.\nwine.price.dtype() # for the specified column wine.dtype() # for all columns dtype function tells us how pandas store the data internally such as float64 or int64. We can convert a column from one type to the other too:\nwine.points.astype('float64') 5.1 Missing Value In a dataset, we might see values being given as NaN or “not a number”. Using Pandas, we can check for the missing data in a DataFrame:\nwine[pd.isnull(wine.country)] To replace the missing value in data, we can use the fillna() function:\nwine.region.fllna(\"Unknown\") If we want to replace value, here’s what we can do:\nwine.twitter_handle.replace(\"@x\", \"@abc\") 6. Renaming \u0026 Combining rename is a function to let you change index names or column names:\nwine.rename(column = {'point': 'score'}) This function allows us to rename index or column by specifying an index or a column keyword parameter:\nwine.rename(index = {0: 'first', 1: 'second'}) Of course, we could give name to a row index and the column index as well:\nwine.rename_axis('wines', axis = 'rows').rename_axis('fields', axis = 'columns') 6.1 Combining The simplest combination method in Pandas is concat. This function is useful when we have data in different DataFrame but having the same columns:\npd.concat([can_yt, bri_yt]) Moreover, for join, it will combine different DataFrame which have an index in common:\nleft = canadian_youtube.set_index(['title', 'trending_date']) right = british_youtube.set_index(['title', 'trending_date']) left.join(right, lsuffix='_CAN', rsuffix='_UK') For the above example, the lsuffix and rsuffix parameter is necessary because the data has the same columns names in both of the datasets. If it is not, then we could just ignore that.\n",
+  "wordCount" : "2162",
+  "inLanguage": "en",
+  "datePublished": "2023-08-18T00:00:00Z",
+  "dateModified": "2023-08-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kean Teng Blog"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kean Teng Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://i.postimg.cc/0Qq5g2fX/favicon.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/faqs/" title="FAQs">
+                    <span>FAQs</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://keanteng.github.io/home/">Home</a>&nbsp;»&nbsp;<a href="https://keanteng.github.io/home/docs/">Docs</a></div>
+    <h1 class="post-title">
+      Pandas
+    </h1>
+    <div class="post-description">
+      My Kaggle Learning Note 
+    </div>
+    <div class="post-meta"><span title='2023-08-18 00:00:00 +0000 UTC'>August 18, 2023</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Kean Teng Blog
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-introduction" aria-label="1. Introduction">1. Introduction</a><ul>
+                        
+                <li>
+                    <a href="#11-reading-data-files" aria-label="1.1 Reading Data Files">1.1 Reading Data Files</a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-indexing-selecting--assigning" aria-label="2. Indexing, Selecting &amp;amp; Assigning">2. Indexing, Selecting &amp; Assigning</a><ul>
+                        
+                <li>
+                    <a href="#21-indexing-in-pandas" aria-label="2.1 Indexing in Pandas">2.1 Indexing in Pandas</a></li>
+                <li>
+                    <a href="#22-manipulation-index" aria-label="2.2 Manipulation Index">2.2 Manipulation Index</a></li>
+                <li>
+                    <a href="#23-conditional-selection" aria-label="2.3 Conditional Selection">2.3 Conditional Selection</a></li>
+                <li>
+                    <a href="#24-assigning-data" aria-label="2.4 Assigning Data">2.4 Assigning Data</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-summary-functions--maps" aria-label="3. Summary Functions &amp;amp; Maps">3. Summary Functions &amp; Maps</a><ul>
+                        
+                <li>
+                    <a href="#31-maps" aria-label="3.1 Maps">3.1 Maps</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-grouping--sorting" aria-label="4. Grouping &amp;amp; Sorting">4. Grouping &amp; Sorting</a><ul>
+                        
+                <li>
+                    <a href="#41-groupwise-analysis" aria-label="4.1 Groupwise Analysis">4.1 Groupwise Analysis</a></li>
+                <li>
+                    <a href="#42-multi-indexes" aria-label="4.2 Multi-indexes">4.2 Multi-indexes</a></li>
+                <li>
+                    <a href="#43-sorting" aria-label="4.3. Sorting">4.3. Sorting</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-data-types--missing-values" aria-label="5. Data Types &amp;amp; Missing Values">5. Data Types &amp; Missing Values</a><ul>
+                        
+                <li>
+                    <a href="#51-missing-value" aria-label="5.1 Missing Value">5.1 Missing Value</a></li></ul>
+                </li>
+                <li>
+                    <a href="#6-renaming--combining" aria-label="6. Renaming &amp;amp; Combining">6. Renaming &amp; Combining</a><ul>
+                        
+                <li>
+                    <a href="#61-combining" aria-label="6.1 Combining">6.1 Combining</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><center><img src="https://images.unsplash.com/32/Mc8kW4x9Q3aRR3RkP5Im_IMG_4417.jpg?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Images from Unsplash</i></p>
+<blockquote>
+<p><em>Disclaimer: This article is my learning note from the courses I took from Kaggle.</em></p>
+</blockquote>
+<p>In this course, we will explore on the Python <code>pandas</code> module which is a popular library for data analysis. With <code>pandas</code>, we can use it to create data and also work or manipulate the existing data.</p>
+<h2 id="1-introduction">1. Introduction<a hidden class="anchor" aria-hidden="true" href="#1-introduction">#</a></h2>
+<p><code>pandas</code> has two core objects known as <code>DataFrame</code> and Series. A <code>DataFrame</code> is a table where it consists of individual entries in the form of an array. Each entry corresponds to a row and a column. For example:</p>
+<p>Let us define a <code>DataFrame</code>, we can also write string in the <code>DataFrame</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><pre tabindex="0"><code>| x | y |
+|---|---|
+| 1 | 3 |
+| 2 | 2 |
+| 3 | 1 |
+</code></pre><p>In the above code we are defining x and y as the column names, and we assigned values to the column. Now, let&rsquo;s try to put an index or row labels to the <code>DataFrame</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Row 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 3&#39;</span><span class="p">]</span>    
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>|     | x | y |
+|-----|---|---|
+|Row 1| 1 | 3 |
+|Row 2| 2 | 2 |
+|Row 3| 3 | 1 |
+</code></pre><p>On the other hand, for Series, it represents a sequence of data values. Just now we have shown that <code>DataFrame</code> is in the form of table, but Series is in the form of a list. Let&rsquo;s try defining one:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</span></span></code></pre></div><p>We can think of a series as only a single column of a <code>DataFrane</code>. In fact, we can add row label or index to Series too:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Row 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Row 4&#39;</span><span class="p">],</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;My Series&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>|Row 1| 1 |
+|Row 2| 2 |
+|Row 3| 3 |
+Name: Product A
+</code></pre><h3 id="11-reading-data-files">1.1 Reading Data Files<a hidden class="anchor" aria-hidden="true" href="#11-reading-data-files">#</a></h3>
+<p>We can use <code>pandas</code> to read <code>.csv</code> file as well, by typing <code>df = pd.read_csv('file.csv')</code>.</p>
+<p>To check how large the <code>DataFrame</code> is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
+</span></span></code></pre></div><p>Here&rsquo;s how we can take a preview of the first five rows of the <code>DataFrame</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># try df.head(10) for first 10 rows</span>
+</span></span></code></pre></div><p>You might be wondering, can we display only the last five rows? Of course:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</span></span></code></pre></div><h2 id="2-indexing-selecting--assigning">2. Indexing, Selecting &amp; Assigning<a hidden class="anchor" aria-hidden="true" href="#2-indexing-selecting--assigning">#</a></h2>
+<p>We have learned how to create a Series and a <code>DataFrame</code>. Now let&rsquo;s look at how do we select specific value in the <code>DataFrame</code> in a quick and effective manner.</p>
+<p>Let&rsquo;s say we have a <code>DataFrame</code> called <code>df</code> with the following column names: country, points, price, province, state and so on. If we would like to only see the country column, we could access the column by doing this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">country</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># or alternatively</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span>
+</span></span></code></pre></div><p>Notice two approaches are provided above. Neither of them is more or less syntactically valid than the other. But let&rsquo;s say we have a column name <code>My House</code>, we just could not write <code>df.My House</code>, it wouldn&rsquo;t work.</p>
+<p>If we want to know the first item in the country column, we can use the indexing operator to drill down to a single specific value:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></div><h3 id="21-indexing-in-pandas">2.1 Indexing in Pandas<a hidden class="anchor" aria-hidden="true" href="#21-indexing-in-pandas">#</a></h3>
+<p>In <code>pandas</code>, indexing works in one of two paradigms. We will start with the first one, the index-based selection where data is selected based on its numerical position in the data. To select the first row of a data:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></div><p>For the <code>loc</code> and <code>iloc</code> function, row will come first then column.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># display all row of first column</span>
+</span></span></code></pre></div><p>The <code>:</code> operator means everything. We can use it to indicate the range of values that we are interested in:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># first three rows of the first column (index 3 or fourth row excluded)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># second and third rows of the first column</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># alternatively</span>
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></div><p>Interestingly, we can also use negative number to select data items. For negative number, it will start counting from the end of the values:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span> <span class="c1"># get the last five rows for all columns</span>
+</span></span></code></pre></div><p>Furthermore, a second paradigm for attribute selection is done by using the <code>loc</code> operator, called as label-based selection. For this approach, it is the data index value, rather than the position that matters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="c1"># first item in the country column</span>
+</span></span></code></pre></div><p>When we compare <code>iloc</code> and <code>loc</code>, <code>iloc</code> seems to be conceptually simpler than <code>loc</code>. This is because we ignore the dataset&rsquo;s indices. Using <code>iloc</code>, dataset is treated like a big matrix, that we index into by position. For <code>loc</code>, we make use of the information in the indices to do its work. Of course, dataset usually comes with indices and this makes <code>loc</code> to be easier to work with.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;regions&#39;</span><span class="p">,</span> <span class="s1">&#39;states&#39;</span><span class="p">]]</span> <span class="c1"># display all rows for the column of country, regions and states</span>
+</span></span></code></pre></div><p>So, how do we choose between <code>iloc</code> and <code>loc</code>? For <code>iloc</code>, it uses the Python standard library indexing scheme, where the first element in the range is included, and the last one is excluded. But for <code>loc</code>, it will include both the first and last element. Of course, using <code>iloc</code> can be confusing sometimes. Here&rsquo;s a comparison:</p>
+<pre tabindex="0"><code>Using loc: 0:10
+Output: 0,1,...,10
+
+Using iloc 0:10
+Output: 0,1,...,9
+</code></pre><h3 id="22-manipulation-index">2.2 Manipulation Index<a hidden class="anchor" aria-hidden="true" href="#22-manipulation-index">#</a></h3>
+<p>When using label-based selection, the power of it comes from the labels in the index. We can manipulate index in any way we see fit as well by using <code>set_index()</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&#34;country&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="23-conditional-selection">2.3 Conditional Selection<a hidden class="anchor" aria-hidden="true" href="#23-conditional-selection">#</a></h3>
+<p>In order to do some interesting things with our dataset, we often need to ask questions based on certain conditions. Suppose that we want to know the better-than-average wine produced in Sweden, we can start by checking whether the wine is from Sweden or not:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s1">&#39;Sweden&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># alternatively</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">wine</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s1">&#39;Sweden&#39;</span><span class="p">]</span>
+</span></span></code></pre></div><p>Now we would like to add an extra condition. We want the wine review to also be at least 90 points:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">wine</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s1">&#39;Sweden&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">points</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)]</span>
+</span></span></code></pre></div><p>If we would like to know whether a wine is from Sweden or a wine is rated above average:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">wine</span><span class="o">.</span><span class="n">country</span> <span class="o">==</span> <span class="s1">&#39;Sweden&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">points</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)]</span>
+</span></span></code></pre></div><p>What if we want to know whether a wine is produced in Sweden or Italy?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">wine</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Sweden&#39;</span><span class="p">,</span> <span class="s1">&#39;Italy&#39;</span><span class="p">])]</span>
+</span></span></code></pre></div><p>We notice that for the wine data produced in Sweden or Italy, there are some rows where the points given is empty, we would like to filter them out:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">wine</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># to check for the null rows</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">wine</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+</span></span></code></pre></div><h3 id="24-assigning-data">2.4 Assigning Data<a hidden class="anchor" aria-hidden="true" href="#24-assigning-data">#</a></h3>
+<p>Now let&rsquo;s look at the method to assign data to a <code>DataFrame</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="p">[</span><span class="s1">&#39;critic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">everyone</span> <span class="c1"># assingning a constant to the column named critic</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="p">[</span><span class="s1">&#39;index_reverse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+</span></span></code></pre></div><h2 id="3-summary-functions--maps">3. Summary Functions &amp; Maps<a hidden class="anchor" aria-hidden="true" href="#3-summary-functions--maps">#</a></h2>
+<p>In the previous section, we learned about selecting relevant data from a <code>DataFrame</code> and a Series. However, data does not always come out in the format that we want, and often we would want to do some more works to reformat the data at hand. For starter, we could use the <code>describe</code> function to generate a high-level summary of the attributes of the given column:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span></span></code></pre></div><p>We can select the column that we want to know the summary:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">winde</span><span class="o">.</span><span class="n">critic</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span></span></code></pre></div><p>Notice that for numerical column, the <code>describe</code> function is telling use about the name, the maximum and the minimum value and a few other information. If we only want to know, says, the mean or the unique labels in a column, we could:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">critic</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</span></span></code></pre></div><p>Let&rsquo;s say we want to know for a list of unique value, how frequent they occur in the dataset:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">critic</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span></span></code></pre></div><h3 id="31-maps">3.1 Maps<a hidden class="anchor" aria-hidden="true" href="#31-maps">#</a></h3>
+<p>Map is a mathematical term where it describes that a function takes one set of values and maps them to another set of value. Oftentimes, we have to create new representations from existing data or perform transformation to the data. Maps are extremely important to help us to achieve our works.</p>
+<p>An example where we remean the scores the wines received to 0:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine_points_mean</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine_points_mean</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span> <span class="p">:</span> <span class="n">p</span> <span class="o">-</span> <span class="n">wine_points_mean</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># alternative</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine_points_mean</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">points</span> <span class="o">-</span> <span class="n">wine_points_mean</span>
+</span></span></code></pre></div><p>In the function above, <code>map()</code> expects a single value from the Series and return a transformed version of that value. A new series with all the transformed values will be returned by <code>map()</code>.</p>
+<p>On the other hand, we can use <code>apply()</code> which is also an equivalent method. Now we want to transform the whole <code>DataFrame</code> by calling a function on each row:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">remean</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">row</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">points</span> <span class="o">-</span> <span class="n">wine_points_mean</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">row</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">remean</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>If we set the <code>axis = index</code>, then we would need to give a function to transform each column rather than each row.</p>
+<p><code>map</code> and <code>apply</code> do not modify the original data they&rsquo;re call on. They return new, transformed series and <code>DataFrame</code> respectively.</p>
+<p>Pandas understand what we do when we perform operations between Series of equal length. These operations are faster than using <code>map</code> or <code>apply</code>. Of course, we can use these functions with more advanced case like conditional logic.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">country</span> <span class="o">+</span> <span class="s2">&#34; - &#34;</span> <span class="o">+</span> <span class="n">wine_region</span>
+</span></span></code></pre></div><h2 id="4-grouping--sorting">4. Grouping &amp; Sorting<a hidden class="anchor" aria-hidden="true" href="#4-grouping--sorting">#</a></h2>
+<h3 id="41-groupwise-analysis">4.1 Groupwise Analysis<a hidden class="anchor" aria-hidden="true" href="#41-groupwise-analysis">#</a></h3>
+<p>In previous section, we learned about <code>value_counts()</code> to count for the unique labels&rsquo; occurrences. Here&rsquo;s an alternative:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;points&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</span></span></code></pre></div><p>This <code>groupby</code> function creates a group of reviews which allotted the same point values to the given wine. Then from these groups, we select the <code>points</code> column and count how many times they appear. For example, we want to get the cheapest wine in each point value category:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;points&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</span></span></code></pre></div><p>We can think of each group as a slice of our <code>DataFrame</code> with only data with values that match. This <code>DataFrane</code> is accessible to use directly using <code>apply</code>, and we can manipulate the data. If we want to select the name of the first wine reviewed from each winery:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;winery&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">df</span> <span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span></code></pre></div><p>We can also group more than one column. Let&rsquo;s say we want to pick out the best wine by country and province:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;province&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">idmax</span><span class="p">()])</span>
+</span></span></code></pre></div><p>Furthermore, if we want to run a bunch of different functions on the <code>DataFrame</code> at once, we can generate a simple statistical summary of the dataset with <code>agg</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;country&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="nb">len</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">])</span>
+</span></span></code></pre></div><h3 id="42-multi-indexes">4.2 Multi-indexes<a hidden class="anchor" aria-hidden="true" href="#42-multi-indexes">#</a></h3>
+<p>A multi-index example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span> <span class="o">=</span> <span class="n">wine</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;province&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="nb">len</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">countries_reviewed</span>
+</span></span></code></pre></div><pre tabindex="0"><code>| country |     province     | len |
+|---------|------------------|-----|
+|Argentina| Mendoza Province | 3264|
+|         | Other            | 536 |
+|...      | ...              |     |
+</code></pre><p>If we check the type:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">mi</span> <span class="o">=</span> <span class="n">countries_reviewed</span><span class="o">.</span><span class="n">index</span>
+</span></span><span class="line"><span class="cl"><span class="nb">type</span><span class="p">(</span><span class="n">mi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># output</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># pandas.core.indexes.multi.MultiIndex</span>
+</span></span></code></pre></div><p>There are a few ways to deal with this tiered structure which are absent for single-level indices. To retrieve a value, we need to provide two levels of labels. For the first method, we can convert the index back to the regular index:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</span></span></code></pre></div><pre tabindex="0"><code>| | country |     province     | len |
+|-|---------|------------------|-----|
+|0|Argentina| Mendoza Province | 3264|
+|1|Argentina| Other            | 536 |
+|2|...      | ...              | ... |
+</code></pre><h3 id="43-sorting">4.3. Sorting<a hidden class="anchor" aria-hidden="true" href="#43-sorting">#</a></h3>
+<p>Previously, we learned about the grouping function to group data in index order. But what about in value order? Can we order the rows from the grouping result based on values in the data rather than index?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span> <span class="o">=</span> <span class="n">countries_reviewed</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>By default, the sorting will be in ascending order, we can change that by changing the <code>ascending</code> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;len&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</span></span></code></pre></div><p>Moreover, if we just want to sort by index values, simply leave the <code>by</code> parameter blank:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+</span></span></code></pre></div><p>Of course, we could sort more than one column at a time:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">countries_reviewed</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">,</span> <span class="s1">&#39;len&#39;</span><span class="p">])</span>
+</span></span></code></pre></div><h2 id="5-data-types--missing-values">5. Data Types &amp; Missing Values<a hidden class="anchor" aria-hidden="true" href="#5-data-types--missing-values">#</a></h2>
+<p>In this section, we will explore how to investigate data types within a <code>DataFrame</code> and how to replace entries in it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">price</span><span class="o">.</span><span class="n">dtype</span><span class="p">()</span> <span class="c1"># for the specified column</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">dtype</span><span class="p">()</span> <span class="c1"># for all columns</span>
+</span></span></code></pre></div><p><code>dtype</code> function tells us how pandas store the data internally such as <code>float64</code> or <code>int64</code>. We can convert a column from one type to the other too:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="51-missing-value">5.1 Missing Value<a hidden class="anchor" aria-hidden="true" href="#51-missing-value">#</a></h3>
+<p>In a dataset, we might see values being given as <code>NaN</code> or &ldquo;not a number&rdquo;. Using Pandas, we can check for the missing data in a <code>DataFrame</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">country</span><span class="p">)]</span>
+</span></span></code></pre></div><p>To replace the missing value in data, we can use the <code>fillna()</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">fllna</span><span class="p">(</span><span class="s2">&#34;Unknown&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>If we want to replace value, here&rsquo;s what we can do:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">twitter_handle</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;@x&#34;</span><span class="p">,</span> <span class="s2">&#34;@abc&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="6-renaming--combining">6. Renaming &amp; Combining<a hidden class="anchor" aria-hidden="true" href="#6-renaming--combining">#</a></h2>
+<p><code>rename</code> is a function to let you change index names or column names:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">column</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="s1">&#39;score&#39;</span><span class="p">})</span>
+</span></span></code></pre></div><p>This function allows us to rename index or column by specifying an index or a column keyword parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;second&#39;</span><span class="p">})</span>
+</span></span></code></pre></div><p>Of course, we could give name to a row index and the column index as well:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">wine</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s1">&#39;wines&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;rows&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s1">&#39;fields&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="61-combining">6.1 Combining<a hidden class="anchor" aria-hidden="true" href="#61-combining">#</a></h3>
+<p>The simplest combination method in Pandas is <code>concat</code>. This function is useful when we have data in different <code>DataFrame</code> but having the same columns:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">can_yt</span><span class="p">,</span> <span class="n">bri_yt</span><span class="p">])</span>
+</span></span></code></pre></div><p>Moreover, for <code>join</code>, it will combine different <code>DataFrame</code> which have an index in common:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">left</span> <span class="o">=</span> <span class="n">canadian_youtube</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;trending_date&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">right</span> <span class="o">=</span> <span class="n">british_youtube</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;trending_date&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">left</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">lsuffix</span><span class="o">=</span><span class="s1">&#39;_CAN&#39;</span><span class="p">,</span> <span class="n">rsuffix</span><span class="o">=</span><span class="s1">&#39;_UK&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>For the above example, the <code>lsuffix</code> and <code>rsuffix</code> parameter is necessary because the data has the same columns names in both of the datasets. If it is not, then we could just ignore that.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://keanteng.github.io/home/tags/pandas/">Pandas</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/data-frame/">Data Frame</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://keanteng.github.io/home/docs/2023/2023-08-15-data-visualization/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Data Visualization</span>
+  </a>
+  <a class="next" href="https://keanteng.github.io/home/docs/2023/2023-08-13-a-streamit-app-for-flood-analysis/">
+    <span class="title">Next »</span>
+    <br>
+    <span>A Streamlit App For Flood Analysis</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pandas on twitter"
+        href="https://twitter.com/intent/tweet/?text=Pandas&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f&amp;hashtags=Pandas%2cDataFrame%2cPython">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pandas on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f&amp;title=Pandas&amp;summary=Pandas&amp;source=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pandas on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f&title=Pandas">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pandas on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pandas on whatsapp"
+        href="https://api.whatsapp.com/send?text=Pandas%20-%20https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pandas on telegram"
+        href="https://telegram.me/share/url?text=Pandas&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-18-pandas%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

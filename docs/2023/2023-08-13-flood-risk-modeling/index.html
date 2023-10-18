@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Flood Risk Modeling With Logistic Regression | Kean Teng Blog</title>
+<meta name="keywords" content="Streamlit, Flood Analysis, GitHub, Pandas, Python">
+<meta name="description" content="With Streamlit Web App Deployment">
+<meta name="author" content="Kean Teng Blog">
+<link rel="canonical" href="https://keanteng.github.io/home/docs/2023/2023-08-13-flood-risk-modeling/">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://keanteng.github.io/home/apple-touch-icon.png">
+<link rel="mask-icon" href="https://keanteng.github.io/home/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Flood Risk Modeling With Logistic Regression" />
+<meta property="og:description" content="With Streamlit Web App Deployment" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://keanteng.github.io/home/docs/2023/2023-08-13-flood-risk-modeling/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2023-08-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-08-13T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Flood Risk Modeling With Logistic Regression"/>
+<meta name="twitter:description" content="With Streamlit Web App Deployment"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Docs",
+      "item": "https://keanteng.github.io/home/docs/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Flood Risk Modeling With Logistic Regression",
+      "item": "https://keanteng.github.io/home/docs/2023/2023-08-13-flood-risk-modeling/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Flood Risk Modeling With Logistic Regression",
+  "name": "Flood Risk Modeling With Logistic Regression",
+  "description": "With Streamlit Web App Deployment",
+  "keywords": [
+    "Streamlit", "Flood Analysis", "GitHub", "Pandas", "Python"
+  ],
+  "articleBody": " Images from Unsplash\nIn econometrics, the ordinary least square (OLS) model is widely used to estimate the parameter of a linear regression model.\ny = beta0 + beta1*x + epsilon Of course, the model can be used to model risk such as flood risk as well. From the equation above, we let y represents the flood risk. y would be a continuous variable, like a flood risk score. It also could be represented as a binary outcome: 0 for no risk and 1 for risk present. The x is the distance to the historical flood location, it is the distance to the nearest historical flood location. For 0, it is the intercept, it shows the estimated flood risk when x is 0 or when the location is exactly the historical flood site. 1, represents the slope. It is expected to be negative as greater distances from historical flood sites correspond to lower flood risks. For the error term, epsilon, it captures the unobserved factors that affect flood risk but are not included in the model.\nThe outcome from the model will be presented on Streamlit web app together with a flood prediction service page to receive user location input and return the flood risk on the input location.\nThe Streamlit Web App\nRefer to my GitHub repository, for my work on this project, the link to the web app can be found on the landing page.\n1. The Workflow Random address generation using web scraping Geocoding, computing distance and response variable Model fitting and evaluation Models comparison Creating and deploying web app 2. Random Address Generation Using Web Scraping Fitting of the flood risk model requires a predictor and a response variable. The predictor variable is collected by computing the minimum distance between a random location and the nearest historical flood location. To obtain the random location, Python selenium module is used to scrape random addresses online by locating the Xpath components on web pages. About 16, 000 random locations are scraped in 3 hours.\nThe data collected contains information such as state, region, country, addresses, zip code and phone number.\nWeb Scraping In Action\nRefer to my GitHub for the corresponding notebook.\n3. Geocoding, Computing Distance And Response Variable Geocoding services like Nominatim is used to convert the random addresses generated into geographic coordinate with longitude and latitude.\n# geocoding function def my_geocoder(row): try: point = geolocator.geocode(row).point return pd.Series({'Latitude': point.latitude, 'Longitude': point.longitude}) except: return pd.Series({'Latitude': None, 'Longitude': None}) data[['Latitude', 'Longitude']] = data.apply(lambda x: my_geocoder(x['Location']), axis=1) # check the percentage of data successfully geocoded print(\"{}% of addresses were geocoded!\".format( (1 - sum(np.isnan(data[\"Latitude\"])) / len(data)) * 100)) To compute for the minimum distance between any random location with the nearest historical flood location, geopandas module is required. Since initially, the coordinate is in the format of EPSG: 4326, to ensure that we obtain distance output in meter, we would need to convert the coordinate to the format of EPSG: 3857:\ngeocoded_data = gpd.GeoDataFrame(geocoded, geometry = gpd.points_from_xy(geocoded.Longitude, geocoded.Latitude), crs = \"EPSG:4326\").to_crs('EPSG:3857') flood_points_data = gpd.GeoDataFrame(flood_points, geometry = gpd.points_from_xy(flood_points.Longitude, flood_points.Latitude), crs = \"EPSG:4326\").to_crs('EPSG:3857') for i in range(0, len(geocoded_data)): distances = flood_points_data.geometry.distance(geocoded_data.iloc[i].geometry) geocoded_data.loc[i, 'distance'] = distances.min() Subsequently, the response variable is computed by assuming no flood risk if the distance is less than 500 m, otherwise, flood risk exists.\n4. Model Fitting And Evaluation The flood risk model is fitted using LogisticRegression() from the scikit module. The model requires at least two dimensions predictor variables. Thus, One-Hot encoding is applied to the state column before model fitting taking place.\nOne Hot Encoding Illustration\n# train test split X = data[['distance','state']] y = data['flood_risk'] X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size = 0.2, random_state = 0) X_train.shape, X_valid.shape, y_train.shape, y_valid.shape # Apply one-hot encoder to each column with categorical data OH_encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=False) # ori: spare = False # Get list of categorical variables s = (X_train.dtypes == 'object') object_cols = list(s[s].index) OH_cols_train = pd.DataFrame(OH_encoder.fit_transform(X_train[object_cols])) OH_cols_valid = pd.DataFrame(OH_encoder.transform(X_valid[object_cols])) # One-hot encoding removed index; put it back OH_cols_train.index = X_train.index OH_cols_valid.index = X_valid.index # Remove categorical columns (will replace with one-hot encoding) num_X_train = X_train.drop(object_cols, axis=1) num_X_valid = X_valid.drop(object_cols, axis=1) # Add one-hot encoded columns to numerical features OH_X_train = pd.concat([num_X_train, OH_cols_train], axis=1) OH_X_valid = pd.concat([num_X_valid, OH_cols_valid], axis=1) 4.1 Model Evaluation The model is evaluated based on its accuracy, training and test score.\n# print the scores on training and test set print('Training set score: {:.4f}'.format(logreg.score(OH_X_train, y_train))) print('Test set score: {:.4f}'.format(logreg.score(OH_X_valid, y_valid))) The model is able to achieve an accuracy of 0.9880, which is remarkably accurate. The model achieved an accuracy score of 0.9880, training set accuracy of 0.9928. Furthermore, the training set score and the test set score are very close to each other, which means that the model is not overfitting.\nTest Set Outcome\nGenerally, training score measures how to model fit in the training data. If a model fits so well in a data with lots of variance it results in overfitting. This will result in a poor test score. The mode curved a lot to fit the training data and generalized very poorly. For test score, since we implement train-test split before fitting the model, it represents a real life scenario. Thus, the higher the test score, the better.\nThe model is then further evaluated with confusion matrix, training and test set score, receiver operating curve (ROC) as well as cross-validation. Of course, comparisons were made with other models such as KNN, SVM, XGB and more. However, logistic regression is chosen as it is able to achieve a high accuracy score with only slightly poor performance compared to XGB classifier (negligible differences).\nMulti-models Comparison\nFrom the confusion matrix below, it can be observed that the true positive is 251, true negative is 575 while the false negative is 8 and the false positive is 2. These results show that our model performs very well in predicting the flood risk of a location in Malaysia. Furthermore, we compute the accuracy (0.9880), classification error (0.0120), precision (0.9921) and sensitivity (0.9691).\n# confusion matrix from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay cm = confusion_matrix(y_valid, y_pred_test) # visualize confusion matrix with seaborn heatmap disp = ConfusionMatrixDisplay(confusion_matrix=cm) disp.plot() Confusion Matrix\nPrecision can be defined as the percentage of correctly predicted positive outcomes out of all the predicted positive outcomes. It can be given as the ratio of true positives (TP) to the sum of true and false positives (TP + FP). Precision identifies the proportion of correctly predicted positive outcomes. It is more concerned with the positive class than the negative class. Recall can be defined as the percentage of correctly predicted positive outcomes out of all the actual positive outcomes. It can be given as the ratio of true positives (TP) to the sum of true positives and false negatives (TP + FN). Recall is also called Sensitivity.\nfrom sklearn.metrics import classification_report print(classification_report(y_valid, y_pred_test)) ROC curve stands for receiver operating characteristic curve. It shows the performance of classification models at various classification threshold levels. The curve also shows the performance of a classification model at various classification threshold levels. From the image below, we can see that the area under the curve is closed to one. Perfect classifier will have AUC equal to 1 whereas a random classifier will have a ROC-AUC equal to 0.5. Since our model ROC-AUC approximates to 1, we can conclude that our classifier does a good job in predicting whether a location has a flood risk or no flood risk.\nfrom sklearn.metrics import roc_auc_score from sklearn.metrics import roc_curve logit_roc_auc = roc_auc_score(y_valid, logreg.predict(OH_X_valid)) fpr, tpr, thresholds = roc_curve(y_valid, logreg.predict_proba(OH_X_valid)[:,1]) plt.figure() plt.plot(fpr, tpr, label='Logistic Regression (area = %0.2f)' % logit_roc_auc) plt.plot([0, 1], [0, 1],'r--') plt.xlim([0.0, 1.0]) plt.ylim([0.0, 1.05]) plt.xlabel('False Positive Rate') plt.ylabel('True Positive Rate') plt.title('Receiver operating characteristic') plt.legend(loc=\"lower right\") plt.savefig('images/Log_ROC.png') ROC Curve\n5. Creating And Deploying Web App With the fitted model, a Streamlit web app is created to present my workflows, analysis and findings. A flood prediction service is added to predict flood risk based on user location input. By typing a location in the input box, a function will be called to compute the distance of the input and the nearest flood data points. The distance computed is then passed to the logistic function for flood risk computation. The flood prediction service works based on the logistic function used for the study. After all the computation, an output in 0 or 1 will be returned to the user.\nFlood Risk Prediction Service Page On Streamlit Web App\n",
+  "wordCount" : "1405",
+  "inLanguage": "en",
+  "datePublished": "2023-08-13T00:00:00Z",
+  "dateModified": "2023-08-13T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kean Teng Blog"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://keanteng.github.io/home/docs/2023/2023-08-13-flood-risk-modeling/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kean Teng Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://i.postimg.cc/0Qq5g2fX/favicon.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://keanteng.github.io/home/faqs/" title="FAQs">
+                    <span>FAQs</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://keanteng.github.io/home/">Home</a>&nbsp;»&nbsp;<a href="https://keanteng.github.io/home/docs/">Docs</a></div>
+    <h1 class="post-title">
+      Flood Risk Modeling With Logistic Regression
+    </h1>
+    <div class="post-description">
+      With Streamlit Web App Deployment
+    </div>
+    <div class="post-meta"><span title='2023-08-13 00:00:00 +0000 UTC'>August 13, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-the-workflow" aria-label="1. The Workflow">1. The Workflow</a></li>
+                <li>
+                    <a href="#2-random-address-generation-using-web-scraping" aria-label="2. Random Address Generation Using Web Scraping">2. Random Address Generation Using Web Scraping</a></li>
+                <li>
+                    <a href="#3-geocoding-computing-distance-and-response-variable" aria-label="3. Geocoding, Computing Distance And Response Variable">3. Geocoding, Computing Distance And Response Variable</a></li>
+                <li>
+                    <a href="#4-model-fitting-and-evaluation" aria-label="4. Model Fitting And Evaluation">4. Model Fitting And Evaluation</a><ul>
+                        
+                <li>
+                    <a href="#41-model-evaluation" aria-label="4.1 Model Evaluation">4.1 Model Evaluation</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-creating-and-deploying-web-app" aria-label="5. Creating And Deploying Web App">5. Creating And Deploying Web App</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><center><img src="https://images.unsplash.com/photo-1604276661516-9c26d19251a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Images from Unsplash</i></p>
+<p>In econometrics, the ordinary least square (OLS) model is widely used to estimate the parameter of a linear regression model.</p>
+<pre tabindex="0"><code>y = beta0 + beta1*x + epsilon
+</code></pre><p>Of course, the model can be used to model risk such as flood risk as well. From the equation above, we let <code>y</code> represents the flood risk. <code>y</code> would be a continuous variable, like a flood risk score. It also could be represented as a binary outcome: <code>0</code> for no risk and <code>1</code> for risk present. The <code>x</code> is the distance to the historical flood location, it is the distance to the nearest historical flood location. For <code>0</code>, it is the intercept, it shows the estimated flood risk when <code>x</code> is <code>0</code> or when the location is exactly the historical flood site. <code>1</code>, represents the slope. It is expected to be negative as greater distances from historical flood sites correspond to lower flood risks. For the error term, <code>epsilon</code>, it captures the unobserved factors that affect flood risk but are not included in the model.</p>
+<p>The outcome from the model will be presented on Streamlit web app together with a flood prediction service page to receive user location input and return the flood risk on the input location.</p>
+<center><img src="images/home.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>The Streamlit Web App</i></p>
+<p>Refer to my GitHub repository, for my work on <a href="https://github.com/keanteng/flood_risk_model">this project</a>, the link to the web app can be found on the <strong>landing page</strong>.</p>
+<h2 id="1-the-workflow">1. The Workflow<a hidden class="anchor" aria-hidden="true" href="#1-the-workflow">#</a></h2>
+<ul>
+<li>Random address generation using web scraping</li>
+<li>Geocoding, computing distance and response variable</li>
+<li>Model fitting and evaluation</li>
+<li>Models comparison</li>
+<li>Creating and deploying web app</li>
+</ul>
+<h2 id="2-random-address-generation-using-web-scraping">2. Random Address Generation Using Web Scraping<a hidden class="anchor" aria-hidden="true" href="#2-random-address-generation-using-web-scraping">#</a></h2>
+<p>Fitting of the flood risk model requires a predictor and a response variable. The predictor variable is collected by computing the minimum distance between a random location and the nearest historical flood location. To obtain the random location, Python <code>selenium</code> module is used to scrape random addresses online by locating the Xpath components on web pages. About 16, 000 random locations are scraped in 3 hours.</p>
+<p>The data collected contains information such as state, region, country, addresses, zip code and phone number.</p>
+<center><img src="images/gif.gif"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Web Scraping In Action</i></p>
+<p>Refer to my <a href="https://github.com/keanteng/flood_risk_model/blob/main/randomaddress.ipynb">GitHub</a> for the corresponding notebook.</p>
+<h2 id="3-geocoding-computing-distance-and-response-variable">3. Geocoding, Computing Distance And Response Variable<a hidden class="anchor" aria-hidden="true" href="#3-geocoding-computing-distance-and-response-variable">#</a></h2>
+<p>Geocoding services like Nominatim is used to convert the random addresses generated into geographic coordinate with longitude and latitude.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># geocoding function</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">my_geocoder</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">point</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">.</span><span class="n">point</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;Latitude&#39;</span><span class="p">:</span> <span class="n">point</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">:</span> <span class="n">point</span><span class="o">.</span><span class="n">longitude</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;Latitude&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data</span><span class="p">[[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">my_geocoder</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># check the percentage of data successfully geocoded</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{}% o</span><span class="s2">f addresses were geocoded!&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&#34;Latitude&#34;</span><span class="p">]))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span></code></pre></div><p>To compute for the minimum distance between any random location with the nearest historical flood location, <code>geopandas</code> module is required. Since initially, the coordinate is in the format of <code>EPSG: 4326</code>, to ensure that we obtain distance output in meter, we would need to convert the coordinate to the format of <code>EPSG: 3857</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">geocoded_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">geocoded</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">geocoded</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">geocoded</span><span class="o">.</span><span class="n">Latitude</span><span class="p">),</span> <span class="n">crs</span> <span class="o">=</span> <span class="s2">&#34;EPSG:4326&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">flood_points_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">flood_points</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">flood_points</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">flood_points</span><span class="o">.</span><span class="n">Latitude</span><span class="p">),</span> <span class="n">crs</span> <span class="o">=</span> <span class="s2">&#34;EPSG:4326&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">geocoded_data</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">distances</span> <span class="o">=</span> <span class="n">flood_points_data</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">geocoded_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">geocoded_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</span></span></code></pre></div><p>Subsequently, the response variable is computed by assuming no flood risk if the distance is less than 500 m, otherwise, flood risk exists.</p>
+<h2 id="4-model-fitting-and-evaluation">4. Model Fitting And Evaluation<a hidden class="anchor" aria-hidden="true" href="#4-model-fitting-and-evaluation">#</a></h2>
+<p>The flood risk model is fitted using <code>LogisticRegression()</code> from the <code>scikit</code> module. The model requires at least two dimensions predictor variables. Thus, One-Hot encoding is applied to the <code>state</code> column before model fitting taking place.</p>
+<center><img src="images/onehot.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>One Hot Encoding Illustration</i></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># train test split</span>
+</span></span><span class="line"><span class="cl"><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span><span class="s1">&#39;state&#39;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;flood_risk&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_valid</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_valid</span><span class="o">.</span><span class="n">shape</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Apply one-hot encoder to each column with categorical data</span>
+</span></span><span class="line"><span class="cl"><span class="n">OH_encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># ori: spare = False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Get list of categorical variables</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">object_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">OH_cols_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">OH_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">object_cols</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl"><span class="n">OH_cols_valid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">OH_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_valid</span><span class="p">[</span><span class="n">object_cols</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># One-hot encoding removed index; put it back</span>
+</span></span><span class="line"><span class="cl"><span class="n">OH_cols_train</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">index</span>
+</span></span><span class="line"><span class="cl"><span class="n">OH_cols_valid</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">X_valid</span><span class="o">.</span><span class="n">index</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove categorical columns (will replace with one-hot encoding)</span>
+</span></span><span class="line"><span class="cl"><span class="n">num_X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">object_cols</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">num_X_valid</span> <span class="o">=</span> <span class="n">X_valid</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">object_cols</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add one-hot encoded columns to numerical features</span>
+</span></span><span class="line"><span class="cl"><span class="n">OH_X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">num_X_train</span><span class="p">,</span> <span class="n">OH_cols_train</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">OH_X_valid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">num_X_valid</span><span class="p">,</span> <span class="n">OH_cols_valid</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="41-model-evaluation">4.1 Model Evaluation<a hidden class="anchor" aria-hidden="true" href="#41-model-evaluation">#</a></h3>
+<p>The model is evaluated based on its accuracy, training and test score.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># print the scores on training and test set</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training set score: </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">OH_X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test set score: </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">OH_X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)))</span>
+</span></span></code></pre></div><p>The model is able to achieve an accuracy of 0.9880, which is remarkably accurate. The model achieved an accuracy score of 0.9880, training set accuracy of 0.9928. Furthermore, the training set score and the test set score are very close to each other, which means that the model is not overfitting.</p>
+<center><img src="images/predprob.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Test Set Outcome</i></p>
+<p>Generally, training score measures how to model fit in the training data. If a model fits so well in a data with lots of variance it results in overfitting. This will result in a poor test score. The mode curved a lot to fit the training data and generalized very poorly. For test score, since we implement train-test split before fitting the model, it represents a real life scenario. Thus, the higher the test score, the better.</p>
+<p>The model is then further evaluated with confusion matrix, training and test set score, receiver operating curve (ROC) as well as cross-validation. Of course, comparisons were made with other models such as KNN, SVM, XGB and more. However, logistic regression is chosen as it is able to achieve a high accuracy score with only slightly poor performance compared to XGB classifier (negligible differences).</p>
+<center><img src="images/mla.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Multi-models Comparison</i></p>
+<p>From the confusion matrix below, it can be observed that the true positive is 251, true negative is 575 while the false negative is 8 and the false positive is 2. These results show that our model performs very well in predicting the flood risk of a location in Malaysia. Furthermore, we compute the accuracy (0.9880), classification error (0.0120), precision (0.9921) and sensitivity (0.9691).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># confusion matrix</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
+</span></span><span class="line"><span class="cl"><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># visualize confusion matrix with seaborn heatmap</span>
+</span></span><span class="line"><span class="cl"><span class="n">disp</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">disp</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></span></code></pre></div><center><img src="images/cm.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Confusion Matrix</i></p>
+<p>Precision can be defined as the percentage of correctly predicted positive outcomes out of all the predicted positive outcomes. It can be given as the ratio of true positives (TP) to the sum of true and false positives (TP + FP). Precision identifies the proportion of correctly predicted positive outcomes. It is more concerned with the positive class than the negative class. Recall can be defined as the percentage of correctly predicted positive outcomes out of all the actual positive outcomes. It can be given as the ratio of true positives (TP) to the sum of true positives and false negatives (TP + FN). Recall is also called Sensitivity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">y_pred_test</span><span class="p">))</span>
+</span></span></code></pre></div><p>ROC curve stands for receiver operating characteristic curve. It shows the performance of classification models at various classification threshold levels. The curve also shows the performance of a classification model at various classification threshold levels. From the image below, we can see that the area under the curve is closed to one. Perfect classifier will have AUC equal to 1 whereas a random classifier will have a ROC-AUC equal to 0.5. Since our model ROC-AUC approximates to 1, we can conclude that our classifier does a good job in predicting whether a location has a flood risk or no flood risk.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
+</span></span><span class="line"><span class="cl"><span class="n">logit_roc_auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">OH_X_valid</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">OH_X_valid</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Logistic Regression (area = </span><span class="si">%0.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">logit_roc_auc</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiver operating characteristic&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&#34;lower right&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;images/Log_ROC.png&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><center><img src="images/roc.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>ROC Curve</i></p>
+<h2 id="5-creating-and-deploying-web-app">5. Creating And Deploying Web App<a hidden class="anchor" aria-hidden="true" href="#5-creating-and-deploying-web-app">#</a></h2>
+<p>With the fitted model, a Streamlit web app is created to present my workflows, analysis and findings. A flood prediction service is added to predict flood risk based on user location input. By typing a location in the input box, a function will be called to compute the distance of the input and the nearest flood data points. The distance computed is then passed to the logistic function for flood risk computation. The flood prediction service works based on the logistic function used for the study. After all the computation, an output in <code>0</code> or <code>1</code> will be returned to the user.</p>
+<center><img src="images/frps.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Flood Risk Prediction Service Page On Streamlit Web App</i></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://keanteng.github.io/home/tags/streamlit/">Streamlit</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/flood-analysis/">Flood Analysis</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/github/">GitHub</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/pandas/">Pandas</a></li>
+      <li><a href="https://keanteng.github.io/home/tags/python/">Python</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://keanteng.github.io/home/docs/2023/2023-08-13-a-streamit-app-for-flood-analysis/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>A Streamlit App For Flood Analysis</span>
+  </a>
+  <a class="next" href="https://keanteng.github.io/home/docs/2023/2023-08-13-webscraping-on-xpath/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Webscraping On Xpath</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Flood Risk Modeling With Logistic Regression on twitter"
+        href="https://twitter.com/intent/tweet/?text=Flood%20Risk%20Modeling%20With%20Logistic%20Regression&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f&amp;hashtags=Streamlit%2cFloodAnalysis%2cGitHub%2cPandas%2cPython">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Flood Risk Modeling With Logistic Regression on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f&amp;title=Flood%20Risk%20Modeling%20With%20Logistic%20Regression&amp;summary=Flood%20Risk%20Modeling%20With%20Logistic%20Regression&amp;source=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Flood Risk Modeling With Logistic Regression on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f&title=Flood%20Risk%20Modeling%20With%20Logistic%20Regression">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Flood Risk Modeling With Logistic Regression on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Flood Risk Modeling With Logistic Regression on whatsapp"
+        href="https://api.whatsapp.com/send?text=Flood%20Risk%20Modeling%20With%20Logistic%20Regression%20-%20https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Flood Risk Modeling With Logistic Regression on telegram"
+        href="https://telegram.me/share/url?text=Flood%20Risk%20Modeling%20With%20Logistic%20Regression&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-08-13-flood-risk-modeling%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

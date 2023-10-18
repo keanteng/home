@@ -2,85 +2,100 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://keanteng.github.io/home/docs/2023-09-17-creating-chatfloodrisk/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023-10-17-jupyter-rmarkdown/</loc>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-09-17-creating-chatfloodrisk/</loc>
     <lastmod>2023-09-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-09-17-chatautomata/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-09-17-chatautomata/</loc>
     <lastmod>2023-09-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-09-07-introducing-blue-automata/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-09-07-introducing-blue-automata/</loc>
     <lastmod>2023-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-09-04-creating-a-site-using-materials-mkdocs/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-09-04-creating-a-site-using-materials-mkdocs/</loc>
     <lastmod>2023-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-09-04-how-to-publish-on-pypi/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-09-04-how-to-publish-on-pypi/</loc>
     <lastmod>2023-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-26-land-cover-elevation-and-slope/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-26-land-cover-elevation-and-slope/</loc>
     <lastmod>2023-08-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-26-ml-explainability/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-26-ml-explainability/</loc>
     <lastmod>2023-08-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-20-feature-engineering/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-20-feature-engineering/</loc>
     <lastmod>2023-08-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-19-data-cleaning/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-19-data-cleaning/</loc>
     <lastmod>2023-08-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-19-time-series/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-19-time-series/</loc>
     <lastmod>2023-08-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-15-data-visualization/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-15-data-visualization/</loc>
     <lastmod>2023-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-18-pandas/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/</loc>
     <lastmod>2023-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-13-a-streamit-app-for-flood-analysis/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-13-a-streamit-app-for-flood-analysis/</loc>
     <lastmod>2023-08-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-13-flood-risk-modeling/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-13-flood-risk-modeling/</loc>
     <lastmod>2023-08-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-08-13-webscraping-on-xpath/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-08-13-webscraping-on-xpath/</loc>
     <lastmod>2023-08-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-04-19-geospatial-analysis/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-04-19-geospatial-analysis/</loc>
     <lastmod>2023-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-04-09-creating-a-website-with-hugo--papermode/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-04-09-creating-a-website-with-hugo--papermode/</loc>
     <lastmod>2023-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-03-20-computer-vision/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-03-20-computer-vision/</loc>
     <lastmod>2023-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-03-15-intro-to-sql/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-03-15-intro-to-sql/</loc>
     <lastmod>2023-03-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-03-02-intermediate-machine-learning/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-03-02-intermediate-machine-learning/</loc>
     <lastmod>2023-03-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-02-25-stable-diffusion-webui-with-civitai-loras/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-02-25-stable-diffusion-webui-with-civitai-loras/</loc>
     <lastmod>2023-02-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-02-24-intro-to-deep-learning/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-02-24-intro-to-deep-learning/</loc>
     <lastmod>2023-02-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2023-02-19-images-scraping-from-web-pages/</loc>
+    <loc>https://keanteng.github.io/home/docs/2023/2023-02-19-images-scraping-from-web-pages/</loc>
     <lastmod>2023-02-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/docs/2022-11-05-google-sheet-simple-web-scraping/</loc>
+    <loc>https://keanteng.github.io/home/docs/2022/2022-11-05-google-sheet-simple-web-scraping/</loc>
     <lastmod>2022-11-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://keanteng.github.io/home/tags/automation/</loc>
-    <lastmod>2023-09-17T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://keanteng.github.io/home/docs/</loc>
-    <lastmod>2023-09-17T00:00:00+00:00</lastmod>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/jupyter/</loc>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/</loc>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/r/</loc>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/rmarkdown/</loc>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/</loc>
+    <lastmod>2023-10-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://keanteng.github.io/home/tags/automation/</loc>
     <lastmod>2023-09-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/logistic-regression/</loc>
@@ -90,9 +105,6 @@
     <lastmod>2023-09-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/streamlit/</loc>
-    <lastmod>2023-09-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://keanteng.github.io/home/tags/</loc>
     <lastmod>2023-09-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/automate/</loc>
@@ -207,9 +219,6 @@
     <lastmod>2023-02-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/images-scraping/</loc>
-    <lastmod>2023-02-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://keanteng.github.io/home/tags/jupyter/</loc>
     <lastmod>2023-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://keanteng.github.io/home/tags/google-sheets/</loc>
