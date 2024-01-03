@@ -19,7 +19,7 @@ summary: "projects"
 
 # 🏆 Competitions
 
-## Geo-based Sustainable Solution
+## Geo-based Sustainable Job Solution
 *Nov. - Dec. 2023, Python*
 
 > GitHub: https://github.com/keanteng/datathon
