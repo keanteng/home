@@ -5,7 +5,31 @@ description: "My Personal Projects"
 summary: "projects"
 ---
 
-# Internship Projects
+# 🔭 Exploration
+
+## Netflix Recommender Bot
+*Dec. 2023, Python*
+
+> GitHub: https://github.com/keanteng/chatbot
+
+- A chatbot capable of recommending Netflix movies of shows created using the Streamlit framework using PaLM-2 API.
+- The program allows large language model to read input data and make recommendation from the data. The data can be of jobs, movies, songs or texts related.
+---
+
+
+# 🏆 Competitions
+
+## Geo-based Sustainable Solution
+*Nov. - Dec. 2023, Python*
+
+> GitHub: https://github.com/keanteng/datathon
+
+- A geo-based sustainable job solution prototype using Streamlit build using LLM, language model and time series forecasting models.
+- The objective of the project is to understand Malaysia's labor market structural issues for resilient and sustainable economic growth. Malaysia remains stuck in a low-wage and low-skill economy because of the work offered domestically, and not because of the talent available. There are also significant skills mismatches between graduates and industry needs.
+  
+---
+
+# 🏢 Internship Projects
 
 ## Flood Analysis App
 *Jul. - Sept. 2023, Python*
