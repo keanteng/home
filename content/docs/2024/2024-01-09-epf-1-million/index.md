@@ -4,7 +4,7 @@ description: "Retirement Goal Projection"
 date: "2024-01-09"
 draft: false
 author: "Kean Teng Blog"
-tags: ["Python", "Streamlit", "EPF/KWSP", "Finance"]
+tags: ["Python", "Streamlit", "EPF", "KWSP", "Finance"]
 weight: 5
 summary: "EPF or KWSP (Employee Provident Fund) is formed by the Malaysian government on 1951 to help workers safeguard their retirement saving."
 ---
