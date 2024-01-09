@@ -10,7 +10,52 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 17 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>EPF</title>
+      <link>https://keanteng.github.io/home/tags/epf/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/epf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Finance</title>
+      <link>https://keanteng.github.io/home/tags/finance/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/finance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>KWSP</title>
+      <link>https://keanteng.github.io/home/tags/kwsp/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/kwsp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://keanteng.github.io/home/tags/python/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Streamlit</title>
+      <link>https://keanteng.github.io/home/tags/streamlit/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Jupyter</title>
       <link>https://keanteng.github.io/home/tags/jupyter/</link>
@@ -53,24 +98,6 @@
       <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/logistic-regression/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Streamlit</title>
-      <link>https://keanteng.github.io/home/tags/streamlit/</link>
-      <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/streamlit/</guid>
       <description></description>
     </item>
     

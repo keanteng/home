@@ -10,7 +10,16 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/streamlit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Jan 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/streamlit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Road To 1 Million With EPF</title>
+      <link>https://keanteng.github.io/home/docs/2024/2024-01-09-epf-1-million/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/docs/2024/2024-01-09-epf-1-million/</guid>
+      <description>Retirement Goal Projection</description>
+    </item>
+    
     <item>
       <title>Creating ChatFloodRisk</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-09-17-creating-chatfloodrisk/</link>
