@@ -52,7 +52,7 @@ def goal_seek(goal, contribution, bonus_contribution, compound_rate):
 You might be wondering how your yearly bonus fit into this equation? In the equation, it is assumed that interest is paid yearly and thus, the yearly bonus can be divided as a monthly payment:
 
 ```
-contribution = bonus/12 + salary
+contribution = bonus/12 + monthly_salary
 ```
 
 But you should note that if the annual interest is to be given on monthly basis, such an assumption might cause inaccurate projection to your savings.
