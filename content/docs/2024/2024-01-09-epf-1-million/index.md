@@ -12,7 +12,7 @@ summary: "EPF or KWSP (Employee Provident Fund) is formed by the Malaysian gover
 <center><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i>Image from Unsplash</i></p>
 
-EPF or KWSP (Employee Provident Fund) is formed by the Malaysian government on 1951 to help workers safeguard their retirement saving. Due to the rising cost of living and changing economic landscape, it poses a challenge for those having the notion of retire early. "How much saving is enough for me to retire early?" has become a pressing question for those who seek to retire comfortably.
+EPF or KWSP (Employee Provident Fund) is formed by the Malaysian government in 1951 to help workers safeguard their retirement saving. Due to the rising cost of living and changing economic landscape, it poses a challenge for those having the notion of retire early. "How much saving is enough for me to retire early?" has become a pressing question for those who seek to retire comfortably.
 
 According to the HSBC Quality of Life report, millennials in Malaysia said that they need an average of RM 4.86 million to retire comfortably. Furthermore, for the same purpose, Gen X and boomers would need an average of RM 4.53 million and RM 2.57 million respectively.
 
