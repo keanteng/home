@@ -6,7 +6,7 @@ draft: false
 author: "Kean Teng Blog"
 tags: ["Python", "Streamlit", "EPF/KWSP", "Finance"]
 weight: 5
-summary: ""
+summary: "EPF or KWSP (Employee Provident Fund) is formed by the Malaysian government on 1951 to help workers safeguard their retirement saving."
 ---
 
 <center><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"  class = "center"/></center>
