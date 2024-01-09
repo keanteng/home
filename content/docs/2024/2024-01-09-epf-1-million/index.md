@@ -55,7 +55,7 @@ You might be wondering how your yearly bonus fit into this equation? In the equa
 contribution = bonus/12 + salary
 ```
 
-But you should note that if the annual interest is to be given on monthly basis, such an assumption might cause inaccurate projection.
+But you should note that if the annual interest is to be given on monthly basis, such an assumption might cause inaccurate projection to your savings.
 
 ## Things To Note
 For Malaysian and Non-Malaysian the EPF contribution rate works differently. Of course, different amount of salary will also subject to slightly different rate of contribution. For example, when your salary is below and equal to RM 5000, the employer's share of contribution is 13% and above that it will be 12%. The contribution amount should always be rounded up to the nearest ringgit, without any cents. Moreover, the monthly contribution rate can be referred from the [Third Schedule](https://www.kwsp.gov.my/documents/20126/140690/Jadual+Ketiga+BI.pdf).
