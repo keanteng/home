@@ -64,7 +64,7 @@ params:
     ShowCodeCopyButtons: true
     ShowRssButtonInSectionTermList: true
     ShowToc: true
-    comments: false
+    comments: true
     images: ["papermod-cover.png"]
 
     profileMode:
@@ -170,3 +170,11 @@ services:
         disableInlineCSS: true
     twitter:
         disableInlineCSS: true
+
+giscus:
+    repo: "$user/$repo"
+    repoID: "$someID"
+    category: "General"
+    categoryID: "$categoryID"
+    mapping: "url"
+    inputPosition: "top"
