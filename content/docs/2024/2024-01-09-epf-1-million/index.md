@@ -22,9 +22,12 @@ That is not all, according to EPF, only 4% of its members has savings between RM
 
 In this study, we will set our retirement saving goal at RM 1 million, and we are interested to determine the number of years would take for a person to achieve the goal according to his monthly salary and yearly bonus. 
 
-<center><img src="image.png"  class = "center"/></center>
-
-You can explore the app [here](https://jf7sray2rbu8bgclqnvaxu.streamlit.app/) together with the source code on [GitHub](https://github.com/keanteng/epf/tree/main).
+<iframe
+  src="https://jf7sray2rbu8bgclqnvaxu.streamlit.app/?embed=true"
+  height="850"
+  width="700"
+  style="border:none;"
+></iframe>
 
 Surprisingly, it only takes 31.29 years for you to accumulate your saving to 1 million if you earn a monthly salary of RM 3000. 
 
