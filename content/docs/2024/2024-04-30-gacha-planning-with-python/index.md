@@ -97,7 +97,7 @@ def calculate_char_probability(
 
 ```
 
-If we give the function some input based on our game account progress, it will tells us how likely are we getting our target goals. Of course, this ensures us to pull more effectively - better expectation and lesser disappointment:
+If we give the function some input based on our game account progress, it will tell us how likely we are getting our target goals. Of course, this ensures us to pull more effectively - better expectation and lesser disappointment:
 
 ```
 calculate_char_probability(
