@@ -105,3 +105,5 @@ print(f"PDF Page dimensions: {page_width}x{page_height}")
 # Start the tkinter main loop
 root.mainloop()
 ```
+
+> Link to [Github](https://github.com/keanteng/live-pdf-coordinate)
