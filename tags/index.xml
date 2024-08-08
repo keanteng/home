@@ -10,7 +10,34 @@
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 30 Apr 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coordinate</title>
+      <link>https://keanteng.github.io/home/tags/coordinate/</link>
+      <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/coordinate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PDF</title>
+      <link>https://keanteng.github.io/home/tags/pdf/</link>
+      <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/pdf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://keanteng.github.io/home/tags/python/</link>
+      <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://keanteng.github.io/home/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Gacha</title>
       <link>https://keanteng.github.io/home/tags/gacha/</link>
@@ -26,15 +53,6 @@
       <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
       
       <guid>https://keanteng.github.io/home/tags/game/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://keanteng.github.io/home/tags/python/</link>
-      <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://keanteng.github.io/home/tags/python/</guid>
       <description></description>
     </item>
     
