@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Web Scraping on Kean Teng Blog</title>
+    <link>http://localhost:1313/home/tags/web-scraping/</link>
+    <description>Recent content in Web Scraping on Kean Teng Blog</description>
+    <image>
+      <title>Kean Teng Blog</title>
+      <url>http://localhost:1313/home/papermod-cover.png</url>
+      <link>http://localhost:1313/home/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.147.1</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 13 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/home/tags/web-scraping/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webscraping On Xpath</title>
+      <link>http://localhost:1313/home/docs/2023/2023-08-13-webscraping-on-xpath/</link>
+      <pubDate>Sun, 13 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/docs/2023/2023-08-13-webscraping-on-xpath/</guid>
+      <description>Alternative To Google Sheet IMPORTXML() </description>
+    </item>
+    <item>
+      <title>Images Scraping from Web Pages</title>
+      <link>http://localhost:1313/home/docs/2023/2023-02-19-images-scraping-from-web-pages/</link>
+      <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/docs/2023/2023-02-19-images-scraping-from-web-pages/</guid>
+      <description>A Functional Approach Towards Repetitious Images Saving</description>
+    </item>
+    <item>
+      <title>Google Sheet Simple Web Scraping</title>
+      <link>http://localhost:1313/home/docs/2022/2022-11-05-google-sheet-simple-web-scraping/</link>
+      <pubDate>Sat, 05 Nov 2022 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/docs/2022/2022-11-05-google-sheet-simple-web-scraping/</guid>
+      <description>Fetching Companies Market Capitalization Data</description>
+    </item>
+  </channel>
+</rss>

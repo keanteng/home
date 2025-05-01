@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/home/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=home/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Geospatial Analysis | Kean Teng Blog</title>
+<meta name="keywords" content="Python, Data Analysis, Geospatial Analysis, Kaggle">
+<meta name="description" content="My Kaggle Learning Note 6">
+<meta name="author" content="Kean Teng Blog">
+<link rel="canonical" href="http://localhost:1313/home/docs/2023/2023-04-19-geospatial-analysis/">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.1f5296aba415da9f4c144e5f6d371e1ec7b408a5c439cae7bfd53f8ab906e529.css" integrity="sha256-H1KWq6QV2p9MFE5fbTceHse0CKXEOcrnv9U/irkG5Sk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/home/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/home/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/home/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/home/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/home/docs/2023/2023-04-19-geospatial-analysis/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/home/docs/2023/2023-04-19-geospatial-analysis/">
+  <meta property="og:site_name" content="Kean Teng Blog">
+  <meta property="og:title" content="Geospatial Analysis">
+  <meta property="og:description" content="My Kaggle Learning Note 6">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2023-04-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-04-19T00:00:00+00:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Data Analysis">
+    <meta property="article:tag" content="Geospatial Analysis">
+    <meta property="article:tag" content="Kaggle">
+      <meta property="og:image" content="http://localhost:1313/home/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/home/papermod-cover.png">
+<meta name="twitter:title" content="Geospatial Analysis">
+<meta name="twitter:description" content="My Kaggle Learning Note 6">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Docs",
+      "item": "http://localhost:1313/home/docs/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Geospatial Analysis",
+      "item": "http://localhost:1313/home/docs/2023/2023-04-19-geospatial-analysis/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Geospatial Analysis",
+  "name": "Geospatial Analysis",
+  "description": "My Kaggle Learning Note 6",
+  "keywords": [
+    "Python", "Data Analysis", "Geospatial Analysis", "Kaggle"
+  ],
+  "articleBody": "\rImages from Unsplash\nDisclaimer: This article is my learning note from the courses I took from Kaggle.\nGeospatial analysis is the gathering, display and manipulation of imagery, GPS, satellite photography and historical data, described explicitly in terms of geographic coordinates. This course will learn on methods to visualize geospatial data and perform some analysis concerning a particular geographic location or region.\nSome interesting questions that can be addressed with geospatial analysis are:\nWhich areas affected by earthquakes would require additional reinforcement? Where should a popular coffee shop select its next store, if it is considering an expansion? With forest conservation areas set up in some regions, will animals migrate to those areas or other areas instead? 1. Creating Maps To visualize geographic coordinates as a map, we need the help of geopandas library. Note that there are a few geospatial file formats available such as shapefile, GeoJSON, KML and GPKG. But all the files can be loaded with geopandaslibrary:\n# read the shape file full_data = gpd.read_file(\"file_name\") Here’s how we can create a map for a geospatial data file. In fact, in every GeoDataFrame, there will be a geometry column that describe the geometric objects when we display them with the plot() function. They can be a point, linestring or polygon :\n## 1. Prework # plot the data only wild_lands.plot() # campsites point POI_data = gpd.read_file(\"../input/geospatial-learn-course-data/DEC_pointsinterest/DEC_pointsinterest/Decptsofinterest.shp\") campsites = POI_data.loc[POI_data.ASSET=='PRIMITIVE CAMPSITE'].copy() # foot trails as linestring roads_trails = gpd.read_file(\"../input/geospatial-learn-course-data/DEC_roadstrails/DEC_roadstrails/Decroadstrails.shp\") trails = roads_trails.loc[roads_trails.ASSET=='FOOT TRAIL'].copy() # country boundaris as polygon counties = gpd.read_file(\"../input/geospatial-learn-course-data/NY_county_boundaries/NY_county_boundaries/NY_county_boundaries.shp\") ## 2. Visualize the map # Plot a base map with counties boundaries ax = counties.plot(figsize=(10,10), color='none', edgecolor='gainsboro', zorder=3) # Add in the campsites and foot trails wild_lands.plot(color='lightgreen', ax=ax) campsites.plot(color='maroon', markersize=2, ax=ax) trails.plot(color='black', markersize=1, ax=ax) Point, linestring and polygon (geometric objects)\n2. Coordinate Reference System In order to create a GeoDataFrame, we have to set the CRS. The CRS is referenced by European Petroleum Survey Group code - EPSG 32630 used by GeoDataFrame or also known as the “Mercator” projection that preserves angles and slightly distorts area. What’s more, EPSG 4326 corresponds to coordinates in latitude and longitude. It is a coordinate system of latitude and longitude based on an ellipsoidal (squashed sphere) model of the earth.\nHere’s how to do it in code:\n# read file facilities_df = pd. read_csv(\"file_name\") # convert to geodataframe facilities = gpd.GeoDataFrames(facilities_df, geometry = points_from_xy(facilities_df.Longitude, facilities_df.Latitiude)) # set crs facilities.crs = {'init': 'epsg:4326'} # view first five rows facilities.head() It is also possible to change the CRS so that we can have datasets with matching CRS. If we cannot do it with code, alternatively, we can use proj4 string of CRS to convert to latitude and longitude coordinates using +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs:\n# match facilities crs with regions ax = regions.plot(figsize=(8,8), color='whitesmoke', linestyle=':', edgecolor='black') facilities.to_crs(epsg=32630).plot(markersize=1, ax=ax) # change CRS to EPSG 4326 and display the data regions.to_crs(\"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs\").head() 2.1 Geometric Objects Attributes Previously, we introduced the geometry column in a GeoDataFrame, in fact they are built-in attributes that could help to give us some interesting information about our data. For example, we want to find the coordinates of each point, the length of linestring or the area of a polygon.\n# find points x-coordinate facilities.geometry.head().x # find area of polygons regions.loc[:, \"AREA\"] = regions.geometry.area/ 10**6 3. Interactive Maps In this section, we will explore methods to plot interactive maps such as heatmaps, points and choropleth maps. These features are enabled by the folium package.\nSome maps to plot with folium package:\nSimple Map Markers/ Bubbles Clustered markers Heatmaps Choropleth maps To create a simple map for visualization as follows:\n# Create a map m_1 = folium.Map(location=[42.32,-71.0589], tiles='openstreetmap', zoom_start=10) # Display the map m_1 A simple map\nLet’s say we want to add some markers to the map. Here’s a case where we add markers to denote places that experienced robbery on the map:\n# data preparatin daytime_robberies = crimes[((crimes.OFFENSE_CODE_GROUP == 'Robbery') \u0026 \\ (crimes.HOUR.isin(range(9,18))))] # Create a map m_2 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13) # Add points to the map for idx, row in daytime_robberies.iterrows(): Marker([row['Lat'], row['Long']]).add_to(m_2) # Display the map m_2 Maps with markers\nNow notice that the markers are scattered all over the place. It is possible to cluster together the markers when we zoom out the map and let the markers spread out as we zoom in with the help of MarkerCluster():\n# Create the map m_3 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13) # Add points to the map mc = MarkerCluster() for idx, row in daytime_robberies.iterrows(): if not math.isnan(row['Long']) and not math.isnan(row['Lat']): mc.add_child(Marker([row['Lat'], row['Long']])) m_3.add_child(mc) # Display the map m_3 Clustered markers\nAn alternative to markers on map, we could also use circle for the same purpose - that is bubble maps:\n# Create a base map m_4 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=13) def color_producer(val): if val \u003c= 12: return 'forestgreen' else: return 'darkred' # Add a bubble map to the base map for i in range(0,len(daytime_robberies)): Circle( location=[daytime_robberies.iloc[i]['Lat'], daytime_robberies.iloc[i]['Long']], radius=20, color=color_producer(daytime_robberies.iloc[i]['HOUR'])).add_to(m_4) # Display the map m_4 Bubble map\nNow consider that among few cities with different crime rate. We would like to visualize whether which city has relatively more criminal incidents than the other, a heatmap would do a good job to show us which areas of a city are susceptible to more criminal cases:\n# Create a base map m_5 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=12) # Add a heatmap to the base map HeatMap(data=crimes[['Lat', 'Long']], radius=10).add_to(m_5) # Display the map m_5 Heat map\nWell, you should notice that heatmap makes geographic boundaries between different areas non-distinguishable. We can also use choropleth maps instead to visualize the crime rate by district.\n# GeoDataFrame with geographical boundaries of Boston police districts districts_full = gpd.read_file('../input/geospatial-learn-course-data/Police_Districts/Police_Districts/Police_Districts.shp') districts = districts_full[[\"DISTRICT\", \"geometry\"]].set_index(\"DISTRICT\") districts.head() # Number of crimes in each police district plot_dict = crimes.DISTRICT.value_counts() plot_dict.head() # Create a base map m_6 = folium.Map(location=[42.32,-71.0589], tiles='cartodbpositron', zoom_start=12) # Add a choropleth map to the base map Choropleth(geo_data=districts.__geo_interface__, data=plot_dict, key_on=\"feature.id\", fill_color='YlGnBu', legend_name='Major criminal incidents (Jan-Aug 2018)' ).add_to(m_6) # Display the map m_6 Choropleth map\n4. Manipulating Geospatial Data When we are using application such a Google Maps, we could easily get a place location on the map by just knowing the address or name. In fact, we are using what it’s known as geocoder to generate locations of the places that we want to go.\nHere’s an interesting example where we try to geocode 100 top universities in Europe with only the universities name:\n# 1. prepare a dataset with the universitites name universities = pd.read_csv(\"../input/geospatial-learn-course-data/top_universities.csv\") universities.head() # 2. apply geocode to each of the universitites def my_geocoder(row): try: point = geolocator.geocode(row).point return pd.Series({'Latitude': point.latitude, 'Longitude': point.longitude}) except: return None universities[['Latitude', 'Longitude']] = universities.apply(lambda x: my_geocoder(x['Name']), axis=1) print(\"{}% of addresses were geocoded!\".format( (1 - sum(np.isnan(universities[\"Latitude\"])) / len(universities)) * 100)) # Drop universities that were not successfully geocoded universities = universities.loc[~np.isnan(universities[\"Latitude\"])] universities = gpd.GeoDataFrame( universities, geometry=gpd.points_from_xy(universities.Longitude, universities.Latitude)) universities.crs = {'init': 'epsg:4326'} universities.head() Now let’s plot out the locations to see if they are accurate:\n# Create a map m = folium.Map(location=[54, 15], tiles='openstreetmap', zoom_start=2) # Add points to the map for idx, row in universities.iterrows(): Marker([row['Latitude'], row['Longitude']], popup=row['Name']).add_to(m) # Display the map m European universitites\n4.1 Table Joins In this section, we will explore on combining data frames with shared index for the case of GeoDataFrame. An example is that we have a dataset with boundaries of every country in Europe and a dataset with their estimated population and GDP, we can perform attribute join to merge the two datasets:\neurope = europe_boundaries.merge(europe_stats, on=\"name\") europe.head() Furthermore, it is also possible to merge GeoDataFrame based on spatial relationship between objects in geometry columns. Recall back that we geocode top 100 universities in Europe previously. Can we match each university with its corresponding country? Spatial join allow us to perform match for such as scenario.\nThe spatial join above looks at the “geometry” columns in both GeoDataFrames. If a Point object from the universities GeoDataFrame intersects a Polygon object from the europe DataFrame, the corresponding rows are combined and added as a single row of the european_universities DataFrame. Otherwise, countries without a matching university (and universities without a matching country) are omitted from the results.\n# Use spatial join to match universities to countries in Europe european_universities = gpd.sjoin(universities, europe) # Investigate the result print(\"We located {} universities.\".format(len(universities))) print(\"Only {} of the universities were located in Europe (in {} different countries).\".format( len(european_universities), len(european_universities.name.unique()))) european_universities.head() 5. Proximity Analysis For the previous four sections, we are exposed to a lot of the functions in geopandas. Here, we will look into some application areas with the learned functions:\nSome useful application:\nMeasuring distance between points on a map Select points within some radius of a feature To compute distances from two GeoDataFrames, we need to make sure they have the same CRS. The distances can be easily computed in GeoPandas. Moreover, we can find the mean distance between two points with mean too. Here’s an example where we deal with dataset with air quality monitoring stations in the same city where we would like to know the mean distance from one monitoring station to the other:\n# check CRS of geodataframes print(stations.crs) print(releases.crs) # Select one release incident in particular recent_release = releases.iloc[360] # Measure distance from release to each station distances = stations.geometry.distance(recent_release.geometry) distances # find the mean distance print('Mean distance to monitoring stations: {} feet'.format(distances.mean())) 5.1 Creating a Buffer The purpose of creating a buffer is for us to understand points on a map that lies some radius away from a point. For example, there’s a toxic gas being release accidentally to the air. There are some air quality monitoring centers nearby. We want to know whether those centers are able to detect the toxic gas.\nA working example would be as follows:\n# 1. creating a two miles buffer two_mile_buffer = stations.geometry.buffer(2*5280) two_mile_buffer.head() # 2. create map with release incidents and monitoring stations m = folium.Map(location=[39.9526,-75.1652], zoom_start=11) HeatMap(data=releases[['LATITUDE', 'LONGITUDE']], radius=15).add_to(m) for idx, row in stations.iterrows(): Marker([row['LATITUDE'], row['LONGITUDE']]).add_to(m) # Plot each polygon on the map GeoJson(two_mile_buffer.to_crs(epsg=4326)).add_to(m) # Show the map m Now we want to check if a toxic release occurred within 2 miles of any monitoring station, to do that we would need to test each polygon. But that would be tedious work. Consider combining all the polygons into one object, we can check whether the toxic gas is within the radar of the closest monitoring station:\n# check if output is true my_union.contains(releases.iloc[360].geometry) ",
+  "wordCount" : "1733",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/home/papermod-cover.png","datePublished": "2023-04-19T00:00:00Z",
+  "dateModified": "2023-04-19T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Kean Teng Blog"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/home/docs/2023/2023-04-19-geospatial-analysis/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Kean Teng Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://i.postimg.cc/0Qq5g2fX/favicon.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="http://localhost:1313/home/ja/" title="日本語"
+                            aria-label="日本語">日本語</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/home/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/home/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/home/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/home/faqs/" title="FAQs">
+                    <span>FAQs</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/home/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/home/docs/">Docs</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Geospatial Analysis
+    </h1>
+    <div class="post-description">
+      My Kaggle Learning Note 6
+    </div>
+    <div class="post-meta"><span title='2023-04-19 00:00:00 +0000 UTC'>April 19, 2023</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Kean Teng Blog&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2023/2023-04-19-geospatial-analysis/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-creating-maps" aria-label="1. Creating Maps">1. Creating Maps</a></li>
+                <li>
+                    <a href="#2-coordinate-reference-system" aria-label="2. Coordinate Reference System">2. Coordinate Reference System</a><ul>
+                        
+                <li>
+                    <a href="#21-geometric-objects-attributes" aria-label="2.1 Geometric Objects Attributes">2.1 Geometric Objects Attributes</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-interactive-maps" aria-label="3. Interactive Maps">3. Interactive Maps</a></li>
+                <li>
+                    <a href="#4-manipulating-geospatial-data" aria-label="4. Manipulating Geospatial Data">4. Manipulating Geospatial Data</a><ul>
+                        
+                <li>
+                    <a href="#41-table-joins" aria-label="4.1 Table Joins">4.1 Table Joins</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-proximity-analysis" aria-label="5. Proximity Analysis">5. Proximity Analysis</a><ul>
+                        
+                <li>
+                    <a href="#51-creating-a-buffer" aria-label="5.1 Creating a Buffer">5.1 Creating a Buffer</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><center><img src="https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1441&q=80"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Images from Unsplash</i></p>
+<blockquote>
+<p><em>Disclaimer: This article is my learning note from the courses I took from Kaggle.</em></p></blockquote>
+<p><strong>Geospatial analysis</strong> is the gathering, display and manipulation of imagery, GPS, satellite photography and historical data, described explicitly in terms of geographic coordinates. This course will learn on methods to visualize geospatial data and perform some analysis concerning a particular geographic location or region.</p>
+<p>Some interesting questions that can be addressed with geospatial analysis are:</p>
+<ul>
+<li>Which areas affected by earthquakes would require additional reinforcement?</li>
+<li>Where should a popular coffee shop select its next store, if it is considering an expansion?</li>
+<li>With forest conservation areas set up in some regions, will animals migrate to those areas or other areas instead?</li>
+</ul>
+<h2 id="1-creating-maps">1. Creating Maps<a hidden class="anchor" aria-hidden="true" href="#1-creating-maps">#</a></h2>
+<p>To visualize geographic coordinates as a map, we need the help of <code>geopandas</code> library. Note that there are a few geospatial file formats available such as <code>shapefile</code>, <code>GeoJSON</code>, <code>KML</code> and <code>GPKG</code>. But all the files can be loaded with <code>geopandas</code>library:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># read the shape file</span>
+</span></span><span class="line"><span class="cl"><span class="n">full_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&#34;file_name&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>Here&rsquo;s how we can create a map for a geospatial data file. In fact, in every <code>GeoDataFrame</code>, there will be a geometry column that describe the geometric objects when we display them with the <code>plot()</code> function. They can be a point, linestring or polygon :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1">## 1. Prework</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># plot the data only </span>
+</span></span><span class="line"><span class="cl"><span class="n">wild_lands</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># campsites point</span>
+</span></span><span class="line"><span class="cl"><span class="n">POI_data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&#34;../input/geospatial-learn-course-data/DEC_pointsinterest/DEC_pointsinterest/Decptsofinterest.shp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">campsites</span> <span class="o">=</span> <span class="n">POI_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">POI_data</span><span class="o">.</span><span class="n">ASSET</span><span class="o">==</span><span class="s1">&#39;PRIMITIVE CAMPSITE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># foot trails as linestring</span>
+</span></span><span class="line"><span class="cl"><span class="n">roads_trails</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&#34;../input/geospatial-learn-course-data/DEC_roadstrails/DEC_roadstrails/Decroadstrails.shp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">trails</span> <span class="o">=</span> <span class="n">roads_trails</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">roads_trails</span><span class="o">.</span><span class="n">ASSET</span><span class="o">==</span><span class="s1">&#39;FOOT TRAIL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># country boundaris as polygon</span>
+</span></span><span class="line"><span class="cl"><span class="n">counties</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&#34;../input/geospatial-learn-course-data/NY_county_boundaries/NY_county_boundaries/NY_county_boundaries.shp&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 2. Visualize the map</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Plot a base map with counties boundaries</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">counties</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;gainsboro&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add in the campsites and foot trails</span>
+</span></span><span class="line"><span class="cl"><span class="n">wild_lands</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">campsites</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">trails</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span></span></code></pre></div><center><img src="images/img1.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Point, linestring and polygon (geometric objects)</i></p>
+<h2 id="2-coordinate-reference-system">2. Coordinate Reference System<a hidden class="anchor" aria-hidden="true" href="#2-coordinate-reference-system">#</a></h2>
+<p>In order to create a <code>GeoDataFrame</code>, we have to set the CRS. The CRS is referenced by European Petroleum Survey Group code - <code>EPSG 32630</code> used by <code>GeoDataFrame</code> or also known as the &ldquo;Mercator&rdquo; projection that preserves angles and slightly distorts area. What&rsquo;s more, <code>EPSG 4326</code> corresponds to coordinates in latitude and longitude. It is a coordinate system of latitude and longitude based on an ellipsoidal (squashed sphere) model of the earth.</p>
+<p>Here&rsquo;s how to do it in code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># read file</span>
+</span></span><span class="line"><span class="cl"><span class="n">facilities_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span> <span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;file_name&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># convert to geodataframe</span>
+</span></span><span class="line"><span class="cl"><span class="n">facilities</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrames</span><span class="p">(</span><span class="n">facilities_df</span><span class="p">,</span> <span class="n">geometry</span> <span class="o">=</span> <span class="n">points_from_xy</span><span class="p">(</span><span class="n">facilities_df</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">facilities_df</span><span class="o">.</span><span class="n">Latitiude</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set crs</span>
+</span></span><span class="line"><span class="cl"><span class="n">facilities</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># view first five rows</span>
+</span></span><span class="line"><span class="cl"><span class="n">facilities</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><p>It is also possible to change the CRS so that we can have datasets with matching CRS. If we cannot do it with code, alternatively, we can use <code>proj4 string</code> of CRS to convert to latitude and longitude coordinates using <code>+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># match facilities crs with regions</span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span> <span class="o">=</span> <span class="n">regions</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;whitesmoke&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">facilities</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">32630</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># change CRS to EPSG 4326 and display the data</span>
+</span></span><span class="line"><span class="cl"><span class="n">regions</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s2">&#34;+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><h3 id="21-geometric-objects-attributes">2.1 Geometric Objects Attributes<a hidden class="anchor" aria-hidden="true" href="#21-geometric-objects-attributes">#</a></h3>
+<p>Previously, we introduced the geometry column in a <code>GeoDataFrame</code>, in fact they are built-in attributes that could help to give us some interesting information about our data. For example, we want to find the coordinates of each point, the length of linestring or the area of a polygon.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># find points x-coordinate</span>
+</span></span><span class="line"><span class="cl"><span class="n">facilities</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># find area of polygons</span>
+</span></span><span class="line"><span class="cl"><span class="n">regions</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&#34;AREA&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">regions</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">area</span><span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+</span></span></code></pre></div><h2 id="3-interactive-maps">3. Interactive Maps<a hidden class="anchor" aria-hidden="true" href="#3-interactive-maps">#</a></h2>
+<p>In this section, we will explore methods to plot interactive maps such as heatmaps, points and choropleth maps. These features are enabled by the <code>folium</code> package.</p>
+<p>Some maps to plot with <code>folium</code> package:</p>
+<ul>
+<li>Simple Map</li>
+<li>Markers/ Bubbles</li>
+<li>Clustered markers</li>
+<li>Heatmaps</li>
+<li>Choropleth maps</li>
+</ul>
+<p>To create a simple map for visualization as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create a map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_1</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">42.32</span><span class="p">,</span><span class="o">-</span><span class="mf">71.0589</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;openstreetmap&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_1</span>
+</span></span></code></pre></div><center><img src="images/img1.1.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>A simple map</i></p>
+<p>Let&rsquo;s say we want to add some markers to the map. Here&rsquo;s a case where we add markers to denote places that experienced robbery on the map:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># data preparatin</span>
+</span></span><span class="line"><span class="cl"><span class="n">daytime_robberies</span> <span class="o">=</span> <span class="n">crimes</span><span class="p">[((</span><span class="n">crimes</span><span class="o">.</span><span class="n">OFFENSE_CODE_GROUP</span> <span class="o">==</span> <span class="s1">&#39;Robbery&#39;</span><span class="p">)</span> <span class="o">&amp;</span> \
+</span></span><span class="line"><span class="cl">                            <span class="p">(</span><span class="n">crimes</span><span class="o">.</span><span class="n">HOUR</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">18</span><span class="p">))))]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_2</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">42.32</span><span class="p">,</span><span class="o">-</span><span class="mf">71.0589</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;cartodbpositron&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add points to the map</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">daytime_robberies</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Marker</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Long&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m_2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_2</span>
+</span></span></code></pre></div><center><img src="images/img2.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Maps with markers</i></p>
+<p>Now notice that the markers are scattered all over the place. It is possible to cluster together the markers when we zoom out the map and let the markers spread out as we zoom in with the help of <code>MarkerCluster()</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_3</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">42.32</span><span class="p">,</span><span class="o">-</span><span class="mf">71.0589</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;cartodbpositron&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add points to the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">mc</span> <span class="o">=</span> <span class="n">MarkerCluster</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">daytime_robberies</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Long&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">]):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mc</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">Marker</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Long&#39;</span><span class="p">]]))</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_3</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">mc</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_3</span>
+</span></span></code></pre></div><center><img src="images/img3.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Clustered markers</i></p>
+<p>An alternative to markers on map, we could also use circle for the same purpose - that is bubble maps:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create a base map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_4</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">42.32</span><span class="p">,</span><span class="o">-</span><span class="mf">71.0589</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;cartodbpositron&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">color_producer</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;forestgreen&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39;darkred&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add a bubble map to the base map</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">daytime_robberies</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Circle</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">daytime_robberies</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Lat&#39;</span><span class="p">],</span> <span class="n">daytime_robberies</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;Long&#39;</span><span class="p">]],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">color</span><span class="o">=</span><span class="n">color_producer</span><span class="p">(</span><span class="n">daytime_robberies</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;HOUR&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m_4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_4</span>
+</span></span></code></pre></div><center><img src="images/img4.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Bubble map</i></p>
+<p>Now consider that among few cities with different crime rate. We would like to visualize whether which city has relatively more criminal incidents than the other, a heatmap would do a good job to show us which areas of a city are susceptible to more criminal cases:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create a base map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_5</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">42.32</span><span class="p">,</span><span class="o">-</span><span class="mf">71.0589</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;cartodbpositron&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add a heatmap to the base map</span>
+</span></span><span class="line"><span class="cl"><span class="n">HeatMap</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">crimes</span><span class="p">[[</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">]],</span> <span class="n">radius</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m_5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_5</span>
+</span></span></code></pre></div><center><img src="images/img5.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Heat map</i></p>
+<p>Well, you should notice that heatmap makes geographic boundaries between different areas non-distinguishable. We can also use choropleth maps instead to visualize the crime rate by district.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># GeoDataFrame with geographical boundaries of Boston police districts</span>
+</span></span><span class="line"><span class="cl"><span class="n">districts_full</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s1">&#39;../input/geospatial-learn-course-data/Police_Districts/Police_Districts/Police_Districts.shp&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">districts</span> <span class="o">=</span> <span class="n">districts_full</span><span class="p">[[</span><span class="s2">&#34;DISTRICT&#34;</span><span class="p">,</span> <span class="s2">&#34;geometry&#34;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&#34;DISTRICT&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">districts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Number of crimes in each police district</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_dict</span> <span class="o">=</span> <span class="n">crimes</span><span class="o">.</span><span class="n">DISTRICT</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plot_dict</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create a base map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_6</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">42.32</span><span class="p">,</span><span class="o">-</span><span class="mf">71.0589</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;cartodbpositron&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add a choropleth map to the base map</span>
+</span></span><span class="line"><span class="cl"><span class="n">Choropleth</span><span class="p">(</span><span class="n">geo_data</span><span class="o">=</span><span class="n">districts</span><span class="o">.</span><span class="n">__geo_interface__</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">data</span><span class="o">=</span><span class="n">plot_dict</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">key_on</span><span class="o">=</span><span class="s2">&#34;feature.id&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;YlGnBu&#39;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">           <span class="n">legend_name</span><span class="o">=</span><span class="s1">&#39;Major criminal incidents (Jan-Aug 2018)&#39;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m_6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m_6</span>
+</span></span></code></pre></div><center><img src="images/img6.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>Choropleth map</i></p>
+<h2 id="4-manipulating-geospatial-data">4. Manipulating Geospatial Data<a hidden class="anchor" aria-hidden="true" href="#4-manipulating-geospatial-data">#</a></h2>
+<p>When we are using application such a Google Maps, we could easily get a place location on the map by just knowing the address or name. In fact, we are using what it&rsquo;s known as geocoder to generate locations of the places that we want to go.</p>
+<p>Here&rsquo;s an interesting example where we try to geocode 100 top universities in Europe with only the universities name:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 1. prepare a dataset with the universitites name</span>
+</span></span><span class="line"><span class="cl"><span class="n">universities</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&#34;../input/geospatial-learn-course-data/top_universities.csv&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">universities</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. apply geocode to each of the universitites</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">my_geocoder</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">point</span> <span class="o">=</span> <span class="n">geolocator</span><span class="o">.</span><span class="n">geocode</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">.</span><span class="n">point</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s1">&#39;Latitude&#39;</span><span class="p">:</span> <span class="n">point</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">:</span> <span class="n">point</span><span class="o">.</span><span class="n">longitude</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">universities</span><span class="p">[[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">universities</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">my_geocoder</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{}% o</span><span class="s2">f addresses were geocoded!&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">universities</span><span class="p">[</span><span class="s2">&#34;Latitude&#34;</span><span class="p">]))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">universities</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Drop universities that were not successfully geocoded</span>
+</span></span><span class="line"><span class="cl"><span class="n">universities</span> <span class="o">=</span> <span class="n">universities</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">universities</span><span class="p">[</span><span class="s2">&#34;Latitude&#34;</span><span class="p">])]</span>
+</span></span><span class="line"><span class="cl"><span class="n">universities</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">universities</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">universities</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">universities</span><span class="o">.</span><span class="n">Latitude</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">universities</span><span class="o">.</span><span class="n">crs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">universities</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><p>Now let&rsquo;s plot out the locations to see if they are accurate:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create a map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mi">54</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;openstreetmap&#39;</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add points to the map</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">universities</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Marker</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]],</span> <span class="n">popup</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Display the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span>
+</span></span></code></pre></div><center><img src="images/img7.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i>European universitites</i></p>
+<h3 id="41-table-joins">4.1 Table Joins<a hidden class="anchor" aria-hidden="true" href="#41-table-joins">#</a></h3>
+<p>In this section, we will explore on combining data frames with shared index for the case of <code>GeoDataFrame</code>. An example is that we have a dataset with boundaries of every country in Europe and a dataset with their estimated population and GDP, we can perform attribute join to merge the two datasets:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">europe</span> <span class="o">=</span> <span class="n">europe_boundaries</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">europe_stats</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&#34;name&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">europe</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><p>Furthermore, it is also possible to merge <code>GeoDataFrame</code> based on spatial relationship between objects in geometry columns. Recall back that we geocode top 100 universities in Europe previously. Can we match each university with its corresponding country? Spatial join allow us to perform match for such as scenario.</p>
+<blockquote>
+<p><em>The spatial join above looks at the &ldquo;geometry&rdquo; columns in both <code>GeoDataFrames</code>. If a Point object from the universities <code>GeoDataFrame</code> intersects a Polygon object from the <code>europe</code> DataFrame, the corresponding rows are combined and added as a single row of the <code>european_universities</code> DataFrame. Otherwise, countries without a matching university (and universities without a matching country) are omitted from the results.</em></p></blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Use spatial join to match universities to countries in Europe</span>
+</span></span><span class="line"><span class="cl"><span class="n">european_universities</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">universities</span><span class="p">,</span> <span class="n">europe</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Investigate the result</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;We located </span><span class="si">{}</span><span class="s2"> universities.&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">universities</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Only </span><span class="si">{}</span><span class="s2"> of the universities were located in Europe (in </span><span class="si">{}</span><span class="s2"> different countries).&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">len</span><span class="p">(</span><span class="n">european_universities</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">european_universities</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">unique</span><span class="p">())))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">european_universities</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span></code></pre></div><h2 id="5-proximity-analysis">5. Proximity Analysis<a hidden class="anchor" aria-hidden="true" href="#5-proximity-analysis">#</a></h2>
+<p>For the previous four sections, we are exposed to a lot of the functions in <code>geopandas</code>. Here, we will look into some application areas with the learned functions:</p>
+<p>Some useful application:</p>
+<ul>
+<li>Measuring distance between points on a map</li>
+<li>Select points within some radius of a feature</li>
+</ul>
+<p>To compute distances from two <code>GeoDataFrames</code>, we need to make sure they have the same CRS. The distances can be easily computed in <code>GeoPandas</code>. Moreover, we can find the mean distance between two points with <code>mean</code> too. Here&rsquo;s an example where we deal with dataset with air quality monitoring stations in the same city where we would like to know the mean distance from one monitoring station to the other:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># check CRS of geodataframes</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">stations</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">releases</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Select one release incident in particular</span>
+</span></span><span class="line"><span class="cl"><span class="n">recent_release</span> <span class="o">=</span> <span class="n">releases</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">360</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Measure distance from release to each station</span>
+</span></span><span class="line"><span class="cl"><span class="n">distances</span> <span class="o">=</span> <span class="n">stations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">recent_release</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">distances</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># find the mean distance</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean distance to monitoring stations: </span><span class="si">{}</span><span class="s1"> feet&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">distances</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</span></span></code></pre></div><h3 id="51-creating-a-buffer">5.1 Creating a Buffer<a hidden class="anchor" aria-hidden="true" href="#51-creating-a-buffer">#</a></h3>
+<p>The purpose of creating a buffer is for us to understand points on a map that lies some radius away from a point. For example, there&rsquo;s a toxic gas being release accidentally to the air. There are some air quality monitoring centers nearby. We want to know whether those centers are able to detect the toxic gas.</p>
+<p>A working example would be as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 1. creating a two miles buffer</span>
+</span></span><span class="line"><span class="cl"><span class="n">two_mile_buffer</span> <span class="o">=</span> <span class="n">stations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">5280</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">two_mile_buffer</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. create map with release incidents and monitoring stations</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">39.9526</span><span class="p">,</span><span class="o">-</span><span class="mf">75.1652</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">HeatMap</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">releases</span><span class="p">[[</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">,</span> <span class="s1">&#39;LONGITUDE&#39;</span><span class="p">]],</span> <span class="n">radius</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">stations</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Marker</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;LATITUDE&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;LONGITUDE&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># Plot each polygon on the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">GeoJson</span><span class="p">(</span><span class="n">two_mile_buffer</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">))</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Show the map</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span>
+</span></span></code></pre></div><center><img src="images/img8.png"  class = "center"/></center>
+<p style="text-align: center; color:grey;"><i></i></p>
+<p>Now we want to check if a toxic release occurred within 2 miles of any monitoring station, to do that we would need to test each polygon. But that would be tedious work. Consider combining all the polygons into one object, we can check whether the toxic gas is within the radar of the closest monitoring station:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># check if output is true</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_union</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">releases</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">360</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/home/tags/python/">Python</a></li>
+      <li><a href="http://localhost:1313/home/tags/data-analysis/">Data Analysis</a></li>
+      <li><a href="http://localhost:1313/home/tags/geospatial-analysis/">Geospatial Analysis</a></li>
+      <li><a href="http://localhost:1313/home/tags/kaggle/">Kaggle</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/home/docs/2023/2023-08-13-webscraping-on-xpath/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Webscraping On Xpath</span>
+  </a>
+  <a class="next" href="http://localhost:1313/home/docs/2023/2023-04-09-creating-a-website-with-hugo--papermode/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Creating a Website With Hugo &amp; PaperMode</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on x"
+            href="https://x.com/intent/tweet/?text=Geospatial%20Analysis&amp;url=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f&amp;hashtags=Python%2cDataAnalysis%2cGeospatialAnalysis%2cKaggle">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f&amp;title=Geospatial%20Analysis&amp;summary=Geospatial%20Analysis&amp;source=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f&title=Geospatial%20Analysis">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on whatsapp"
+            href="https://api.whatsapp.com/send?text=Geospatial%20Analysis%20-%20http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on telegram"
+            href="https://telegram.me/share/url?text=Geospatial%20Analysis&amp;url=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Geospatial Analysis on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Geospatial%20Analysis&u=http%3a%2f%2flocalhost%3a1313%2fhome%2fdocs%2f2023%2f2023-04-19-geospatial-analysis%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer><script src="https://giscus.app/client.js"
+        data-repo="keanteng/home"
+        data-repo-id="R_kgDOJUcFvg"
+        data-category="General"
+        data-category-id="DIC_kwDOJUcFvs4CeIVI"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/home/">Kean Teng Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

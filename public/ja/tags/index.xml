@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Kean Teng Blog</title>
+    <link>http://localhost:1313/home/ja/tags/</link>
+    <description>Recent content in Tags on Kean Teng Blog</description>
+    <image>
+      <title>Kean Teng Blog</title>
+      <url>http://localhost:1313/home/papermod-cover.png</url>
+      <link>http://localhost:1313/home/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.147.1</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 08 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/home/ja/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PDF</title>
+      <link>http://localhost:1313/home/ja/tags/pdf/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/pdf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/home/ja/tags/python/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>座標</title>
+      <link>http://localhost:1313/home/ja/tags/%E5%BA%A7%E6%A8%99/</link>
+      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/%E5%BA%A7%E6%A8%99/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>コーディング</title>
+      <link>http://localhost:1313/home/ja/tags/%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</link>
+      <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ゲーム</title>
+      <link>http://localhost:1313/home/ja/tags/%E3%82%B2%E3%83%BC%E3%83%A0/</link>
+      <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/%E3%82%B2%E3%83%BC%E3%83%A0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ガチャ</title>
+      <link>http://localhost:1313/home/ja/tags/%E3%82%AC%E3%83%81%E3%83%A3/</link>
+      <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/%E3%82%AC%E3%83%81%E3%83%A3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>シミュレーション</title>
+      <link>http://localhost:1313/home/ja/tags/%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/</link>
+      <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/tags/%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

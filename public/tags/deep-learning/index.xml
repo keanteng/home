@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Deep Learning on Kean Teng Blog</title>
+    <link>http://localhost:1313/home/tags/deep-learning/</link>
+    <description>Recent content in Deep Learning on Kean Teng Blog</description>
+    <image>
+      <title>Kean Teng Blog</title>
+      <url>http://localhost:1313/home/papermod-cover.png</url>
+      <link>http://localhost:1313/home/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.147.1</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 24 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/home/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Intro to Deep Learning</title>
+      <link>http://localhost:1313/home/docs/2023/2023-02-24-intro-to-deep-learning/</link>
+      <pubDate>Fri, 24 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/docs/2023/2023-02-24-intro-to-deep-learning/</guid>
+      <description>My Kaggle Learning Note 1</description>
+    </item>
+  </channel>
+</rss>
