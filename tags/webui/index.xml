@@ -9,16 +9,16 @@
       <url>https://keanteng.github.io/home/papermod-cover.png</url>
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 25 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/webui/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.147.1</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 25 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keanteng.github.io/home/tags/webui/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Stable Diffusion WebUI with Civitai LORAs</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-02-25-stable-diffusion-webui-with-civitai-loras/</link>
       <pubDate>Sat, 25 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://keanteng.github.io/home/docs/2023/2023-02-25-stable-diffusion-webui-with-civitai-loras/</guid>
       <description>Quick Guide I compiled from the Web</description>
     </item>
-    
   </channel>
 </rss>

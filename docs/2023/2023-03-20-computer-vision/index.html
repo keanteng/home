@@ -10,7 +10,7 @@
 <meta name="description" content="My Kaggle Learning Note 5">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/docs/2023/2023-03-20-computer-vision/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7eda7b0a9527ce652a3c87fbed4e152dc9c45f0b3894c9d25b8d5d4e960e8c29.css" integrity="sha256-ftp7CpUnzmUqPIf77U4VLcnEXws4lMnSW41dTpYOjCk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -18,6 +18,7 @@
 <link rel="mask-icon" href="https://keanteng.github.io/home/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://keanteng.github.io/home/docs/2023/2023-03-20-computer-vision/">
 <noscript>
     <style>
         #theme-toggle,
@@ -35,7 +36,7 @@
                 --secondary: rgb(155, 156, 157);
                 --tertiary: rgb(65, 66, 68);
                 --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
+                --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
             }
@@ -54,18 +55,24 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Computer Vision" />
-<meta property="og:description" content="My Kaggle Learning Note 5" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://keanteng.github.io/home/docs/2023/2023-03-20-computer-vision/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/><meta property="article:section" content="docs" />
-<meta property="article:published_time" content="2023-03-20T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-03-20T00:00:00+00:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
-
-<meta name="twitter:title" content="Computer Vision"/>
-<meta name="twitter:description" content="My Kaggle Learning Note 5"/>
+</noscript><meta property="og:url" content="https://keanteng.github.io/home/docs/2023/2023-03-20-computer-vision/">
+  <meta property="og:site_name" content="Kean Teng Blog">
+  <meta property="og:title" content="Computer Vision">
+  <meta property="og:description" content="My Kaggle Learning Note 5">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:published_time" content="2023-03-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-03-20T00:00:00+00:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Computer Vision">
+    <meta property="article:tag" content="Image Classification">
+    <meta property="article:tag" content="Kaggle">
+      <meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:title" content="Computer Vision">
+<meta name="twitter:description" content="My Kaggle Learning Note 5">
 
 
 <script type="application/ld+json">
@@ -101,7 +108,7 @@
   "articleBody": " Images from Unsplash\nDisclaimer: This article is my learning note from the courses I took from Kaggle.\nComputer vision literally means computer able to see and recognize stuff. Applications such as Google Lens and Google Image Search are some good examples of where computer vision is being used in our daily life.\nIn this course, we will explore some technique used to empower computer with the power of seeing:\nBuilding an image classifier with Keras Concepts of visual feature extraction Custom covnet Apply data augmentation to extend dataset. 1. Convolutional Classifier Convolutional neural networks or “covnet” is a neural network specializes in computer vision. A covnet used for image classification has two parts: a convolutional base and a dense head. The base is used to extract the features of an image while the head is used to determine the class of the image. So, the aims of training a neural network are simply to know which feature to extract from a particular image and to know which class the image will belong from the features.\nThe process\nHere is how we can train a covnet on Python to recognize a car and a truck:\n# 1. load pretrained base pretrained_base = tf.keras.models.load_model( # file path '../input/cv-course-models/cv-course-models/vgg16-pretrained-base', ) pretrained_base.trainable = False # 2. attach classfier head from tensorflow import keras from tensorflow.keras import layers model = keras.Sequential([ pretrained_base, layers.Flatten(), # transform 2d output to 1d layers.Dense(6, activation = 'relu'), layers.Dense(1, activation = 'sigmoid'), # transform output to class probability (truck) ]) # 3. model fitting model.compile( optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['binary_accurary'], ) history = model.fit( ds_train, validation_data = ds_valid, epochs = 30, verbose = 0, ) # 4. visualize model loss import pandas as pd history_frame = pd.DataFrame(history.history) history_frame.loc[:, ['loss', 'val_loss']].plot() history_frame.loc[:, ['binary_accurary', 'val_binary_accurary']].plot(); 2. Features Extraction 2.1 Convolution and ReLU The process of feature extraction does three things. It filters an image for a certain feature; it detects the feature within the filtered image, and it condenses the image to enhance the features.\nFeatur extraction overview\nIn training, the covnet will learn weights from image features and the weights are contained in the convolutional layers. The weights are known as kernels which can be presented as an array of number. A kernel will scan over an image and produce a weighted sum of pixel values (finding the best kernel values) — emphasizing and de-emphasizing certain image patterns and information.\nThe process\nActivations in the network is called feature maps. Feature maps is the result when filter is applied to image — it contains features a kernel extract.\nApplying filter\nAfter filtering, the feature maps will be passed to an activation function which can be though as scoring pixel values according to some measure of importance. For example, ReLU activation assumes negative values are not important, so they are set to zero. In fact, these images are how the head of a network is able to solve the classification problem — looking for a particular characteristic of images that we want to classify.\nAfter passing through activation function\nHere’s how to can perform feature extraction in Python:\n# define kernel import tensorflow as tf kernel =tf.constant([ [-1, -1, -1], [-1, 8, -1], [-1, -1, -1], ]) plt.figure(figsize = (3,3)) show_kernel(kernel) # applying kernel image_filter = tf.nn.conv2d( input = image, fitlers = kernel, strides = 1, # section 3 padding = 'SAME', ) plt.figure(figsize = (6,6)) plt.imshow(tf.squeeze(image_filter)) plt.axis('off') plt.show(); # applying activation function image_detect = tf.nn.relu(image_filter) plt.figure(figsize = (6,6)) plt.imshow(tf.squeeze(image_filter)) plt.axis('off') plt.show(); 2.2 Maximum Pooling from tensorflow import keras from tensorflow.keras import layers model = keras.Sequential([ layers.Conv2D(filters=64, kernel_size=3), # activation is None layers.MaxPool2D(pool_size=2), # More layers follow ]) Notice that after the Conv2D layer, we will apply a MaxPool2D layer for the condensation step. This layer will not contain any trainable weights as of the previous layer, but it will condense the feature maps to only retain important feature. This is what maximum pooling does. It takes patches of activations in the original feature maps and replaces them with maximum activation in those patches. The pooling steps will increase the proportions of active pixels to zero pixels — intensifying the feature after ReLU activation.\nMaximum pooling\nIs zero pixels unimportant? In fact, zero pixels carries positional information and MaxPool2D function will remove them (positional information of the feature maps) and this will lead to a property in covnet known as translation invariance.\nThis means that a covnet with maximum pooling tend to not distinguish features by their location in image. Notice from the first row of images below, after repeated pooling, the positional information is destroyed and no longer distinguishable. But pooling only causes translation invariance in network over small distance. The second row of the image features two dots far apart and this feature remains distinct after repeated pooling.\nIn fact, such invariance is good for an image classifier as it reduces data for training since we do not need to teach the network differences in perspective and framing when same features are positioned on different part of an original image.\n3. Sliding Window Both convolution and pooling steps are performed over a sliding window with parameters “kernel_size” for convolution and “pool_size” for pooling.\nNotice in section 2.1, when we perform pooling, there are two extra parameters: strides and padding. strides means how far the window will move each step and padding describes how the pixels at the edge are being handle.\nPooling layer will almost always have stride values greater than 1, like (2, 2) or (3, 3), but not larger than the window itself.\nConsidering the sliding window process, is it necessary to always stay within the boundary? In fact, there is a trade-off between staying within and out of bound by changing the parameter padding in our code:\npadding = ‘valid’: Convolution window stay entirely inside input. Output will shrink. It will shrink more for larger kernels. This will limit the number of layers contained in a network, notably small size input. padding = ‘same’: Pad the input with 0’s around the border to make size of output and input the same. However, this will dilute the influence of pixels at the borders. from tensorflow import keras from tensorflow.keras import layers model = keras.Sequential([ layers.Conv2D(filters=64, kernel_size=3, strides=1, padding='same', activation='relu'), layers.MaxPool2D(pool_size=2, strides=1, padding='same') # More layers follow ]) Example for visualization:\nshow_extraction( image, kernel, # Window parameters conv_stride=3, pool_size=2, pool_stride=2, subplot_shape=(1, 4), figsize=(14, 6), ) Since the circle is just 1 pixel wide, using stride = 3 is too coarse to produce a decent feature maps. We should then reduce the number of strides for a better feature map.\nThe more horizontal parts of the input end up with the greatest activation as the kernel is designed to detect horizontal lines.\n4. Custom Covnet Through feature extraction, we learned how to extract simple features from an image through filter, detect and pooling. By repeating the extraction process, we can extract more complex and refined features as the process travel deeper into the network.\nThis can be done through convolution blocks with stacks of Conv2D and MaxPool2D layers as below:\nHere’s how we can design a covnet that can extract complex features:\n# 1. define model from tensorflow import keras from tensorflow.keras import layers model = keras.Sequential([ # First Convolutional Block layers.Conv2D(filters=32, kernel_size=5, activation=\"relu\", padding='same', input_shape=[128, 128, 3]), layers.MaxPool2D(), # Second Convolutional Block layers.Conv2D(filters=64, kernel_size=3, activation=\"relu\", padding='same'), layers.MaxPool2D(), # Third Convolutional Block layers.Conv2D(filters=128, kernel_size=3, activation=\"relu\", padding='same'), layers.MaxPool2D(), # Classifier Head layers.Flatten(), layers.Dense(units=6, activation=\"relu\"), layers.Dense(units=1, activation=\"sigmoid\"), ]) model.summary() # 2. model training model.compile( optimizer=tf.keras.optimizers.Adam(epsilon=0.01), loss='binary_crossentropy', metrics=['binary_accuracy'] ) history = model.fit( ds_train, validation_data=ds_valid, epochs=40, verbose=0, ) # 3. model loss evaluation import pandas as pd history_frame = pd.DataFrame(history.history) history_frame.loc[:, ['loss', 'val_loss']].plot() history_frame.loc[:, ['binary_accuracy', 'val_binary_accuracy']].plot(); 5. Data Augmentation More data will generally help a model performs better — to better differentiate image. In this section, we will learn to augment our data by applying transformation to our datasets such as rotation, flipping, warping and changing of contrast and color tone. Here’s how to perform data augmentation in Python:\nData augmentation example\n# 1. define model - with augmentation from tensorflow import keras from tensorflow.keras import layers pretrained_base = tf.keras.models.load_model( '../input/cv-course-models/cv-course-models/vgg16-pretrained-base', ) pretrained_base.trainable = False model = keras.Sequential([ # Preprocessing layers.RandomFlip('horizontal'), # flip left-to-right layers.RandomContrast(0.5), # contrast change by up to 50% # Base pretrained_base, # Head layers.Flatten(), layers.Dense(6, activation='relu'), layers.Dense(1, activation='sigmoid'), ]) # 2. model training model.compile( optimizer='adam', loss='binary_crossentropy', metrics=['binary_accuracy'], ) history = model.fit( ds_train, validation_data=ds_valid, epochs=30, verbose=0, ) # 3. model loss evaluation import pandas as pd history_frame = pd.DataFrame(history.history) history_frame.loc[:, ['loss', 'val_loss']].plot() history_frame.loc[:, ['binary_accuracy', 'val_binary_accuracy']].plot(); ",
   "wordCount" : "1428",
   "inLanguage": "en",
-  "datePublished": "2023-03-20T00:00:00Z",
+  "image": "https://keanteng.github.io/home/papermod-cover.png","datePublished": "2023-03-20T00:00:00Z",
   "dateModified": "2023-03-20T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -140,7 +147,7 @@
         <div class="logo">
             <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -160,11 +167,17 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://keanteng.github.io/home/ja/" title="日本語"
+                            aria-label="日本語">日本語</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                <a href="https://keanteng.github.io/home/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
@@ -176,11 +189,6 @@
             <li>
                 <a href="https://keanteng.github.io/home/tags/" title="Tags">
                     <span>Tags</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://keanteng.github.io/home/projects/" title="Projects">
-                    <span>Projects</span>
                 </a>
             </li>
             <li>
@@ -196,13 +204,13 @@
 <article class="post-single">
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://keanteng.github.io/home/">Home</a>&nbsp;»&nbsp;<a href="https://keanteng.github.io/home/docs/">Docs</a></div>
-    <h1 class="post-title">
+    <h1 class="post-title entry-hint-parent">
       Computer Vision
     </h1>
     <div class="post-description">
       My Kaggle Learning Note 5
     </div>
-    <div class="post-meta"><span title='2023-03-20 00:00:00 +0000 UTC'>March 20, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog
+    <div class="post-meta"><span title='2023-03-20 00:00:00 +0000 UTC'>March 20, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2023/2023-03-20-computer-vision/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> <div class="toc">
@@ -237,8 +245,7 @@
   <div class="post-content"><center><img src="images/img1.png"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i>Images from Unsplash</i></p>
 <blockquote>
-<p><em>Disclaimer: This article is my learning note from the courses I took from Kaggle.</em></p>
-</blockquote>
+<p><em>Disclaimer: This article is my learning note from the courses I took from Kaggle.</em></p></blockquote>
 <p>Computer vision literally means computer able to see and recognize stuff. Applications such as Google Lens and Google Image Search are some good examples of where computer vision is being used in our daily life.</p>
 <p>In this course, we will explore some technique used to empower computer with the power of seeing:</p>
 <ul>
@@ -516,50 +523,73 @@
 </nav>
 
 
-<div class="share-buttons">
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on twitter"
-        href="https://twitter.com/intent/tweet/?text=Computer%20Vision&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f&amp;hashtags=Python%2cComputerVision%2cImageClassification%2cKaggle">
-        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-            <path
-                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
-        </svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on linkedin"
-        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f&amp;title=Computer%20Vision&amp;summary=Computer%20Vision&amp;source=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
-        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-            <path
-                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-        </svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on reddit"
-        href="https://reddit.com/submit?url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f&title=Computer%20Vision">
-        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-            <path
-                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-        </svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on facebook"
-        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
-        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-            <path
-                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-        </svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on whatsapp"
-        href="https://api.whatsapp.com/send?text=Computer%20Vision%20-%20https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
-        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-            <path
-                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-        </svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on telegram"
-        href="https://telegram.me/share/url?text=Computer%20Vision&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
-        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-            <path
-                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-        </svg>
-    </a>
-</div>
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on x"
+            href="https://x.com/intent/tweet/?text=Computer%20Vision&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f&amp;hashtags=Python%2cComputerVision%2cImageClassification%2cKaggle">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f&amp;title=Computer%20Vision&amp;summary=Computer%20Vision&amp;source=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f&title=Computer%20Vision">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on whatsapp"
+            href="https://api.whatsapp.com/send?text=Computer%20Vision%20-%20https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on telegram"
+            href="https://telegram.me/share/url?text=Computer%20Vision&amp;url=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Computer Vision on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Computer%20Vision&u=https%3a%2f%2fkeanteng.github.io%2fhome%2fdocs%2f2023%2f2023-03-20-computer-vision%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
   </footer><script src="https://giscus.app/client.js"
         data-repo="keanteng/home"
         data-repo-id="R_kgDOJUcFvg"
@@ -579,7 +609,8 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+        <span>&copy; 2025 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.110.0"><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.147.1"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -11,7 +11,7 @@
 <meta name="description" content="Kean Teng Blog - https://keanteng.github.io/home/">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7eda7b0a9527ce652a3c87fbed4e152dc9c45f0b3894c9d25b8d5d4e960e8c29.css" integrity="sha256-ftp7CpUnzmUqPIf77U4VLcnEXws4lMnSW41dTpYOjCk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -21,6 +21,8 @@
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" type="application/rss+xml" href="https://keanteng.github.io/home/index.xml">
 <link rel="alternate" type="application/json" href="https://keanteng.github.io/home/index.json">
+<link rel="alternate" hreflang="en" href="https://keanteng.github.io/home/">
+<link rel="alternate" hreflang="ja" href="https://keanteng.github.io/home/ja/">
 <noscript>
     <style>
         #theme-toggle,
@@ -38,7 +40,7 @@
                 --secondary: rgb(155, 156, 157);
                 --tertiary: rgb(65, 66, 68);
                 --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
+                --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
             }
@@ -57,16 +59,17 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Kean Teng Blog" />
-<meta property="og:description" content="Kean Teng Blog - https://keanteng.github.io/home/" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://keanteng.github.io/home/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
-
-<meta name="twitter:title" content="Kean Teng Blog"/>
-<meta name="twitter:description" content="Kean Teng Blog - https://keanteng.github.io/home/"/>
+</noscript><meta property="og:url" content="https://keanteng.github.io/home/">
+  <meta property="og:site_name" content="Kean Teng Blog">
+  <meta property="og:title" content="Kean Teng Blog">
+  <meta property="og:description" content="Kean Teng Blog - https://keanteng.github.io/home/">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:title" content="Kean Teng Blog">
+<meta name="twitter:description" content="Kean Teng Blog - https://keanteng.github.io/home/">
 
 <script type="application/ld+json">
 {
@@ -75,7 +78,7 @@
   "name": "Kean Teng Blog",
   "url": "https://keanteng.github.io/home/",
   "description": "Kean Teng Blog - https://keanteng.github.io/home/",
-  "thumbnailUrl": "https://i.postimg.cc/0Qq5g2fX/favicon.png",
+  "logo": "https://i.postimg.cc/0Qq5g2fX/favicon.png",
   "sameAs": [
       "https://github.com/keanteng/home", "https://my.linkedin.com/in/khorkeanteng", "https://twitter.com/realKeanTeng", "https://khorkeanteng.medium.com/", "https://www.instagram.com/khorkeanteng/", "index.xml"
   ]
@@ -100,7 +103,7 @@
         <div class="logo">
             <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -120,11 +123,17 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://keanteng.github.io/home/ja/" title="日本語"
+                            aria-label="日本語">日本語</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                <a href="https://keanteng.github.io/home/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
@@ -139,11 +148,6 @@
                 </a>
             </li>
             <li>
-                <a href="https://keanteng.github.io/home/projects/" title="Projects">
-                    <span>Projects</span>
-                </a>
-            </li>
-            <li>
                 <a href="https://keanteng.github.io/home/faqs/" title="FAQs">
                     <span>FAQs</span>
                 </a>
@@ -155,7 +159,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Geospatial Analysis
+    <h2 class="entry-hint-parent">Geospatial Analysis
     </h2>
   </header>
   <div class="entry-content">
@@ -167,19 +171,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Creating a Website With Hugo &amp; PaperMode
+    <h2 class="entry-hint-parent">Creating a Website With Hugo &amp; PaperMode
     </h2>
   </header>
   <div class="entry-content">
     <p>There are a few things to prepare before your own site can be created, as follows: A GitHub account Installed Microsoft Visual Studio Code Installed Git. After you create a GitHub account and installing the necessary software, we are ready to begin!</p>
   </div>
   <footer class="entry-footer"><span title='2023-04-09 00:00:00 +0000 UTC'>April 9, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</footer>
-  <a class="entry-link" aria-label="post link to Creating a Website With Hugo &amp; PaperMode" href="https://keanteng.github.io/home/docs/2023/2023-04-09-creating-a-website-with-hugo--papermode/"></a>
+  <a class="entry-link" aria-label="post link to Creating a Website With Hugo & PaperMode" href="https://keanteng.github.io/home/docs/2023/2023-04-09-creating-a-website-with-hugo--papermode/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Computer Vision
+    <h2 class="entry-hint-parent">Computer Vision
     </h2>
   </header>
   <div class="entry-content">
@@ -191,7 +195,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Intro to SQL
+    <h2 class="entry-hint-parent">Intro to SQL
     </h2>
   </header>
   <div class="entry-content">
@@ -203,7 +207,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Intermediate Machine Learning
+    <h2 class="entry-hint-parent">Intermediate Machine Learning
     </h2>
   </header>
   <div class="entry-content">
@@ -215,7 +219,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Stable Diffusion WebUI with Civitai LORAs
+    <h2 class="entry-hint-parent">Stable Diffusion WebUI with Civitai LORAs
     </h2>
   </header>
   <div class="entry-content">
@@ -227,7 +231,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Intro to Deep Learning
+    <h2 class="entry-hint-parent">Intro to Deep Learning
     </h2>
   </header>
   <div class="entry-content">
@@ -239,7 +243,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Images Scraping from Web Pages
+    <h2 class="entry-hint-parent">Images Scraping from Web Pages
     </h2>
   </header>
   <div class="entry-content">
@@ -251,7 +255,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Google Sheet Simple Web Scraping
+    <h2 class="entry-hint-parent">Google Sheet Simple Web Scraping
     </h2>
   </header>
   <div class="entry-content">
@@ -270,7 +274,8 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+        <span>&copy; 2025 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

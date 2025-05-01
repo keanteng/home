@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>JAtags/Finance on Kean Teng Blog</title>
+    <link>http://localhost:1313/home/ja/jatags/finance/</link>
+    <description>Recent content in JAtags/Finance on Kean Teng Blog</description>
+    <image>
+      <title>Kean Teng Blog</title>
+      <url>http://localhost:1313/home/papermod-cover.png</url>
+      <link>http://localhost:1313/home/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- 0.147.0</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 09 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/home/ja/jatags/finance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Road To 1 Million With EPF</title>
+      <link>http://localhost:1313/home/ja/docs/2025/testing/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/docs/2025/testing/</guid>
+      <description>Retirement Goal Projection</description>
+    </item>
+  </channel>
+</rss>

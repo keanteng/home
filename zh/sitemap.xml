@@ -2,27 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://keanteng.github.io/home/zh/chcategories/</loc>
-  </url><url>
-    <loc>https://keanteng.github.io/home/zh/chseries/</loc>
-  </url><url>
-    <loc>https://keanteng.github.io/home/zh/chtags/</loc>
-  </url><url>
-    <loc>https://keanteng.github.io/home/zh/</loc>
+    <loc>http://localhost:1313/home/zh/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://keanteng.github.io/home/"
+                href="http://localhost:1313/home/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="jp"
-                href="https://keanteng.github.io/home/jp/"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://keanteng.github.io/home/zh/"
+                href="http://localhost:1313/home/zh/"
                 />
+  </url><url>
+    <loc>http://localhost:1313/home/zh/tags/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/home/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="http://localhost:1313/home/zh/tags/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/home/zh/zhcategories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/home/zh/zhseries/</loc>
   </url>
 </urlset>

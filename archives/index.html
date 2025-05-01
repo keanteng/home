@@ -10,7 +10,7 @@
 <meta name="description" content="archives">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/archives/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7eda7b0a9527ce652a3c87fbed4e152dc9c45f0b3894c9d25b8d5d4e960e8c29.css" integrity="sha256-ftp7CpUnzmUqPIf77U4VLcnEXws4lMnSW41dTpYOjCk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -18,6 +18,8 @@
 <link rel="mask-icon" href="https://keanteng.github.io/home/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://keanteng.github.io/home/archives/">
+<link rel="alternate" hreflang="ja" href="https://keanteng.github.io/home/ja/archives/">
 <noscript>
     <style>
         #theme-toggle,
@@ -35,7 +37,7 @@
                 --secondary: rgb(155, 156, 157);
                 --tertiary: rgb(65, 66, 68);
                 --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
+                --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
             }
@@ -54,18 +56,17 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Archive" />
-<meta property="og:description" content="archives" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://keanteng.github.io/home/archives/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/><meta property="article:section" content="" />
-
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
-
-<meta name="twitter:title" content="Archive"/>
-<meta name="twitter:description" content="archives"/>
+</noscript><meta property="og:url" content="https://keanteng.github.io/home/archives/">
+  <meta property="og:site_name" content="Kean Teng Blog">
+  <meta property="og:title" content="Archive">
+  <meta property="og:description" content="archives">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+      <meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:title" content="Archive">
+<meta name="twitter:description" content="archives">
 
 
 <script type="application/ld+json">
@@ -95,7 +96,7 @@
   "articleBody": "",
   "wordCount" : "0",
   "inLanguage": "en",
-  "datePublished": "0001-01-01T00:00:00Z",
+  "image": "https://keanteng.github.io/home/papermod-cover.png","datePublished": "0001-01-01T00:00:00Z",
   "dateModified": "0001-01-01T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -134,7 +135,7 @@
         <div class="logo">
             <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -154,11 +155,17 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://keanteng.github.io/home/ja/" title="日本語"
+                            aria-label="日本語">日本語</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                <a href="https://keanteng.github.io/home/archives" title="Archive">
                     <span class="active">Archive</span>
                 </a>
             </li>
@@ -173,11 +180,6 @@
                 </a>
             </li>
             <li>
-                <a href="https://keanteng.github.io/home/projects/" title="Projects">
-                    <span>Projects</span>
-                </a>
-            </li>
-            <li>
                 <a href="https://keanteng.github.io/home/faqs/" title="FAQs">
                     <span>FAQs</span>
                 </a>
@@ -188,16 +190,31 @@
 <main class="main">
 
 <header class="page-header">
-  <h1>Archive</h1>
+  <h1>
+    Archive
+    <a href="/home/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
 </header>
 <div class="archive-year">
-  <h2 class="archive-year-header">2024<sup class="archive-count">&nbsp;&nbsp;4</sup>
+  <h2 class="archive-year-header" id="2024">
+    <a class="archive-header-link" href="#2024">2024</a>
+    <sup class="archive-count">&nbsp;4</sup>
   </h2>
   <div class="archive-month">
-    <h3 class="archive-month-header">August<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header" id="2024-August">
+      <a class="archive-header-link" href="#2024-August">August</a>
+      <sup class="archive-count">&nbsp;1</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">A Live PDF Coordinate Viewer
+        <h3 class="archive-entry-title entry-hint-parent">A Live PDF Coordinate Viewer
         </h3>
         <div class="archive-meta"><span title='2024-08-08 00:00:00 +0000 UTC'>August 8, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to A Live PDF Coordinate Viewer" href="https://keanteng.github.io/home/docs/2024/2024-08-08-pdf-coordinate-viewer/"></a>
@@ -205,10 +222,13 @@
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">April<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header" id="2024-April">
+      <a class="archive-header-link" href="#2024-April">April</a>
+      <sup class="archive-count">&nbsp;1</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Gacha Planning With Python
+        <h3 class="archive-entry-title entry-hint-parent">Gacha Planning With Python
         </h3>
         <div class="archive-meta"><span title='2024-04-30 00:00:00 +0000 UTC'>April 30, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Gacha Planning With Python" href="https://keanteng.github.io/home/docs/2024/2024-04-30-gacha-planning-with-python/"></a>
@@ -216,10 +236,13 @@
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">March<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header" id="2024-March">
+      <a class="archive-header-link" href="#2024-March">March</a>
+      <sup class="archive-count">&nbsp;1</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Villianess Protagonists&rsquo; Performative Acts As The Representation of Modern Femininity
+        <h3 class="archive-entry-title entry-hint-parent">Villianess Protagonists&rsquo; Performative Acts As The Representation of Modern Femininity
         </h3>
         <div class="archive-meta"><span title='2024-03-22 00:00:00 +0000 UTC'>March 22, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Villianess Protagonists&#39; Performative Acts As The Representation of Modern Femininity" href="https://keanteng.github.io/home/docs/2024/2024-03-22-villianess-protagonists-acts/"></a>
@@ -227,10 +250,13 @@
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">January<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header" id="2024-January">
+      <a class="archive-header-link" href="#2024-January">January</a>
+      <sup class="archive-count">&nbsp;1</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Road To 1 Million With EPF
+        <h3 class="archive-entry-title entry-hint-parent">Road To 1 Million With EPF
         </h3>
         <div class="archive-meta"><span title='2024-01-09 00:00:00 +0000 UTC'>January 9, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Road To 1 Million With EPF" href="https://keanteng.github.io/home/docs/2024/2024-01-09-epf-1-million/"></a>
@@ -239,48 +265,56 @@
   </div>
 </div>
 <div class="archive-year">
-  <h2 class="archive-year-header">2023<sup class="archive-count">&nbsp;&nbsp;24</sup>
+  <h2 class="archive-year-header" id="2023">
+    <a class="archive-header-link" href="#2023">2023</a>
+    <sup class="archive-count">&nbsp;24</sup>
   </h2>
   <div class="archive-month">
-    <h3 class="archive-month-header">October<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header" id="2023-October">
+      <a class="archive-header-link" href="#2023-October">October</a>
+      <sup class="archive-count">&nbsp;1</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Jupyter Notebook, RMarkdown &amp; PDF
+        <h3 class="archive-entry-title entry-hint-parent">Jupyter Notebook, RMarkdown &amp; PDF
         </h3>
         <div class="archive-meta"><span title='2023-10-17 00:00:00 +0000 UTC'>October 17, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
-        <a class="entry-link" aria-label="post link to Jupyter Notebook, RMarkdown &amp; PDF" href="https://keanteng.github.io/home/docs/2023/2023-10-17-jupyter-rmarkdown/"></a>
+        <a class="entry-link" aria-label="post link to Jupyter Notebook, RMarkdown & PDF" href="https://keanteng.github.io/home/docs/2023/2023-10-17-jupyter-rmarkdown/"></a>
       </div>
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">September<sup class="archive-count">&nbsp;&nbsp;5</sup></h3>
+    <h3 class="archive-month-header" id="2023-September">
+      <a class="archive-header-link" href="#2023-September">September</a>
+      <sup class="archive-count">&nbsp;5</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Creating ChatFloodRisk
+        <h3 class="archive-entry-title entry-hint-parent">Creating ChatFloodRisk
         </h3>
         <div class="archive-meta"><span title='2023-09-17 00:00:00 +0000 UTC'>September 17, 2023</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Creating ChatFloodRisk" href="https://keanteng.github.io/home/docs/2023/2023-09-17-creating-chatfloodrisk/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Introducing ChatAutomata
+        <h3 class="archive-entry-title entry-hint-parent">Introducing ChatAutomata
         </h3>
         <div class="archive-meta"><span title='2023-09-17 00:00:00 +0000 UTC'>September 17, 2023</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Introducing ChatAutomata" href="https://keanteng.github.io/home/docs/2023/2023-09-17-chatautomata/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Introducing BlueAutomata
+        <h3 class="archive-entry-title entry-hint-parent">Introducing BlueAutomata
         </h3>
         <div class="archive-meta"><span title='2023-09-07 00:00:00 +0000 UTC'>September 7, 2023</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Introducing BlueAutomata" href="https://keanteng.github.io/home/docs/2023/2023-09-07-introducing-blue-automata/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Creating a Site Using Materials Mkdocs
+        <h3 class="archive-entry-title entry-hint-parent">Creating a Site Using Materials Mkdocs
         </h3>
         <div class="archive-meta"><span title='2023-09-04 00:00:00 +0000 UTC'>September 4, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Creating a Site Using Materials Mkdocs" href="https://keanteng.github.io/home/docs/2023/2023-09-04-creating-a-site-using-materials-mkdocs/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Publish a Package on Pypi
+        <h3 class="archive-entry-title entry-hint-parent">Publish a Package on Pypi
         </h3>
         <div class="archive-meta"><span title='2023-09-04 00:00:00 +0000 UTC'>September 4, 2023</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Publish a Package on Pypi" href="https://keanteng.github.io/home/docs/2023/2023-09-04-how-to-publish-on-pypi/"></a>
@@ -288,64 +322,67 @@
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">August<sup class="archive-count">&nbsp;&nbsp;10</sup></h3>
+    <h3 class="archive-month-header" id="2023-August">
+      <a class="archive-header-link" href="#2023-August">August</a>
+      <sup class="archive-count">&nbsp;10</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Land Cover, Elevation &amp; Slope
+        <h3 class="archive-entry-title entry-hint-parent">Land Cover, Elevation &amp; Slope
         </h3>
         <div class="archive-meta"><span title='2023-08-26 00:00:00 +0000 UTC'>August 26, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
-        <a class="entry-link" aria-label="post link to Land Cover, Elevation &amp; Slope" href="https://keanteng.github.io/home/docs/2023/2023-08-26-land-cover-elevation-and-slope/"></a>
+        <a class="entry-link" aria-label="post link to Land Cover, Elevation & Slope" href="https://keanteng.github.io/home/docs/2023/2023-08-26-land-cover-elevation-and-slope/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Machine Learning Explainability
+        <h3 class="archive-entry-title entry-hint-parent">Machine Learning Explainability
         </h3>
         <div class="archive-meta"><span title='2023-08-26 00:00:00 +0000 UTC'>August 26, 2023</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Machine Learning Explainability" href="https://keanteng.github.io/home/docs/2023/2023-08-26-ml-explainability/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Feature Engineering
+        <h3 class="archive-entry-title entry-hint-parent">Feature Engineering
         </h3>
         <div class="archive-meta"><span title='2023-08-20 00:00:00 +0000 UTC'>August 20, 2023</span>&nbsp;·&nbsp;20 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Feature Engineering" href="https://keanteng.github.io/home/docs/2023/2023-08-20-feature-engineering/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Data Cleaning
+        <h3 class="archive-entry-title entry-hint-parent">Data Cleaning
         </h3>
         <div class="archive-meta"><span title='2023-08-19 00:00:00 +0000 UTC'>August 19, 2023</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Data Cleaning" href="https://keanteng.github.io/home/docs/2023/2023-08-19-data-cleaning/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Time Series
+        <h3 class="archive-entry-title entry-hint-parent">Time Series
         </h3>
         <div class="archive-meta"><span title='2023-08-19 00:00:00 +0000 UTC'>August 19, 2023</span>&nbsp;·&nbsp;25 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Time Series" href="https://keanteng.github.io/home/docs/2023/2023-08-19-time-series/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Data Visualization
+        <h3 class="archive-entry-title entry-hint-parent">Data Visualization
         </h3>
         <div class="archive-meta"><span title='2023-08-18 00:00:00 +0000 UTC'>August 18, 2023</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Data Visualization" href="https://keanteng.github.io/home/docs/2023/2023-08-15-data-visualization/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Pandas
+        <h3 class="archive-entry-title entry-hint-parent">Pandas
         </h3>
         <div class="archive-meta"><span title='2023-08-18 00:00:00 +0000 UTC'>August 18, 2023</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Pandas" href="https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">A Streamlit App For Flood Analysis
+        <h3 class="archive-entry-title entry-hint-parent">A Streamlit App For Flood Analysis
         </h3>
         <div class="archive-meta"><span title='2023-08-13 00:00:00 +0000 UTC'>August 13, 2023</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to A Streamlit App For Flood Analysis" href="https://keanteng.github.io/home/docs/2023/2023-08-13-a-streamit-app-for-flood-analysis/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Flood Risk Modeling With Logistic Regression
+        <h3 class="archive-entry-title entry-hint-parent">Flood Risk Modeling With Logistic Regression
         </h3>
         <div class="archive-meta"><span title='2023-08-13 00:00:00 +0000 UTC'>August 13, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Flood Risk Modeling With Logistic Regression" href="https://keanteng.github.io/home/docs/2023/2023-08-13-flood-risk-modeling/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Webscraping On Xpath
+        <h3 class="archive-entry-title entry-hint-parent">Webscraping On Xpath
         </h3>
         <div class="archive-meta"><span title='2023-08-13 00:00:00 +0000 UTC'>August 13, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Webscraping On Xpath" href="https://keanteng.github.io/home/docs/2023/2023-08-13-webscraping-on-xpath/"></a>
@@ -353,39 +390,45 @@
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">April<sup class="archive-count">&nbsp;&nbsp;2</sup></h3>
+    <h3 class="archive-month-header" id="2023-April">
+      <a class="archive-header-link" href="#2023-April">April</a>
+      <sup class="archive-count">&nbsp;2</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Geospatial Analysis
+        <h3 class="archive-entry-title entry-hint-parent">Geospatial Analysis
         </h3>
         <div class="archive-meta"><span title='2023-04-19 00:00:00 +0000 UTC'>April 19, 2023</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Geospatial Analysis" href="https://keanteng.github.io/home/docs/2023/2023-04-19-geospatial-analysis/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Creating a Website With Hugo &amp; PaperMode
+        <h3 class="archive-entry-title entry-hint-parent">Creating a Website With Hugo &amp; PaperMode
         </h3>
         <div class="archive-meta"><span title='2023-04-09 00:00:00 +0000 UTC'>April 9, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
-        <a class="entry-link" aria-label="post link to Creating a Website With Hugo &amp; PaperMode" href="https://keanteng.github.io/home/docs/2023/2023-04-09-creating-a-website-with-hugo--papermode/"></a>
+        <a class="entry-link" aria-label="post link to Creating a Website With Hugo & PaperMode" href="https://keanteng.github.io/home/docs/2023/2023-04-09-creating-a-website-with-hugo--papermode/"></a>
       </div>
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">March<sup class="archive-count">&nbsp;&nbsp;3</sup></h3>
+    <h3 class="archive-month-header" id="2023-March">
+      <a class="archive-header-link" href="#2023-March">March</a>
+      <sup class="archive-count">&nbsp;3</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Computer Vision
+        <h3 class="archive-entry-title entry-hint-parent">Computer Vision
         </h3>
         <div class="archive-meta"><span title='2023-03-20 00:00:00 +0000 UTC'>March 20, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Computer Vision" href="https://keanteng.github.io/home/docs/2023/2023-03-20-computer-vision/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Intro to SQL
+        <h3 class="archive-entry-title entry-hint-parent">Intro to SQL
         </h3>
         <div class="archive-meta"><span title='2023-03-15 00:00:00 +0000 UTC'>March 15, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Intro to SQL" href="https://keanteng.github.io/home/docs/2023/2023-03-15-intro-to-sql/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Intermediate Machine Learning
+        <h3 class="archive-entry-title entry-hint-parent">Intermediate Machine Learning
         </h3>
         <div class="archive-meta"><span title='2023-03-02 00:00:00 +0000 UTC'>March 2, 2023</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Intermediate Machine Learning" href="https://keanteng.github.io/home/docs/2023/2023-03-02-intermediate-machine-learning/"></a>
@@ -393,22 +436,25 @@
     </div>
   </div>
   <div class="archive-month">
-    <h3 class="archive-month-header">February<sup class="archive-count">&nbsp;&nbsp;3</sup></h3>
+    <h3 class="archive-month-header" id="2023-February">
+      <a class="archive-header-link" href="#2023-February">February</a>
+      <sup class="archive-count">&nbsp;3</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Stable Diffusion WebUI with Civitai LORAs
+        <h3 class="archive-entry-title entry-hint-parent">Stable Diffusion WebUI with Civitai LORAs
         </h3>
         <div class="archive-meta"><span title='2023-02-25 00:00:00 +0000 UTC'>February 25, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Stable Diffusion WebUI with Civitai LORAs" href="https://keanteng.github.io/home/docs/2023/2023-02-25-stable-diffusion-webui-with-civitai-loras/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Intro to Deep Learning
+        <h3 class="archive-entry-title entry-hint-parent">Intro to Deep Learning
         </h3>
         <div class="archive-meta"><span title='2023-02-24 00:00:00 +0000 UTC'>February 24, 2023</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Intro to Deep Learning" href="https://keanteng.github.io/home/docs/2023/2023-02-24-intro-to-deep-learning/"></a>
       </div>
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Images Scraping from Web Pages
+        <h3 class="archive-entry-title entry-hint-parent">Images Scraping from Web Pages
         </h3>
         <div class="archive-meta"><span title='2023-02-19 00:00:00 +0000 UTC'>February 19, 2023</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Images Scraping from Web Pages" href="https://keanteng.github.io/home/docs/2023/2023-02-19-images-scraping-from-web-pages/"></a>
@@ -417,13 +463,18 @@
   </div>
 </div>
 <div class="archive-year">
-  <h2 class="archive-year-header">2022<sup class="archive-count">&nbsp;&nbsp;1</sup>
+  <h2 class="archive-year-header" id="2022">
+    <a class="archive-header-link" href="#2022">2022</a>
+    <sup class="archive-count">&nbsp;1</sup>
   </h2>
   <div class="archive-month">
-    <h3 class="archive-month-header">November<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header" id="2022-November">
+      <a class="archive-header-link" href="#2022-November">November</a>
+      <sup class="archive-count">&nbsp;1</sup>
+    </h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Google Sheet Simple Web Scraping
+        <h3 class="archive-entry-title entry-hint-parent">Google Sheet Simple Web Scraping
         </h3>
         <div class="archive-meta"><span title='2022-11-05 00:00:00 +0000 UTC'>November 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Kean Teng Blog</div>
         <a class="entry-link" aria-label="post link to Google Sheet Simple Web Scraping" href="https://keanteng.github.io/home/docs/2022/2022-11-05-google-sheet-simple-web-scraping/"></a>
@@ -434,7 +485,8 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+        <span>&copy; 2025 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

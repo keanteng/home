@@ -9,25 +9,23 @@
       <url>https://keanteng.github.io/home/papermod-cover.png</url>
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.147.1</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 17 Sep 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keanteng.github.io/home/tags/automation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Introducing ChatAutomata</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-09-17-chatautomata/</link>
       <pubDate>Sun, 17 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://keanteng.github.io/home/docs/2023/2023-09-17-chatautomata/</guid>
       <description>Reporting Workflow Automation With BlueAutomata</description>
     </item>
-    
     <item>
       <title>Introducing BlueAutomata</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-09-07-introducing-blue-automata/</link>
       <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://keanteng.github.io/home/docs/2023/2023-09-07-introducing-blue-automata/</guid>
       <description>A Package to Automate Reporting Workflow</description>
     </item>
-    
   </channel>
 </rss>

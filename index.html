@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.110.0"><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.147.1"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -11,7 +11,7 @@
 <meta name="description" content="Kean Teng Blog - https://keanteng.github.io/home/">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.3609ac0fb85d7c541bc02f22afb84e98fecc845be8138dfe1ac5d77feae14cb1.css" integrity="sha256-NgmsD7hdfFQbwC8ir7hOmP7MhFvoE43&#43;GsXXf&#43;rhTLE=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7eda7b0a9527ce652a3c87fbed4e152dc9c45f0b3894c9d25b8d5d4e960e8c29.css" integrity="sha256-ftp7CpUnzmUqPIf77U4VLcnEXws4lMnSW41dTpYOjCk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -21,6 +21,8 @@
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" type="application/rss+xml" href="https://keanteng.github.io/home/index.xml">
 <link rel="alternate" type="application/json" href="https://keanteng.github.io/home/index.json">
+<link rel="alternate" hreflang="en" href="https://keanteng.github.io/home/">
+<link rel="alternate" hreflang="ja" href="https://keanteng.github.io/home/ja/">
 <noscript>
     <style>
         #theme-toggle,
@@ -38,7 +40,7 @@
                 --secondary: rgb(155, 156, 157);
                 --tertiary: rgb(65, 66, 68);
                 --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
+                --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
             }
@@ -57,16 +59,17 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Kean Teng Blog" />
-<meta property="og:description" content="Kean Teng Blog - https://keanteng.github.io/home/" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://keanteng.github.io/home/" /><meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png"/>
-
-<meta name="twitter:title" content="Kean Teng Blog"/>
-<meta name="twitter:description" content="Kean Teng Blog - https://keanteng.github.io/home/"/>
+</noscript><meta property="og:url" content="https://keanteng.github.io/home/">
+  <meta property="og:site_name" content="Kean Teng Blog">
+  <meta property="og:title" content="Kean Teng Blog">
+  <meta property="og:description" content="Kean Teng Blog - https://keanteng.github.io/home/">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://keanteng.github.io/home/papermod-cover.png">
+<meta name="twitter:title" content="Kean Teng Blog">
+<meta name="twitter:description" content="Kean Teng Blog - https://keanteng.github.io/home/">
 
 <script type="application/ld+json">
 {
@@ -75,7 +78,7 @@
   "name": "Kean Teng Blog",
   "url": "https://keanteng.github.io/home/",
   "description": "Kean Teng Blog - https://keanteng.github.io/home/",
-  "thumbnailUrl": "https://i.postimg.cc/0Qq5g2fX/favicon.png",
+  "logo": "https://i.postimg.cc/0Qq5g2fX/favicon.png",
   "sameAs": [
       "https://github.com/keanteng/home", "https://my.linkedin.com/in/khorkeanteng", "https://twitter.com/realKeanTeng", "https://khorkeanteng.medium.com/", "https://www.instagram.com/khorkeanteng/", "index.xml"
   ]
@@ -100,7 +103,7 @@
         <div class="logo">
             <a href="https://keanteng.github.io/home/" accesskey="h" title="Kean Teng Blog (Alt + H)">Kean Teng Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -120,11 +123,17 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://keanteng.github.io/home/ja/" title="日本語"
+                            aria-label="日本語">日本語</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://keanteng.github.io/home/archives/" title="Archive">
+                <a href="https://keanteng.github.io/home/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
@@ -136,11 +145,6 @@
             <li>
                 <a href="https://keanteng.github.io/home/tags/" title="Tags">
                     <span>Tags</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://keanteng.github.io/home/projects/" title="Projects">
-                    <span>Projects</span>
                 </a>
             </li>
             <li>
@@ -160,8 +164,9 @@
         Welcome to my personal blog. I will publish my learning notes on a variety of topics and ideas here. ✨
     </div>
     <footer class="entry-footer">
-        <div class="social-icons">
-    <a href="https://github.com/keanteng/home" target="_blank" rel="noopener noreferrer me" title="Github">
+        <div class="social-icons" >
+    <a href="https://github.com/keanteng/home" target="_blank" rel="noopener noreferrer me"
+        title="Github">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round">
     <path
@@ -169,7 +174,8 @@
     </path>
 </svg>
     </a>
-    <a href="https://my.linkedin.com/in/khorkeanteng" target="_blank" rel="noopener noreferrer me" title="LinkedIn">
+    <a href="https://my.linkedin.com/in/khorkeanteng" target="_blank" rel="noopener noreferrer me"
+        title="LinkedIn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -177,24 +183,26 @@
     <circle cx="4" cy="4" r="2"></circle>
 </svg>
     </a>
-    <a href="https://twitter.com/realKeanTeng" target="_blank" rel="noopener noreferrer me" title="Twitter">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round">
+    <a href="https://twitter.com/realKeanTeng" target="_blank" rel="noopener noreferrer me"
+        title="X">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
     <path
-        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
     </path>
 </svg>
     </a>
-    <a href="https://khorkeanteng.medium.com/" target="_blank" rel="noopener noreferrer me" title="Medium">
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke-width="2"
-    viewBox="0 0 76.000000 76.000000" preserveAspectRatio="xMidYMid meet">
+    <a href="https://khorkeanteng.medium.com/" target="_blank" rel="noopener noreferrer me"
+        title="Medium">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76.000000 76.000000" fill="currentColor" stroke-width="2"
+    preserveAspectRatio="xMidYMid meet">
     <g transform="translate(0.000000,76.000000) scale(0.100000,-0.100000)">
         <path
             d="M0 380 l0 -380 380 0 380 0 0 380 0 380 -380 0 -380 0 0 -380z m334 85 c30 -63 57 -115 59 -115 2 0 16 30 31 68 15 37 37 88 49 115 l20 47 76 0 76 -1 -27 -20 -28 -21 0 -151 c0 -150 0 -151 27 -179 l27 -28 -109 0 -109 0 27 28 c26 27 27 32 26 143 0 131 3 134 -71 -58 -24 -62 -48 -113 -53 -113 -6 0 -17 16 -24 35 -7 19 -36 83 -64 142 l-52 108 -3 -98 c-3 -97 -2 -99 28 -133 16 -19 30 -39 30 -44 0 -6 -31 -10 -70 -10 -45 0 -70 4 -70 11 0 6 14 27 30 46 30 33 30 35 30 151 0 116 0 118 -31 155 l-30 37 75 0 76 0 54 -115z" />
     </g>
 </svg>
     </a>
-    <a href="https://www.instagram.com/khorkeanteng/" target="_blank" rel="noopener noreferrer me" title="Instagram">
+    <a href="https://www.instagram.com/khorkeanteng/" target="_blank" rel="noopener noreferrer me"
+        title="Instagram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -202,7 +210,8 @@
     <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
 </svg>
     </a>
-    <a href="index.xml" target="_blank" rel="noopener noreferrer me" title="Rss">
+    <a href="index.xml" target="_blank" rel="noopener noreferrer me"
+        title="Rss">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
     stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 11a9 9 0 0 1 9 9" />
@@ -217,7 +226,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>A Live PDF Coordinate Viewer
+    <h2 class="entry-hint-parent">A Live PDF Coordinate Viewer
     </h2>
   </header>
   <div class="entry-content">
@@ -229,7 +238,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Gacha Planning With Python
+    <h2 class="entry-hint-parent">Gacha Planning With Python
     </h2>
   </header>
   <div class="entry-content">
@@ -241,7 +250,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Villianess Protagonists&#39; Performative Acts As The Representation of Modern Femininity
+    <h2 class="entry-hint-parent">Villianess Protagonists&#39; Performative Acts As The Representation of Modern Femininity
     </h2>
   </header>
   <div class="entry-content">
@@ -253,7 +262,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Road To 1 Million With EPF
+    <h2 class="entry-hint-parent">Road To 1 Million With EPF
     </h2>
   </header>
   <div class="entry-content">
@@ -265,19 +274,19 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Jupyter Notebook, RMarkdown &amp; PDF
+    <h2 class="entry-hint-parent">Jupyter Notebook, RMarkdown &amp; PDF
     </h2>
   </header>
   <div class="entry-content">
     <p>Jupyter notebook is a great documentation option when it comes to writing R or Python code. Personally, I use Jupyter notebook together with Visual Studio code a lot when it comes to data analysis and visualization work.</p>
   </div>
   <footer class="entry-footer"><span title='2023-10-17 00:00:00 +0000 UTC'>October 17, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</footer>
-  <a class="entry-link" aria-label="post link to Jupyter Notebook, RMarkdown &amp; PDF" href="https://keanteng.github.io/home/docs/2023/2023-10-17-jupyter-rmarkdown/"></a>
+  <a class="entry-link" aria-label="post link to Jupyter Notebook, RMarkdown & PDF" href="https://keanteng.github.io/home/docs/2023/2023-10-17-jupyter-rmarkdown/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Creating ChatFloodRisk
+    <h2 class="entry-hint-parent">Creating ChatFloodRisk
     </h2>
   </header>
   <div class="entry-content">
@@ -289,7 +298,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Introducing ChatAutomata
+    <h2 class="entry-hint-parent">Introducing ChatAutomata
     </h2>
   </header>
   <div class="entry-content">
@@ -301,7 +310,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Introducing BlueAutomata
+    <h2 class="entry-hint-parent">Introducing BlueAutomata
     </h2>
   </header>
   <div class="entry-content">
@@ -313,12 +322,13 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Creating a Site Using Materials Mkdocs
+    <h2 class="entry-hint-parent">Creating a Site Using Materials Mkdocs
     </h2>
   </header>
   <div class="entry-content">
-    <p>Images from Unsplash
-MkDocs is a fast, simple and downright gorgeous static site generator that’s geared towards building project documentation. With source files in Markdown configured with a YAML configuration, site can be easily generated and deployed. Material for Mkdocs is build on top of Mkdocs, and it is targeted for project documentation with a set of powerful and beautiful documentation framework. Let’s go through how the site below is built:...</p>
+    <p> Images from Unsplash
+MkDocs is a fast, simple and downright gorgeous static site generator that’s geared towards building project documentation. With source files in Markdown configured with a YAML configuration, site can be easily generated and deployed. Material for Mkdocs is build on top of Mkdocs, and it is targeted for project documentation with a set of powerful and beautiful documentation framework. Let’s go through how the site below is built:
+...</p>
   </div>
   <footer class="entry-footer"><span title='2023-09-04 00:00:00 +0000 UTC'>September 4, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Kean Teng Blog</footer>
   <a class="entry-link" aria-label="post link to Creating a Site Using Materials Mkdocs" href="https://keanteng.github.io/home/docs/2023/2023-09-04-creating-a-site-using-materials-mkdocs/"></a>
@@ -326,7 +336,7 @@ MkDocs is a fast, simple and downright gorgeous static site generator that’s g
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Publish a Package on Pypi
+    <h2 class="entry-hint-parent">Publish a Package on Pypi
     </h2>
   </header>
   <div class="entry-content">
@@ -344,7 +354,8 @@ MkDocs is a fast, simple and downright gorgeous static site generator that’s g
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span>
+        <span>&copy; 2025 <a href="https://keanteng.github.io/home/">Kean Teng Blog</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

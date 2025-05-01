@@ -9,34 +9,30 @@
       <url>https://keanteng.github.io/home/papermod-cover.png</url>
       <link>https://keanteng.github.io/home/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://keanteng.github.io/home/tags/data-frame/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- 0.147.1</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keanteng.github.io/home/tags/data-frame/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Feature Engineering</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-08-20-feature-engineering/</link>
       <pubDate>Sun, 20 Aug 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://keanteng.github.io/home/docs/2023/2023-08-20-feature-engineering/</guid>
       <description>My Kaggle Learning Note </description>
     </item>
-    
     <item>
       <title>Data Cleaning</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-08-19-data-cleaning/</link>
       <pubDate>Sat, 19 Aug 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://keanteng.github.io/home/docs/2023/2023-08-19-data-cleaning/</guid>
       <description>My Kaggle Learning Note </description>
     </item>
-    
     <item>
       <title>Pandas</title>
       <link>https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/</link>
       <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://keanteng.github.io/home/docs/2023/2023-08-18-pandas/</guid>
       <description>My Kaggle Learning Note </description>
     </item>
-    
   </channel>
 </rss>
