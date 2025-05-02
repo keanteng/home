@@ -245,7 +245,7 @@ pdf_y = (canvas_height - canvas_y) / canvas_height * page_height
 </code></pre><p>Basically, the formula will normalizes the coordinates on a canvas, let&rsquo;s say your cursor coordinate on screen to represent the fractional position along the canvas height or width. Of course, the formula will also take care of the difference of origin between the canvas and PDF document. Then, we will scale these values to the actual height of the PDF.</p>
 <h2 id="python-program">Python Program<a hidden class="anchor" aria-hidden="true" href="#python-program">#</a></h2>
 <p>With this formula, we can create a Python program to allow use to track our cursor on screen, the screen will need to show the PDF document we want, and then as we click around the screen it will display the converted cursor coordinate in the form of PDF coordinate:</p>
-<p><img alt="Alt Text" loading="lazy" src="/home/docs/2024/2024-08-08-pdf-coordinate-viewer/demo.gif"></p>
+<p><img alt="Alt Text" loading="lazy" src="https://github.com/keanteng/live-pdf-coordinate/blob/main/demo.gif?raw=true"></p>
 <p>We will make use of the <code>PyMuPDF</code> library to allow us to work with PDF document, you need to install then as follows:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">PyMuPDF</span> <span class="n">tk</span>
 </span></span></code></pre></div><p>Now, the program as follows:</p>
@@ -322,6 +322,11 @@ pdf_y = (canvas_height - canvas_y) / canvas_height * page_height
       <li><a href="https://keanteng.github.io/home/tags/coordinate/">Coordinate</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://keanteng.github.io/home/docs/2025/2025-05-02-post/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>First Post of 2025</span>
+  </a>
   <a class="next" href="https://keanteng.github.io/home/docs/2024/2024-04-30-gacha-planning-with-python/">
     <span class="title">Next »</span>
     <br>

@@ -19,6 +19,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <link rel="alternate" hreflang="en" href="https://keanteng.github.io/home/docs/2024/2024-01-09-epf-1-million/">
+<link rel="alternate" hreflang="ja" href="https://keanteng.github.io/home/ja/docs/2024/2024-01-09-epf-1-million/">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,7 +56,22 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="https://keanteng.github.io/home/docs/2024/2024-01-09-epf-1-million/">
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+<meta property="og:url" content="https://keanteng.github.io/home/docs/2024/2024-01-09-epf-1-million/">
   <meta property="og:site_name" content="Kean Teng Blog">
   <meta property="og:title" content="Road To 1 Million With EPF">
   <meta property="og:description" content="Retirement Goal Projection">
@@ -106,8 +122,8 @@
   "keywords": [
     "Python", "Streamlit", "EPF", "KWSP", "Finance"
   ],
-  "articleBody": " Image from Unsplash\nEPF or KWSP (Employee Provident Fund) is formed by the Malaysian government in 1951 to help workers safeguard their retirement saving. Due to the rising cost of living and changing economic landscape, it poses a challenge for those having the notion of retire early. “How much saving is enough for me to retire early?” has become a pressing question for those who seek to retire comfortably.\nAccording to the HSBC Quality of Life report, millennials in Malaysia said that they need an average of RM 4.86 million to retire comfortably. Furthermore, for the same purpose, Gen X and boomers would need an average of RM 4.53 million and RM 2.57 million respectively.\nPersonally, this is a concerning amount as increase in spending, in areas such as healthcare, higher tax rate, housings and more is making people difficult to accumulate enough savings to sustain a potentially lengthy retirement period. Of course, it has too, be imperative that a proper planning and projection of your personal retirement savings is key to achieve one’s goal and lifestyle expectations during the retirement stage.\nThat is not all, according to EPF, only 4% of its members has savings between RM 500,001 and RM 1 million and more than 35% of the members when turned 54 years old have less than RM 10,000 in savings. As such any action to withdraw your savings from the account could be a very bad idea.\nIn this study, we will set our retirement saving goal at RM 1 million, and we are interested to determine the number of years would take for a person to achieve the goal according to his monthly salary and yearly bonus.\nSurprisingly, it only takes 31.29 years for you to accumulate your saving to 1 million if you earn a monthly salary of RM 3000.\ntotal_1_year = 12 * 728 * (1 + i) total_2_year = 12 * 728 * (1 + i) + 12 * 728 * (1 + i)^2 ... ... To search for the number of year, we can develop a goal seek function using Python to search for any amount of interested:\nWe can translate the equation into Python code for execution:\ndef goal_seek(goal, contribution, bonus_contribution, compound_rate): r = 1 + compound_rate/100 contribution = contribution + bonus_contribution/12 years = 1/np.log(r)*np.log((goal*(r-1))/(12*contribution*r) + 1) return years You might be wondering how your yearly bonus fit into this equation? In the equation, it is assumed that interest is paid yearly and thus, the yearly bonus can be divided as a monthly payment:\ncontribution = bonus/12 + monthly_salary But you should note that if the annual interest is to be given on monthly basis, such an assumption might cause inaccurate projection to your savings.\nThings To Note For Malaysian and Non-Malaysian the EPF contribution rate works differently. Of course, different amount of salary will also subject to slightly different rate of contribution. For example, when your salary is below and equal to RM 5000, the employer’s share of contribution is 13% and above that it will be 12%. The contribution amount should always be rounded up to the nearest ringgit, without any cents. Moreover, the monthly contribution rate can be referred from the Third Schedule.\n",
-  "wordCount" : "534",
+  "articleBody": " Image from Unsplash\nEPF or KWSP (Employee Provident Fund) is formed by the Malaysian government in 1951 to help workers safeguard their retirement saving. Due to the rising cost of living and changing economic landscape, it poses a challenge for those having the notion of retire early. “How much saving is enough for me to retire early?” has become a pressing question for those who seek to retire comfortably.\nAccording to the HSBC Quality of Life report, millennials in Malaysia said that they need an average of RM 4.86 million to retire comfortably. Furthermore, for the same purpose, Gen X and boomers would need an average of RM 4.53 million and RM 2.57 million respectively.\nPersonally, this is a concerning amount as increase in spending, in areas such as healthcare, higher tax rate, housings and more is making people difficult to accumulate enough savings to sustain a potentially lengthy retirement period. Of course, it has too, be imperative that a proper planning and projection of your personal retirement savings is key to achieve one’s goal and lifestyle expectations during the retirement stage.\nThat is not all, according to EPF, only 4% of its members has savings between RM 500,001 and RM 1 million and more than 35% of the members when turned 54 years old have less than RM 10,000 in savings. As such any action to withdraw your savings from the account could be a very bad idea.\nIn this study, we will set our retirement saving goal at RM 1 million, and we are interested to determine the number of years would take for a person to achieve the goal according to his monthly salary and yearly bonus.\nSurprisingly, it only takes 31.29 years for you to accumulate your saving to 1 million if you earn a monthly salary of RM 3000.\ntotal_1_year = 12 * 728 * (1 + i) total_2_year = 12 * 728 * (1 + i) + 12 * 728 * (1 + i)^2 ... ... To search for the number of year, we can develop a goal seek function using Python to search for any amount of interested:\n$$ 10^6 = 12 \\times x \\times (r + r^2 + r^3 + … + r^n) $$ $$\\iff n = \\frac{1}{ln(r)}\\times ln(\\frac{10^6 \\times (r-1)}{12xr} + 1)$$\nWe can translate the equation into Python code for execution:\ndef goal_seek(goal, contribution, bonus_contribution, compound_rate): r = 1 + compound_rate/100 contribution = contribution + bonus_contribution/12 years = 1/np.log(r)*np.log((goal*(r-1))/(12*contribution*r) + 1) return years You might be wondering how your yearly bonus fit into this equation? In the equation, it is assumed that interest is paid yearly and thus, the yearly bonus can be divided as a monthly payment:\ncontribution = bonus/12 + monthly_salary But you should note that if the annual interest is to be given on monthly basis, such an assumption might cause inaccurate projection to your savings.\nThings To Note For Malaysian and Non-Malaysian the EPF contribution rate works differently. Of course, different amount of salary will also subject to slightly different rate of contribution. For example, when your salary is below and equal to RM 5000, the employer’s share of contribution is 13% and above that it will be 12%. The contribution amount should always be rounded up to the nearest ringgit, without any cents. Moreover, the monthly contribution rate can be referred from the Third Schedule.\n",
+  "wordCount" : "560",
   "inLanguage": "en",
   "image": "https://keanteng.github.io/home/papermod-cover.png","datePublished": "2024-01-09T00:00:00Z",
   "dateModified": "2024-01-09T00:00:00Z",
@@ -211,7 +227,12 @@
     <div class="post-description">
       Retirement Goal Projection
     </div>
-    <div class="post-meta"><span title='2024-01-09 00:00:00 +0000 UTC'>January 9, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kean Teng Blog&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2024/2024-01-09-epf-1-million/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2024-01-09 00:00:00 +0000 UTC'>January 9, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Kean Teng Blog&nbsp;|&nbsp;Translations:
+<ul class="i18n_list">
+    <li>
+        <a href="https://keanteng.github.io/home/ja/docs/2024/2024-01-09-epf-1-million/">日本語</a>
+    </li>
+</ul>&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2024/2024-01-09-epf-1-million/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> <div class="toc">
@@ -248,7 +269,10 @@ total_2_year = 12 * 728 * (1 + i) + 12 * 728 * (1 + i)^2
 ...
 ...
 </code></pre><p>To search for the number of year, we can develop a goal seek function using Python to search for any amount of interested:</p>
-<center><img src="image-1.png"  class = "center"/></center>
+<p>$$
+10^6 = 12 \times x \times (r + r^2 + r^3 + &hellip; + r^n)
+$$
+$$\iff n = \frac{1}{ln(r)}\times ln(\frac{10^6 \times (r-1)}{12xr} + 1)$$</p>
 <p>We can translate the equation into Python code for execution:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">goal_seek</span><span class="p">(</span><span class="n">goal</span><span class="p">,</span> <span class="n">contribution</span><span class="p">,</span> <span class="n">bonus_contribution</span><span class="p">,</span> <span class="n">compound_rate</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">compound_rate</span><span class="o">/</span><span class="mi">100</span>

@@ -11,14 +11,21 @@
     </image>
     <generator>Hugo -- 0.147.1</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://keanteng.github.io/home/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>testing</title>
-      <link>https://keanteng.github.io/home/ja/docs/2025/testing/</link>
-      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://keanteng.github.io/home/ja/docs/2025/testing/</guid>
-      <description>testing</description>
+      <title>はじめまして📌</title>
+      <link>https://keanteng.github.io/home/ja/docs/2025/feature/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://keanteng.github.io/home/ja/docs/2025/feature/</guid>
+      <description>日本語バシャンサポート</description>
+    </item>
+    <item>
+      <title>First Post of 2025</title>
+      <link>https://keanteng.github.io/home/docs/2025/2025-05-02-post/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://keanteng.github.io/home/docs/2025/2025-05-02-post/</guid>
+      <description>What&amp;#39;s Changed?</description>
     </item>
     <item>
       <title>A Live PDF Coordinate Viewer</title>

@@ -244,7 +244,7 @@ pdf_y = (canvas_height - canvas_y) / canvas_height * page_height
 </code></pre><p>基本的に、この式はキャンバス上の座標（たとえば画面上のカーソル座標）を正規化し、キャンバスの高さまたは幅に沿った小数での位置を表します。もちろん、この式はキャンバスとPDFドキュメントの原点の違いも考慮します。次に、これらの値を実際のPDFの高さと幅に合わせてスケーリングします。</p>
 <h2 id="pythonプログラム">Pythonプログラム<a hidden class="anchor" aria-hidden="true" href="#pythonプログラム">#</a></h2>
 <p>この式を使えば、Pythonプログラムを作成できます。このプログラムは、画面上でカーソルを追跡できるようにするものです。画面には対象のPDFドキュメントを表示する必要があり、画面をクリックすると、変換されたカーソル座標がPDF座標として表示されます：</p>
-<p><img alt="Alt Text" loading="lazy" src="/home/docs/2024/2024-08-08-pdf-coordinate-viewer/demo.gif"></p>
+<p><img alt="Alt Text" loading="lazy" src="https://github.com/keanteng/live-pdf-coordinate/blob/main/demo.gif?raw=true"></p>
 <p>PDFドキュメントを扱うために <code>PyMuPDF</code> ライブラリを使用します。次のようにインストールする必要があります：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">PyMuPDF</span> <span class="n">tk</span>
 </span></span></code></pre></div><p>プログラムは以下の通りです：</p>
@@ -322,10 +322,10 @@ pdf_y = (canvas_height - canvas_y) / canvas_height * page_height
       <li><a href="https://keanteng.github.io/home/ja/tags/%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/">コーディング</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://keanteng.github.io/home/ja/docs/2025/testing/">
+  <a class="prev" href="https://keanteng.github.io/home/ja/docs/2025/2025-05-02-post/">
     <span class="title">« 前へ</span>
     <br>
-    <span>testing</span>
+    <span>2025年最初の投稿</span>
   </a>
   <a class="next" href="https://keanteng.github.io/home/ja/docs/2024/2024-04-30-gacha-planning-with-python/">
     <span class="title">次へ »</span>

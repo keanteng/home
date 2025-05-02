@@ -11,15 +11,8 @@
     </image>
     <generator>Hugo -- 0.147.1</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 08 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://keanteng.github.io/home/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>testing</title>
-      <link>https://keanteng.github.io/home/ja/docs/2025/testing/</link>
-      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>https://keanteng.github.io/home/ja/docs/2025/testing/</guid>
-      <description>testing</description>
-    </item>
     <item>
       <title>A Live PDF Coordinate Viewer</title>
       <link>https://keanteng.github.io/home/docs/2024/2024-08-08-pdf-coordinate-viewer/</link>
