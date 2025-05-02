@@ -7,6 +7,7 @@ author: "Kean Teng Blog"
 tags: ["Python", "Streamlit", "EPF", "KWSP", "Finance"]
 weight: 5
 summary: "EPF or KWSP (Employee Provident Fund) is formed by the Malaysian government on 1951 to help workers safeguard their retirement saving."
+math: true
 ---
 
 <center><img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"  class = "center"/></center>
@@ -40,7 +41,10 @@ total_2_year = 12 * 728 * (1 + i) + 12 * 728 * (1 + i)^2
 
 To search for the number of year, we can develop a goal seek function using Python to search for any amount of interested:
 
-<center><img src="image-1.png"  class = "center"/></center>
+$$
+10^6 = 12 \times x \times (r + r^2 + r^3 + ... + r^n) 
+$$
+$$\iff n = \frac{1}{ln(r)}\times ln(\frac{10^6 \times (r-1)}{12xr} + 1)$$
 
 We can translate the equation into Python code for execution:
 

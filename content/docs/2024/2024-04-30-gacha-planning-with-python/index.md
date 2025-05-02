@@ -74,7 +74,7 @@ def get_rate_mult(warp):
 
 If we look at the distribution of the pulls, we can get some interesting insights:
 
-<center><img src="image1.png"  class = "center"/></center>
+<center><img src="https://github.com/keanteng/honkaistarrail/blob/main/image/image1.png?raw=true"  class = "center"/></center>
 
 The first plot shows us that the distribution of the 5-star pull where we are likely to get a 5-star if we make about 70 to 80 pulls. Around 74th pull, we can see that the cumulative probability curve stars to spike up showing an increase of chance. The third plot also shows likewise. To produce the plot, refers [here](https://github.com/keanteng/honkaistarrail/blob/main/2_hsr_gacha_system.ipynb). In fact, we can safely assume that if we prepared around 80 pulls, we can expect to get at least 1 5-star. 
 

@@ -77,6 +77,7 @@ params:
     # disableThemeToggle: true
     ShowShareButtons: true
     ShowReadingTime: true
+    #ShowWordCount: true
     # disableSpecial1stPost: true
     displayFullLangName: true
     ShowPostNavLinks: true
@@ -103,7 +104,7 @@ params:
     homeInfoParams:
         Title: "Kean Teng Blog"
         Content: >
-            Welcome to my personal blog. I will publish my learning notes on a variety of topics and ideas here. ✨ 
+            Welcome to my personal blog. I will publish my learning notes on a variety of topics and ideas here ✨
     socialIcons:
         - name: github
           url: "https://github.com/keanteng/home"

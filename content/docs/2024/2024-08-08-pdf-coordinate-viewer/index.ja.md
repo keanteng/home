@@ -33,7 +33,7 @@ pdf_y = (canvas_height - canvas_y) / canvas_height * page_height
 
 この式を使えば、Pythonプログラムを作成できます。このプログラムは、画面上でカーソルを追跡できるようにするものです。画面には対象のPDFドキュメントを表示する必要があり、画面をクリックすると、変換されたカーソル座標がPDF座標として表示されます：
 
-![Alt Text](demo.gif)
+![Alt Text](https://github.com/keanteng/live-pdf-coordinate/blob/main/demo.gif?raw=true)
 
 PDFドキュメントを扱うために `PyMuPDF` ライブラリを使用します。次のようにインストールする必要があります：
 

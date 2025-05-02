@@ -74,7 +74,7 @@ def get_rate_mult(warp):
 
 引くの分布を見ると、いくつかの興味深い洞察が得られます：
 
-<center><img src="image1.png" class="center"/></center>
+<center><img src="https://github.com/keanteng/honkaistarrail/blob/main/image/image1.png?raw=true"  class = "center"/></center>
 
 最初のプロットは、5つ星の引くの分布を示しており、約70〜80回の引くで5つ星を獲得する可能性が高いことがわかります。74回目の引くあたりで、累積確率曲線が急上昇し、確率の増加を示しています。3番目のプロットも同様です。プロットの作成については、[こちら](https://github.com/keanteng/honkaistarrail/blob/main/2_hsr_gacha_system.ipynb)を参照してください。実際、約80回の引くを準備しておけば、少なくとも1つの5つ星を期待できると安全に想定できます。
 

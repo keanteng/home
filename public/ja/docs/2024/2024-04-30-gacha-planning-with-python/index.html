@@ -284,7 +284,7 @@ k : 試行回数
 </span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">get_rate</span><span class="p">(</span><span class="n">warp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">get_rate_mult</span><span class="p">(</span><span class="n">warp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </span></span></code></pre></div><p>引くの分布を見ると、いくつかの興味深い洞察が得られます：</p>
-<center><img src="image1.png" class="center"/></center>
+<center><img src="https://github.com/keanteng/honkaistarrail/blob/main/image/image1.png?raw=true"  class = "center"/></center>
 <p>最初のプロットは、5つ星の引くの分布を示しており、約70〜80回の引くで5つ星を獲得する可能性が高いことがわかります。74回目の引くあたりで、累積確率曲線が急上昇し、確率の増加を示しています。3番目のプロットも同様です。プロットの作成については、<a href="https://github.com/keanteng/honkaistarrail/blob/main/2_hsr_gacha_system.ipynb">こちら</a>を参照してください。実際、約80回の引くを準備しておけば、少なくとも1つの5つ星を期待できると安全に想定できます。</p>
 <h2 id="期待値の設定">期待値の設定<a hidden class="anchor" aria-hidden="true" href="#期待値の設定">#</a></h2>
 <p>これまでの計算では、ピティやキャラクター保証のケースは考慮していませんでした。実際のシナリオでは、プレイヤーは自分が欲しい5つ星のコピーを入手する確率を知りたいとき、さまざまな条件を持っています。Pythonを使用して何度もシミュレーションを行い、平均を取ることで推定確率を得ることができます。シミュレーションでは、引く回数、アカウントのキャラクター保証の状態、アカウントのピティ量を考慮する必要があります。</p>
@@ -335,6 +335,11 @@ k : 試行回数
     <span class="title">« 前へ</span>
     <br>
     <span>ライブPDF座標ビューア</span>
+  </a>
+  <a class="next" href="http://localhost:1313/home/ja/docs/2024/2024-03-22-villianess-protagonists-acts/">
+    <span class="title">次へ »</span>
+    <br>
+    <span>悪役令嬢主人公のパフォーマティブな行為が現代的フェミニニティを表象するものとして</span>
   </a>
 </nav>
 

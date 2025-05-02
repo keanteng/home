@@ -11,14 +11,14 @@
     </image>
     <generator>Hugo -- 0.147.1</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 08 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/home/ja/docs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>testing</title>
-      <link>http://localhost:1313/home/ja/docs/2025/testing/</link>
-      <pubDate>Wed, 08 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/home/ja/docs/2025/testing/</guid>
-      <description>testing</description>
+      <title>はじめまして📌</title>
+      <link>http://localhost:1313/home/ja/docs/2025/feature/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/docs/2025/feature/</guid>
+      <description>日本語バシャンサポート</description>
     </item>
     <item>
       <title>ライブPDF座標ビューア</title>
@@ -33,6 +33,20 @@
       <pubDate>Tue, 30 Apr 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/home/ja/docs/2024/2024-04-30-gacha-planning-with-python/</guid>
       <description>崩壊：スターレイルのワープ計画</description>
+    </item>
+    <item>
+      <title>悪役令嬢主人公のパフォーマティブな行為が現代的フェミニニティを表象するものとして</title>
+      <link>http://localhost:1313/home/ja/docs/2024/2024-03-22-villianess-protagonists-acts/</link>
+      <pubDate>Fri, 22 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/docs/2024/2024-03-22-villianess-protagonists-acts/</guid>
+      <description>論文レビュー</description>
+    </item>
+    <item>
+      <title>EPFで100万円への道</title>
+      <link>http://localhost:1313/home/ja/docs/2024/2024-01-09-epf-1-million/</link>
+      <pubDate>Tue, 09 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/ja/docs/2024/2024-01-09-epf-1-million/</guid>
+      <description>退職目標の予測</description>
     </item>
   </channel>
 </rss>

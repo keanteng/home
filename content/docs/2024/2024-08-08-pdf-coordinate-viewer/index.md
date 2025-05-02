@@ -33,7 +33,7 @@ Basically, the formula will normalizes the coordinates on a canvas, let's say yo
 
 With this formula, we can create a Python program to allow use to track our cursor on screen, the screen will need to show the PDF document we want, and then as we click around the screen it will display the converted cursor coordinate in the form of PDF coordinate:
 
-![Alt Text](demo.gif)
+![Alt Text](https://github.com/keanteng/live-pdf-coordinate/blob/main/demo.gif?raw=true)
 
 We will make use of the `PyMuPDF` library to allow us to work with PDF document, you need to install then as follows:
 
