@@ -10,7 +10,7 @@
 <meta name="description" content="何が変わった？">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="http://localhost:1313/home/ja/docs/2025/2025-05-02-post/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.1f5296aba415da9f4c144e5f6d371e1ec7b408a5c439cae7bfd53f8ab906e529.css" integrity="sha256-H1KWq6QV2p9MFE5fbTceHse0CKXEOcrnv9U/irkG5Sk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.f17a9624778dfac7448fc86c3c6a69a779fa508c246988454db1bc46af2a4aa1.css" integrity="sha256-8XqWJHeN&#43;sdEj8hsPGppp3n6UIwkaYhFTbG8Rq8qSqE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/home/favicon-32x32.png">
@@ -216,24 +216,85 @@
 </ul>&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2025/2025-05-02-post/index.ja.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">目次</span>
-        </summary>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">目次</span>
+            </summary>
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%ae%e6%96%b0%e3%81%97%e3%81%84%e8%a8%80%e8%aa%9e%e3%82%b5%e3%83%9d%e3%83%bc%e3%83%88" aria-label="日本語の新しい言語サポート">日本語の新しい言語サポート</a></li>
-                <li>
-                    <a href="#%e5%9f%8b%e3%82%81%e8%be%bc%e3%81%bf%e3%83%a1%e3%83%87%e3%82%a3%e3%82%a2%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84" aria-label="埋め込みメディアコンテンツ">埋め込みメディアコンテンツ</a></li>
-                <li>
-                    <a href="#latex%e3%82%b5%e3%83%9d%e3%83%bc%e3%83%88" aria-label="Latexサポート">Latexサポート</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%ae%e6%96%b0%e3%81%97%e3%81%84%e8%a8%80%e8%aa%9e%e3%82%b5%e3%83%9d%e3%83%bc%e3%83%88" aria-label="日本語の新しい言語サポート">日本語の新しい言語サポート</a></li>
+                    <li>
+                        <a href="#%e5%9f%8b%e3%82%81%e8%be%bc%e3%81%bf%e3%83%a1%e3%83%87%e3%82%a3%e3%82%a2%e3%82%b3%e3%83%b3%e3%83%86%e3%83%b3%e3%83%84" aria-label="埋め込みメディアコンテンツ">埋め込みメディアコンテンツ</a></li>
+                    <li>
+                        <a href="#latex%e3%82%b5%e3%83%9d%e3%83%bc%e3%83%88" aria-label="Latexサポート">Latexサポート</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
 
   <div class="post-content"><center><img src=https://images.unsplash.com/photo-1717501218385-55bc3a95be94?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"  class = "center"/></center>
 <p style="text-align: center; color:grey;"><i>Unsplashからの画像</i></p>

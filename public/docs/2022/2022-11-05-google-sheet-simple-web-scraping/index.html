@@ -10,7 +10,7 @@
 <meta name="description" content="Fetching Companies Market Capitalization Data">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="http://localhost:1313/home/docs/2022/2022-11-05-google-sheet-simple-web-scraping/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.1f5296aba415da9f4c144e5f6d371e1ec7b408a5c439cae7bfd53f8ab906e529.css" integrity="sha256-H1KWq6QV2p9MFE5fbTceHse0CKXEOcrnv9U/irkG5Sk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.f17a9624778dfac7448fc86c3c6a69a779fa508c246988454db1bc46af2a4aa1.css" integrity="sha256-8XqWJHeN&#43;sdEj8hsPGppp3n6UIwkaYhFTbG8Rq8qSqE=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/home/favicon-32x32.png">
@@ -214,22 +214,83 @@
     <div class="post-meta"><span title='2022-11-05 00:00:00 +0000 UTC'>November 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Kean Teng Blog&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2022/2022-11-05-google-sheet-simple-web-scraping/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">Table of Contents</span>
-        </summary>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">Table of Contents</span>
+            </summary>
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#generate-webpage-for-scraping" aria-label="Generate Webpage for Scraping">Generate Webpage for Scraping</a></li>
-                <li>
-                    <a href="#web-scraping-in-action" aria-label="Web Scraping in Action">Web Scraping in Action</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#generate-webpage-for-scraping" aria-label="Generate Webpage for Scraping">Generate Webpage for Scraping</a></li>
+                    <li>
+                        <a href="#web-scraping-in-action" aria-label="Web Scraping in Action">Web Scraping in Action</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
 
   <div class="post-content"><p>In this article, I will be showing the process of scraping some listed companies market capitalization in Malaysia data using Google Sheet. We will perform web scraping on the <strong><a href="https://klse.i3investor.com/web/index">i3 Investor site</a></strong>.</p>
 <img src="images/img1.png"  class = "center"/>
@@ -278,11 +339,6 @@ Note: The URL will be the URLs in the Reference column
     <span class="title">« Prev</span>
     <br>
     <span>Images Scraping from Web Pages</span>
-  </a>
-  <a class="next" href="http://localhost:1313/home/docs/2025/2025-05-02-post/">
-    <span class="title">Next »</span>
-    <br>
-    <span></span>
   </a>
 </nav>
 

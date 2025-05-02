@@ -5,6 +5,19 @@
     <loc>http://localhost:1313/home/ja/docs/2025/feature/</loc>
     <lastmod>2025-05-02T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/home/ja/docs/2025/2025-05-02-post/</loc>
+    <lastmod>2025-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/home/docs/2025/2025-05-02-post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/docs/2025/2025-05-02-post/"
+                />
+  </url><url>
     <loc>http://localhost:1313/home/ja/docs/2024/2024-08-08-pdf-coordinate-viewer/</loc>
     <lastmod>2024-08-08T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -55,6 +68,19 @@
                 rel="alternate"
                 hreflang="ja"
                 href="http://localhost:1313/home/ja/docs/2024/2024-01-09-epf-1-million/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/home/ja/tags/blog/</loc>
+    <lastmod>2025-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/home/tags/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/tags/blog/"
                 />
   </url><url>
     <loc>http://localhost:1313/home/ja/docs/</loc>

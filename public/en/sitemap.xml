@@ -5,6 +5,19 @@
     <loc>http://localhost:1313/home/ja/docs/2025/feature/</loc>
     <lastmod>2025-05-02T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/home/docs/2025/2025-05-02-post/</loc>
+    <lastmod>2025-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/docs/2025/2025-05-02-post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/home/docs/2025/2025-05-02-post/"
+                />
+  </url><url>
     <loc>http://localhost:1313/home/docs/2024/2024-08-08-pdf-coordinate-viewer/</loc>
     <lastmod>2024-08-08T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -132,6 +145,32 @@
     <loc>http://localhost:1313/home/docs/2022/2022-11-05-google-sheet-simple-web-scraping/</loc>
     <lastmod>2022-11-05T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/home/tags/blog/</loc>
+    <lastmod>2025-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/tags/blog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/home/tags/blog/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/home/docs/</loc>
+    <lastmod>2025-05-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="http://localhost:1313/home/ja/docs/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/home/docs/"
+                />
+  </url><url>
     <loc>http://localhost:1313/home/ja/</loc>
     <lastmod>2025-05-02T00:00:00+00:00</lastmod>
   </url><url>
@@ -176,19 +215,6 @@
   </url><url>
     <loc>http://localhost:1313/home/tags/coordinate/</loc>
     <lastmod>2024-08-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/home/docs/</loc>
-    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="http://localhost:1313/home/ja/docs/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/home/docs/"
-                />
   </url><url>
     <loc>http://localhost:1313/home/tags/pdf/</loc>
     <lastmod>2024-08-08T00:00:00+00:00</lastmod>
@@ -422,8 +448,6 @@
   </url><url>
     <loc>http://localhost:1313/home/tags/xpath/</loc>
     <lastmod>2022-11-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/home/docs/2025/2025-05-02-post/</loc>
   </url><url>
     <loc>http://localhost:1313/home/archives/</loc>
     <xhtml:link
