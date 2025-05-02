@@ -10,7 +10,7 @@
 <meta name="description" content="崩壊：スターレイルのワープ計画">
 <meta name="author" content="Kean Teng Blog">
 <link rel="canonical" href="https://keanteng.github.io/home/ja/docs/2024/2024-04-30-gacha-planning-with-python/">
-<link crossorigin="anonymous" href="/home/assets/css/stylesheet.7eda7b0a9527ce652a3c87fbed4e152dc9c45f0b3894c9d25b8d5d4e960e8c29.css" integrity="sha256-ftp7CpUnzmUqPIf77U4VLcnEXws4lMnSW41dTpYOjCk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/home/assets/css/stylesheet.42b796e06d1330447cad2b7cf31d0edbb28b5959a021373fc0b6b1750e6c2824.css" integrity="sha256-QreW4G0TMER8rSt88x0O27KLWVmgITc/wLaxdQ5sKCQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://i.postimg.cc/0Qq5g2fX/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://keanteng.github.io/home/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://keanteng.github.io/home/favicon-32x32.png">
@@ -219,26 +219,87 @@
 </ul>&nbsp;|&nbsp;<a href="https://github.com/keanteng/home/tree/main/content/docs/2024/2024-04-30-gacha-planning-with-python/index.ja.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
-  </header> <div class="toc">
-    <details >
-        <summary accesskey="c" title="(Alt + C)">
-            <span class="details">目次</span>
-        </summary>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details  open>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">目次</span>
+            </summary>
 
-        <div class="inner"><ul>
-                <li>
-                    <a href="#%e3%81%af%e3%81%98%e3%82%81%e3%81%ab" aria-label="はじめに">はじめに</a></li>
-                <li>
-                    <a href="#5%e3%81%a4%e6%98%9f%e3%82%92%e5%85%a5%e6%89%8b%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%af" aria-label="5つ星を入手する方法は？">5つ星を入手する方法は？</a></li>
-                <li>
-                    <a href="#%e6%9c%9f%e5%be%85%e5%80%a4%e3%81%ae%e8%a8%ad%e5%ae%9a" aria-label="期待値の設定">期待値の設定</a></li>
-                <li>
-                    <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" aria-label="参考文献">参考文献</a>
-                </li>
-            </ul>
-        </div>
-    </details>
-</div>
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e3%81%af%e3%81%98%e3%82%81%e3%81%ab" aria-label="はじめに">はじめに</a></li>
+                    <li>
+                        <a href="#5%e3%81%a4%e6%98%9f%e3%82%92%e5%85%a5%e6%89%8b%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%af" aria-label="5つ星を入手する方法は？">5つ星を入手する方法は？</a></li>
+                    <li>
+                        <a href="#%e6%9c%9f%e5%be%85%e5%80%a4%e3%81%ae%e8%a8%ad%e5%ae%9a" aria-label="期待値の設定">期待値の設定</a></li>
+                    <li>
+                        <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" aria-label="参考文献">参考文献</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    window.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+         
+         activeElement = elements[0];
+         const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+         document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+     }, false);
+
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+
+    window.addEventListener('scroll', () => {
+        
+        activeElement = Array.from(elements).find((element) => {
+            if ((getOffsetTop(element) - window.pageYOffset) > 0 && 
+                (getOffsetTop(element) - window.pageYOffset) < window.innerHeight/2) {
+                return element;
+            }
+        }) || activeElement
+
+        elements.forEach(element => {
+             const id = encodeURI(element.getAttribute('id')).toLowerCase();
+             if (element === activeElement){
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+             } else {
+                 document.querySelector(`.inner ul li a[href="#${id}"]`).classList.remove('active');
+             }
+         })
+     }, false);
+
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+</script>
 
   <div class="post-content"><center><img src=https://images.unsplash.com/photo-1518895312237-a9e23508077d?q=80&w=1784&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="center"/></center>
 <p style="text-align: center; color:grey;"><i>Unsplashからの画像</i></p>
