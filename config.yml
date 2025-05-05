@@ -11,7 +11,7 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true
-# googleAnalytics: UA-123-45
+googleAnalytics: G-PPTWMGE94F
 
 minify:
     disableXML: true
@@ -131,9 +131,9 @@ params:
        #  icon: icon.png
         # iconHeight: 35
 
-    # analytics:
-        # google:
-        # SiteVerificationTag: "XYZabc"
+    analytics:
+        google:
+        SiteVerificationTag: "G-PPTWMGE94F"
 
     assets:
         disableHLJS: true
